@@ -1,6 +1,10 @@
+import SwiperSlides from "../../components/Swiper/Swipers"
+
 const HomePage = () => {
     return (
-        <div>HomePage</div>
+        <div>
+            <SwiperSlides/>
+        </div>
     )
 }
 

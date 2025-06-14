@@ -1,5 +1,17 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+.custom-pagination .swiper-pagination-bullet {
+  background-color: rgba(141, 141, 141, 0.368);
+  opacity: 1;
+  transition: all 0.3s ease;
+}
+
+.custom-pagination .swiper-pagination-bullet-active {
+  background-color: #b9fa15; /* Tailwind sariq: yellow-400 */
+  opacity: 1;
+  width: 40px;
+}
+
 
 @custom-variant dark (&:is(.dark *));
 
