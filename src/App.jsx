@@ -1,9 +1,7 @@
-import { Button } from "../src/components/ui/button"
+import { RouteProvider } from "./routes/route"
 const App = () => {
   return (
-    <div className="flex items-center justify-center h-screen">
-      <Button variant="link">Hello world</Button>
-    </div>
+    <RouteProvider />
   )
 }
 
