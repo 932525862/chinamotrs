@@ -1,4 +1,4 @@
-import { RouteProvider } from "./routes/route"
+import RouteProvider from './routes/route';
 const App = () => {
   return (
     <RouteProvider />

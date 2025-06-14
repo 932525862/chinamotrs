@@ -1,23 +1,40 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom"
-import HomePage from "../pages/Home"
-import AboutPage from "../pages/About"
-import CategoryPage from '../pages/Category';
-import ContactPage from '../pages/Contact';
-import NotFoundPage from "../pages/NotFound";
-import Navbar from "../components/Navbar/navbar";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { lazy, Suspense } from "react";
 
-export const RouteProvider = () => {
+// Layouts
+import MainLayout from "@/layouts/MainLayout";
+import Layout from "../layouts/Layout";
+
+import Loading from "../components/Loading/loading";
+
+// Pages
+const Home = lazy(() => import("@/pages/Home"));
+const About = lazy(() => import("@/pages/About"));
+const Category = lazy(() => import("@/pages/Category"));
+const Contact = lazy(() => import("@/pages/Contact"));
+const NotFound = lazy(() => import("@/pages/NotFound"));
+
+const RouteProvider = () => {
     return (
         <BrowserRouter>
-            <Navbar />
-            <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/about" element={<AboutPage />} />
-                <Route path="/category" element={<CategoryPage />} />
-                <Route path="/contact" element={<ContactPage />} />
-                <Route path="*" element={<NotFoundPage />} />
-            </Routes>
-        </BrowserRouter>
+            <Suspense fallback={<div className="p-4">
+                <Loading />
+            </div>}>
+                <Routes>
+                    <Route element={<MainLayout />}>
+                        <Route path="/" element={<Home />} />
+                        <Route path="/about" element={<About />} />
+                        <Route path="/category" element={<Category />} />
+                        <Route path="/contact" element={<Contact />} />
+                    </Route>
 
-    )
-}
+                    <Route element={<Layout />}>
+                        <Route path="*" element={<NotFound />} />
+                    </Route>
+                </Routes>
+            </Suspense>
+        </BrowserRouter>
+    );
+};
+
+export default RouteProvider;
