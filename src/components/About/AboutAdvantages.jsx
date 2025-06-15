@@ -28,7 +28,7 @@ const cards = [
 function AboutAdvantages() {
   return (
     <>
-      <section className="max-w-7xl mx-auto mt-15">
+      <section className="max-w-7xl mx-auto mt-15 px-[1rem]">
         <div className="">
           <h3 className="text-xl md:text-2xl text-black/90 lg:text-4xl flex font-bold items-center font-one gap-3">
             <span className="">AFZALLIKLARIMIZ</span>
@@ -41,7 +41,7 @@ function AboutAdvantages() {
             {cards.map((item, index) => (
               <li
                 key={index}
-                className=" lg:even:mt-10 lg:odd:mb-10 flex flex-col items-center gap-5 text-center bg-gray-200 px-5 py-10 rounded-2xl shadow-md"
+                className=" lg:even:mt-10 lg:odd:mb-10 flex flex-col items-center gap-5 text-center bg-gray-100 px-5 py-10 rounded-2xl shadow-[3px_3px_15px]/20 "
               >
                 <div className="text-4xl md:text-5xl text-red-500">{item.icon}</div>
                 <h4 className="text-md font-one text-gray-900">{item.title}</h4>

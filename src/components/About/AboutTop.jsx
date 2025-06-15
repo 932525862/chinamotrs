@@ -7,7 +7,7 @@ function AboutTop() {
     <>
       <div className="">
         <img src={aboutBg} alt="" className="hidden lg:block absolute left-0" />
-        <section className="max-w-7xl mx-auto">
+        <section className="max-w-7xl mx-auto px-[1rem]">
           <div className="flex flex-col md:grid md:grid-cols-11 ">
             <div className="col-span-5 z-0 md:pr-4 lg:pr-10 flex flex-col justify-center gap-5 md:gap-10 relative">
               <img
