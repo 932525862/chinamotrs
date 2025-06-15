@@ -84,7 +84,7 @@ const CategoryPage = () => {
             originalPrice: 99.99,
             rating: 4.5,
             reviews: 178,
-            image: "https://images.pexels.com/photos/4162452/pexels-photo-4162452.jpeg?auto=compress&cs=tinysrgb&w=400",
+            image: "https://images.pexels.com/photos/4162449/pexels-photo-4162449.jpeg?auto=compress&cs=tinysrgb&w=400",
             category: "Mass Gainers",
             inStock: true,
             isNew: false,
