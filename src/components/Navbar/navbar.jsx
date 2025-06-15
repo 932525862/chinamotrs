@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import logo from "../../assets/logo.jpg";
 import {
     Search,
@@ -16,8 +16,25 @@ const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [activeDropdown, setActiveDropdown] = useState(null);
+    const dropdownRef = useRef(null);
 
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (
+                dropdownRef.current &&
+                !dropdownRef.current.contains(event.target)
+            ) {
+                setActiveDropdown(null);
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
 
     const categories = [
         {
@@ -88,13 +105,6 @@ const Navbar = () => {
                     <div className="hidden lg:flex flex-1 max-w-2xl mx-8">
                         <div className="relative w-full">
                             <div className="flex">
-                                {/* <select className="bg-gray-100 border border-r-0 border-gray-300 rounded-l-lg px-4 py-3 focus:outline-none">
-                                    <option>All Categories</option>
-                                    <option>Protein</option>
-                                    <option>Amino Acids</option>
-                                    <option>Pre-Workout</option>
-                                    <option>Vitamins</option>
-                                </select> */}
                                 <input
                                     type="text"
                                     placeholder="Search for products..."
@@ -152,9 +162,9 @@ const Navbar = () => {
             <div className="border-t border-gray-200">
                 <div className="max-w-7xl mx-auto px-4">
                     <nav className="hidden lg:flex items-center justify-center space-x-14 py-4">
-                        <a href="#" className="text-gray-800 hover:text-blue-600 font-medium transition-colors">Home</a>
-                        <a href="#" className="text-gray-800 hover:text-blue-600 font-medium transition-colors">About</a>
-                        <div className="relative group">
+                        <a href="/" className="text-gray-800 hover:text-blue-600 font-medium transition-colors">Home</a>
+                        <a href="/about" className="text-gray-800 hover:text-blue-600 font-medium transition-colors">About</a>
+                        <div className="relative group" ref={dropdownRef}>
                             <button
                                 onClick={() =>
                                     setActiveDropdown(activeDropdown === "Category" ? null : "Category")
@@ -177,7 +187,10 @@ const Navbar = () => {
                                     >
                                         <ul className="py-2">
                                             {categories.map((category) => (
-                                                <li key={category.name}>
+                                                <li key={category.name} onClick={() => {
+                                                    navigate(`/category/${category?.name}`);
+                                                    setActiveDropdown(null);
+                                                }}>
                                                     <a
                                                         href="#"
                                                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition"
@@ -192,8 +205,8 @@ const Navbar = () => {
                             </AnimatePresence>
                         </div>
 
-                        <a href="#" className="text-gray-800 hover:text-blue-600 font-medium transition-colors">News</a>
-                        <a href="#" className="text-gray-800 hover:text-blue-600 font-medium transition-colors">Contact</a>
+                        <a href="/news" className="text-gray-800 hover:text-blue-600 font-medium transition-colors">News</a>
+                        <a href="/contact" className="text-gray-800 hover:text-blue-600 font-medium transition-colors">Contact</a>
                     </nav>
 
                     {/* Mobile Menu */}
@@ -201,22 +214,10 @@ const Navbar = () => {
                         {isMenuOpen && (
                             <div className="lg:hidden py-4 border-t border-gray-200">
                                 <div className="space-y-4">
-                                    {/* Static Links */}
-                                    <a
-                                        href="#"
-                                        className="block text-gray-800 hover:text-blue-600 font-medium transition-colors"
-                                    >
-                                        Home
-                                    </a>
-                                    <a
-                                        href="#"
-                                        className="block text-gray-800 hover:text-blue-600 font-medium transition-colors"
-                                    >
-                                        About
-                                    </a>
+                                    <a href="/" className="block text-gray-800 hover:text-blue-600 font-medium transition-colors">Home</a>
+                                    <a href="/about" className="block text-gray-800 hover:text-blue-600 font-medium transition-colors">About</a>
 
-                                    {/* Category Dropdown */}
-                                    <div className="relative group">
+                                    <div className="relative group" ref={dropdownRef}>
                                         <button
                                             onClick={() =>
                                                 setActiveDropdown(activeDropdown === "Category" ? null : "Category")
@@ -239,12 +240,15 @@ const Navbar = () => {
                                                 >
                                                     <ul className="py-2">
                                                         {categories.map((category) => (
-                                                            <li key={category.name}>
+                                                            <li key={category.name} onClick={() => {
+                                                                navigate(`/category/${category?.name}`);
+                                                                setActiveDropdown(null);
+                                                            }}>
                                                                 <a
                                                                     href="#"
                                                                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition"
                                                                 >
-                                                                    {category.name} a
+                                                                    {category.name}
                                                                 </a>
                                                             </li>
                                                         ))}
@@ -254,24 +258,11 @@ const Navbar = () => {
                                         </AnimatePresence>
                                     </div>
 
-
-                                    <a
-                                        href="#"
-                                        className="block text-gray-800 hover:text-blue-600 font-medium transition-colors"
-                                    >
-                                        News
-                                    </a>
-
-                                    <a
-                                        href="#"
-                                        className="block text-gray-800 hover:text-blue-600 font-medium transition-colors"
-                                    >
-                                        Contact
-                                    </a>
+                                    <a href="/news" className="block text-gray-800 hover:text-blue-600 font-medium transition-colors">News</a>
+                                    <a href="/contact" className="block text-gray-800 hover:text-blue-600 font-medium transition-colors">Contact</a>
                                 </div>
                             </div>
                         )}
-
                     </AnimatePresence>
                 </div>
             </div>
