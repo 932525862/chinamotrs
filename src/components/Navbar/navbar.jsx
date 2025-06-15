@@ -125,7 +125,7 @@ const Navbar = () => {
                         </button>
 
                         {/* User Account */}
-                        <div className="relative group">
+                        {/* <div className="relative group"> */}
                             <button className="flex items-center space-x-2 p-2 hover:bg-gray-100 rounded-lg transition-colors">
                                 <User className="w-6 h-6 text-gray-600" />
                                 <div className="hidden md:block text-left">
@@ -145,19 +145,19 @@ const Navbar = () => {
                                     <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Account Settings</a>
                                 </div>
                             </div>
-                        </div>
+                        {/* </div> */}
 
                         {/* Wishlist */}
-                        <button className="relative p-2 hover:bg-gray-100 rounded-lg transition-colors">
+                        {/* <button className="relative p-2 hover:bg-gray-100 rounded-lg transition-colors"> */}
                             <Heart className="w-6 h-6 text-gray-600" />
                             <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
-                        </button>
+                        {/* </button> */}
 
                         {/* Shopping Cart */}
-                        <button className="relative p-2 hover:bg-gray-100 rounded-lg transition-colors">
+                        {/* <button className="relative p-2 hover:bg-gray-100 rounded-lg transition-colors"> */}
                             <ShoppingCart className="w-6 h-6 text-gray-600" />
                             <span className="absolute -top-1 -right-1 bg-blue-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">2</span>
-                        </button>
+                       {/* </div> </button> */}
 
                         {/* Mobile Menu Toggle */}
                         <button
