@@ -1,23 +1,23 @@
 import { useState } from 'react';
-import logo from "../../assets/logo.jpg"
+import logo from "../../assets/logo.jpg";
 import {
     Search,
-    User,
-    ShoppingCart,
-    Heart,
     Menu,
     X,
     Phone,
     Mail,
     MapPin,
-    ChevronDown,
-    Dumbbell
+    ChevronDown
 } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [activeDropdown, setActiveDropdown] = useState(null);
+
+    const navigate = useNavigate();
 
     const categories = [
         {
@@ -51,24 +51,20 @@ const Navbar = () => {
             {/* Top Bar */}
             <div className="bg-gray-900 text-white">
                 <div className="max-w-7xl mx-auto px-4">
-                    <div className="flex items-center justify-between py-2 text-sm">
-                        <div className="flex items-center space-x-6">
+                    <div className="flex items-center justify-center py-2 gap-5 text-sm">
+                        <div className="flex items-center justify-center space-x-10">
                             <div className="flex items-center space-x-2">
                                 <Phone className="w-4 h-4" />
                                 <span className='md:block hidden'>+998 (71) 123-45-67</span>
                             </div>
                             <div className="flex items-center space-x-2">
                                 <Mail className="w-4 h-4" />
-                                <span>info@sports.uz</span>
+                                <span className='md:block hidden'>info@sports.uz</span>
                             </div>
-                            <div className="hidden md:flex items-center space-x-2">
+                            <div className="flex items-center space-x-2">
                                 <MapPin className="w-4 h-4" />
-                                <span>Tashkent, Uzbekistan</span>
+                                <span className='md:block hidden'>Tashkent, Uzbekistan</span>
                             </div>
-                        </div>
-                        <div className="flex items-center space-x-4">
-                            <span>Free shipping on orders over $100</span>
-
                         </div>
                     </div>
                 </div>
@@ -78,10 +74,9 @@ const Navbar = () => {
             <div className="max-w-7xl mx-auto px-4">
                 <div className="flex items-center justify-between py-4">
                     {/* Logo */}
-                    <div className="flex items-center space-x-2">
+                    <div className="flex items-center space-x-2 cursor-pointer" onClick={() => navigate('/')}>
                         <div className="rounded-lg">
-                            {/* <Dumbbell className="w-8 h-8 text-white" /> */}
-                            <img src={logo} className="w-12 h-12 text-white" alt="Logo Image" />
+                            <img src={logo} className="w-12 h-12 text-white" alt="Logo" />
                         </div>
                         <div>
                             <h1 className="text-2xl font-bold text-gray-800">Sports</h1>
@@ -93,20 +88,18 @@ const Navbar = () => {
                     <div className="hidden lg:flex flex-1 max-w-2xl mx-8">
                         <div className="relative w-full">
                             <div className="flex">
-                                <select className="bg-gray-100 border border-r-0 border-gray-300 rounded-l-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                {/* <select className="bg-gray-100 border border-r-0 border-gray-300 rounded-l-lg px-4 py-3 focus:outline-none">
                                     <option>All Categories</option>
                                     <option>Protein</option>
                                     <option>Amino Acids</option>
                                     <option>Pre-Workout</option>
                                     <option>Vitamins</option>
-                                </select>
-                                <div className="relative flex-1">
-                                    <input
-                                        type="text"
-                                        placeholder="Search for products, brands..."
-                                        className="w-full px-4 py-3 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                    />
-                                </div>
+                                </select> */}
+                                <input
+                                    type="text"
+                                    placeholder="Search for products..."
+                                    className="w-full px-4 py-3 border border-gray-300 focus:outline-none"
+                                />
                                 <button className="bg-blue-600 text-white px-6 py-3 rounded-r-lg hover:bg-blue-700 transition-colors">
                                     <Search className="w-5 h-5" />
                                 </button>
@@ -114,54 +107,16 @@ const Navbar = () => {
                         </div>
                     </div>
 
-                    {/* Right Side Icons */}
+                    {/* Icons */}
                     <div className="flex items-center space-x-4">
-                        {/* Mobile Search Toggle */}
                         <button
-                            className="lg:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                            className="lg:hidden p-2 hover:bg-gray-100 rounded-lg"
                             onClick={() => setIsSearchOpen(!isSearchOpen)}
                         >
                             <Search className="w-6 h-6 text-gray-600" />
                         </button>
-
-                        {/* User Account */}
-                        {/* <div className="relative group"> */}
-                            <button className="flex items-center space-x-2 p-2 hover:bg-gray-100 rounded-lg transition-colors">
-                                <User className="w-6 h-6 text-gray-600" />
-                                <div className="hidden md:block text-left">
-                                    <div className="text-xs text-gray-500">Hello, Sign in</div>
-                                    <div className="text-sm font-medium text-gray-800">Account</div>
-                                </div>
-                            </button>
-
-                            {/* Account Dropdown */}
-                            <div className="absolute right-0 top-full mt-2 w-48 bg-white rounded-lg shadow-xl border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                                <div className="py-2">
-                                    <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Sign In</a>
-                                    <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Create Account</a>
-                                    <hr className="my-2" />
-                                    <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">My Orders</a>
-                                    <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Wishlist</a>
-                                    <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Account Settings</a>
-                                </div>
-                            </div>
-                        {/* </div> */}
-
-                        {/* Wishlist */}
-                        {/* <button className="relative p-2 hover:bg-gray-100 rounded-lg transition-colors"> */}
-                            <Heart className="w-6 h-6 text-gray-600" />
-                            <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
-                        {/* </button> */}
-
-                        {/* Shopping Cart */}
-                        {/* <button className="relative p-2 hover:bg-gray-100 rounded-lg transition-colors"> */}
-                            <ShoppingCart className="w-6 h-6 text-gray-600" />
-                            <span className="absolute -top-1 -right-1 bg-blue-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">2</span>
-                       {/* </div> </button> */}
-
-                        {/* Mobile Menu Toggle */}
                         <button
-                            className="lg:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                            className="lg:hidden p-2 hover:bg-gray-100 rounded-lg"
                             onClick={() => setIsMenuOpen(!isMenuOpen)}
                         >
                             {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -170,124 +125,154 @@ const Navbar = () => {
                 </div>
 
                 {/* Mobile Search Bar */}
-                {isSearchOpen && (
-                    <div className="lg:hidden pb-4">
-                        <div className="flex">
-                            <input
-                                type="text"
-                                placeholder="Search products..."
-                                className="flex-1 px-4 py-3 border border-gray-300 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                            />
-                            <button className="bg-blue-600 text-white px-6 py-3 rounded-r-lg hover:bg-blue-700 transition-colors">
-                                <Search className="w-5 h-5" />
-                            </button>
-                        </div>
-                    </div>
-                )}
+                <AnimatePresence>
+                    {isSearchOpen && (
+                        <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: 'auto', opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            className="lg:hidden pb-4 overflow-hidden"
+                        >
+                            <div className="flex">
+                                <input
+                                    type="text"
+                                    placeholder="Search products..."
+                                    className="flex-1 px-4 py-3 border border-gray-300 rounded-l-lg focus:outline-none"
+                                />
+                                <button className="bg-blue-600 text-white px-6 py-3 rounded-r-lg hover:bg-blue-700 transition-colors">
+                                    <Search className="w-5 h-5" />
+                                </button>
+                            </div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
             </div>
 
             {/* Navigation Menu */}
             <div className="border-t border-gray-200">
                 <div className="max-w-7xl mx-auto px-4">
-                    <nav className="hidden lg:flex items-center space-x-8 py-4">
-                        <a href="#" className="text-gray-800 hover:text-blue-600 font-medium transition-colors">
-                            Home
-                        </a>
-
-                        {categories.map((category) => (
-                            <div
-                                key={category.name}
-                                className="relative group"
-                                onMouseEnter={() => setActiveDropdown(category.name)}
-                                onMouseLeave={() => setActiveDropdown(null)}
+                    <nav className="hidden lg:flex items-center justify-center space-x-14 py-4">
+                        <a href="#" className="text-gray-800 hover:text-blue-600 font-medium transition-colors">Home</a>
+                        <a href="#" className="text-gray-800 hover:text-blue-600 font-medium transition-colors">About</a>
+                        <div className="relative group">
+                            <button
+                                onClick={() =>
+                                    setActiveDropdown(activeDropdown === "Category" ? null : "Category")
+                                }
+                                className="nav-link flex items-center gap-1 text-gray-800 font-medium transition-colors"
                             >
-                                <button className="flex items-center space-x-1 text-gray-800 hover:text-blue-600 font-medium transition-colors">
-                                    <span>{category.name}</span>
-                                    <ChevronDown className="w-4 h-4" />
-                                </button>
+                                <span>Category</span>
+                                <ChevronDown
+                                    className={`w-4 h-4 transition-transform ${activeDropdown === "Category" ? "rotate-180" : ""}`}
+                                />
+                            </button>
 
-                                {/* Dropdown Menu */}
-                                <div className={`absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-xl border transition-all duration-200 ${activeDropdown === category.name ? 'opacity-100 visible' : 'opacity-0 invisible'
-                                    }`}>
-                                    <div className="py-2">
-                                        {category.subcategories.map((sub) => (
-                                            <a
-                                                key={sub}
-                                                href="#"
-                                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-blue-600 transition-colors"
-                                            >
-                                                {sub}
-                                            </a>
-                                        ))}
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
+                            <AnimatePresence>
+                                {activeDropdown === "Category" && (
+                                    <motion.div
+                                        initial={{ opacity: 0, y: -10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: -10 }}
+                                        className="absolute left-0 mt-2 w-48 bg-white shadow-lg rounded-lg border border-gray-100 z-50"
+                                    >
+                                        <ul className="py-2">
+                                            {categories.map((category) => (
+                                                <li key={category.name}>
+                                                    <a
+                                                        href="#"
+                                                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition"
+                                                    >
+                                                        {category.name}
+                                                    </a>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+                        </div>
 
-                        <a href="#" className="text-gray-800 hover:text-blue-600 font-medium transition-colors">
-                            Brands
-                        </a>
-                        <a href="#" className="text-gray-800 hover:text-blue-600 font-medium transition-colors">
-                            Sale
-                        </a>
-                        <a href="#" className="text-gray-800 hover:text-blue-600 font-medium transition-colors">
-                            About
-                        </a>
-                        <a href="#" className="text-gray-800 hover:text-blue-600 font-medium transition-colors">
-                            Contact
-                        </a>
+                        <a href="#" className="text-gray-800 hover:text-blue-600 font-medium transition-colors">News</a>
+                        <a href="#" className="text-gray-800 hover:text-blue-600 font-medium transition-colors">Contact</a>
                     </nav>
 
                     {/* Mobile Menu */}
-                    {isMenuOpen && (
-                        <div className="lg:hidden py-4 border-t border-gray-200">
-                            <div className="space-y-4">
-                                <a href="#" className="block text-gray-800 hover:text-blue-600 font-medium transition-colors">
-                                    Home
-                                </a>
+                    <AnimatePresence>
+                        {isMenuOpen && (
+                            <div className="lg:hidden py-4 border-t border-gray-200">
+                                <div className="space-y-4">
+                                    {/* Static Links */}
+                                    <a
+                                        href="#"
+                                        className="block text-gray-800 hover:text-blue-600 font-medium transition-colors"
+                                    >
+                                        Home
+                                    </a>
+                                    <a
+                                        href="#"
+                                        className="block text-gray-800 hover:text-blue-600 font-medium transition-colors"
+                                    >
+                                        About
+                                    </a>
 
-                                {categories.map((category) => (
-                                    <div key={category.name}>
+                                    {/* Category Dropdown */}
+                                    <div className="relative group">
                                         <button
-                                            className="flex items-center justify-between w-full text-left text-gray-800 hover:text-blue-600 font-medium transition-colors"
-                                            onClick={() => setActiveDropdown(activeDropdown === category.name ? null : category.name)}
+                                            onClick={() =>
+                                                setActiveDropdown(activeDropdown === "Category" ? null : "Category")
+                                            }
+                                            className="nav-link flex items-center gap-1 text-gray-800 font-medium transition-colors"
                                         >
-                                            <span>{category.name}</span>
-                                            <ChevronDown className={`w-4 h-4 transition-transform ${activeDropdown === category.name ? 'rotate-180' : ''
-                                                }`} />
+                                            <span>Category</span>
+                                            <ChevronDown
+                                                className={`w-4 h-4 transition-transform ${activeDropdown === "Category" ? "rotate-180" : ""}`}
+                                            />
                                         </button>
 
-                                        {activeDropdown === category.name && (
-                                            <div className="mt-2 ml-4 space-y-2">
-                                                {category.subcategories.map((sub) => (
-                                                    <a
-                                                        key={sub}
-                                                        href="#"
-                                                        className="block text-sm text-gray-600 hover:text-blue-600 transition-colors"
-                                                    >
-                                                        {sub}
-                                                    </a>
-                                                ))}
-                                            </div>
-                                        )}
+                                        <AnimatePresence>
+                                            {activeDropdown === "Category" && (
+                                                <motion.div
+                                                    initial={{ opacity: 0, y: -10 }}
+                                                    animate={{ opacity: 1, y: 0 }}
+                                                    exit={{ opacity: 0, y: -10 }}
+                                                    className="absolute left-0 mt-2 w-48 bg-white shadow-lg rounded-lg border border-gray-100 z-50"
+                                                >
+                                                    <ul className="py-2">
+                                                        {categories.map((category) => (
+                                                            <li key={category.name}>
+                                                                <a
+                                                                    href="#"
+                                                                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition"
+                                                                >
+                                                                    {category.name} a
+                                                                </a>
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                </motion.div>
+                                            )}
+                                        </AnimatePresence>
                                     </div>
-                                ))}
 
-                                <a href="#" className="block text-gray-800 hover:text-blue-600 font-medium transition-colors">
-                                    Brands
-                                </a>
-                                <a href="#" className="block text-gray-800 hover:text-blue-600 font-medium transition-colors">
-                                    Sale
-                                </a>
-                                <a href="#" className="block text-gray-800 hover:text-blue-600 font-medium transition-colors">
-                                    About
-                                </a>
-                                <a href="#" className="block text-gray-800 hover:text-blue-600 font-medium transition-colors">
-                                    Contact
-                                </a>
+
+                                    <a
+                                        href="#"
+                                        className="block text-gray-800 hover:text-blue-600 font-medium transition-colors"
+                                    >
+                                        News
+                                    </a>
+
+                                    <a
+                                        href="#"
+                                        className="block text-gray-800 hover:text-blue-600 font-medium transition-colors"
+                                    >
+                                        Contact
+                                    </a>
+                                </div>
                             </div>
-                        </div>
-                    )}
+                        )}
+
+                    </AnimatePresence>
                 </div>
             </div>
         </div>
