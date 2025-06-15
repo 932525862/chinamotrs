@@ -9,14 +9,18 @@ const News = () => {
   return (
     <div>
       <section className="max-w-7xl mx-auto px-[1rem]">
-        {/* <main className="flex gap-10">
-          <div className="">
-            <img src={item.img} alt="" className="" />
-          </div>
-          <div className="">
-            <p className="">{item.desc}</p>
-          </div>
-        </main> */}
+        {item ? (
+          <main className="flex gap-10">
+            <div className="">
+              <img src={item.img} alt="" className="" />
+            </div>
+            <div className="">
+              <p className="">{item.desc}</p>
+            </div>
+          </main>
+        ) : (
+          ''
+        )}
         <div className="mt-15">
           <h3 className="text-xl pb-7 md:text-2xl text-black/90 lg:text-4xl flex font-bold items-center font-one gap-3">
             <span className="">YANGILIKLAR</span>

@@ -2,7 +2,7 @@ import brandImg from '../../assets/brandImg.jpg'
 function BrandVision() {
   return (
     <>
-      <section className="max-w-7xl mx-auto pt-15 md:pt-35 px-[1rem]">
+      <section className="max-w-7xl mx-auto pt-15 pb-10 md:pt-35 px-[1rem]">
         
         <div className="flex flex-col-reverse md:flex-row gap-4 md:gap-10 md:items-center">
           <div className="overflow-hidden rounded-2xl md:w-6/10 group md:h-80">
