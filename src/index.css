@@ -12,7 +12,6 @@
   width: 40px;
 }
 
-
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -129,4 +128,8 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.font-one {
+  font-family: Prosto One, sans-serif;
 }
