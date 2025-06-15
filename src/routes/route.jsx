@@ -6,6 +6,7 @@ import MainLayout from "@/layouts/MainLayout";
 import Layout from "../layouts/Layout";
 
 import Loading from "../components/Loading/loading";
+import News from "../components/News/news";
 
 // Pages
 const Home = lazy(() => import("@/pages/Home"));
@@ -26,6 +27,8 @@ const RouteProvider = () => {
                         <Route path="/about" element={<About />} />
                         <Route path="/category" element={<Category />} />
                         <Route path="/contact" element={<Contact />} />
+                        <Route path="/news/:id" element={<News />} />
+                        <Route path="/news" element={<News />} />
                     </Route>
 
                     <Route element={<Layout />}>
