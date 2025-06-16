@@ -27,8 +27,8 @@ const cards = [
 
 function AboutAdvantages() {
   return (
-    <>
-      <section className="max-w-7xl mx-auto pt-10 pb-15 px-[1rem] bg-gray-100">
+    <div className='bg-gray-100'>
+      <section className="max-w-7xl mx-auto pt-10 pb-15 px-[1rem]">
         <div className="">
           <h3 className="text-xl md:text-2xl text-black/90 lg:text-4xl flex font-bold items-center font-one gap-3">
             <span className="">AFZALLIKLARIMIZ</span>
@@ -51,7 +51,7 @@ function AboutAdvantages() {
           </ul>
         </div>
       </section>
-    </>
+    </div>
   )
 }
 
