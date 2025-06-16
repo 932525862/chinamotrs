@@ -1,11 +1,18 @@
 import { useState } from "react";
-import { Search, ChevronDown } from "lucide-react";
+import { Search } from "lucide-react";
 import logo from "../../assets/gran.png";
+import { Link } from "react-router-dom"; // 🆕 qo‘shildi
 
 const Navbar = () => {
   const [language, setLanguage] = useState("en");
 
-  const categories = ["Home", "About", "Category", "News", "Contact"];
+  const categories = [
+    { name: "Home", path: "/" },
+    { name: "About", path: "/about" },
+    { name: "Category", path: "/category" },
+    { name: "News", path: "/news" },
+    { name: "Contact", path: "/contact" },
+  ];
 
   return (
     <div className="bg-white shadow-md sticky top-0 z-50 border-b">
@@ -13,19 +20,18 @@ const Navbar = () => {
         {/* Left: Logo */}
         <div className="flex items-center space-x-3 cursor-pointer">
           <img src={logo} alt="Logo" className="w-42 h-17 object-contain" />
-          
         </div>
 
         {/* Center: Menu items */}
         <div className="flex flex-wrap justify-center gap-6 text-lg font-semibold text-gray-700">
           {categories.map((item) => (
-            <a
-              href={`/${item.toLowerCase()}`}
-              key={item}
+            <Link
+              to={item.path}
+              key={item.name}
               className="hover:text-blue-600 transition-colors"
             >
-              {item}
-            </a>
+              {item.name}
+            </Link>
           ))}
         </div>
 
@@ -47,7 +53,6 @@ const Navbar = () => {
             onChange={(e) => setLanguage(e.target.value)}
             className="border border-gray-300 rounded-full px-4 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
-            
             <option value="uz">UZ</option>
             <option value="ru">RU</option>
           </select>
