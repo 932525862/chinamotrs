@@ -96,3 +96,21 @@ export const categories = [
     { name: "Fat Burners", count: 19 },
     { name: "Post-Workout", count: 15 }
 ];
+
+export const productData = {
+    title: 'Виниловый гантель STARFIT 1кг',
+    category: 'Гантели',
+    price: '279 000',
+    currency: 'сум',
+    rating: 5,
+    reviews: 0,
+    description: 'Профессиональный виниловый гантель STARFIT весом 1кг. Идеально подходит для домашних тренировок, фитнеса и реабилитации. Виниловое покрытие обеспечивает комфортный хват и защищает поверхность от повреждений.',
+    features: [
+        'Вес: 1 кг',
+        'Материал: винил',
+        'Цвет: красный',
+        'Удобная эргономичная форма',
+        'Антискользящее покрытие'
+    ],
+    image: 'https://images.pexels.com/photos/416717/pexels-photo-416717.jpeg?auto=compress&cs=tinysrgb&w=800'
+};
