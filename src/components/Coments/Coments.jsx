@@ -36,14 +36,14 @@ export default function Coments() {
   const [activeIndex, setActiveIndex] = useState(1);
 
   return (
-    <div className="relative w-full mx-auto p-5 my-7 bg-gray-100">
+    <div className="relative w-full mx-auto p-5 my-7">
       <h2 className="lg:text-4xl md:3xl font-semibold text-center">Mijozlarimiz fikirlari</h2>
       <Swiper
         modules={[Autoplay, Navigation]}
         loop={true}
         slidesPerView={4}
         centeredSlides={false}
-        spaceBetween={30}
+        spaceBetween={15}
         autoplay={{ delay: 2000, disableOnInteraction: false }}
         onSwiper={(swiper) => (swiperRef.current = swiper)}
         onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
@@ -64,11 +64,11 @@ export default function Coments() {
             slidesPerView: 1,
           },
         }}
-        className="w-full"
+        className="max-w-7xl"
       >
         {videos.map((item, index) => (
           <SwiperSlide key={index} className="flex items-start justify-center">
-            <div className="w-[220px] max-[550px]:w-full relative group my-10 max-[270px]:w-full h-[250px]  shadow-md rounded-xl">
+            <div className="w-[230px] max-[550px]:w-full relative group my-10 max-[270px]:w-full h-[250px]  shadow-md rounded-xl">
               <video
                 controls
                 autoPlay
