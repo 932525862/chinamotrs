@@ -10,6 +10,7 @@ import hero3 from "../../assets/hero.2.png";
 import hero4 from "../../assets/hero.3.jpg";
 import { NavLink } from "react-router-dom";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import { RiArrowRightUpLine } from "react-icons/ri";
 
 export default function SwiperSlides() {
   // const swiperRef = useRef(null);
@@ -55,7 +56,7 @@ export default function SwiperSlides() {
           el: ".custom-pagination",
           clickable: true,
           renderBullet: (index, className) =>
-            `<span class="${className} w-10 h-3 inline-block mx-1 rounded-xl border-1 border-[#b9fa15] transition-all duration-300"></span>`,
+            `<span class="${className} w-10 h-3 inline-block mx-1 rounded-xl border-1 border-[#0B954C] transition-all duration-300"></span>`,
         }}
         navigation={{
           nextEl: ".custom-next",
@@ -78,7 +79,7 @@ export default function SwiperSlides() {
 
                 <span className="w-full h-full min-md:hidden bg-black/40 absolute top-0 left-0"></span>
 
-                <div className="w-[250px] z-10 max-sm:hidden mt-3 border-b-2 border-r-2 border-[#b9fa15] rounded-[50%] px-7 py-4">
+                <div className="w-[250px] z-10 max-sm:hidden mt-3 border-b-2 border-r-2 border-[#0B954C] rounded-[50%] px-7 py-4">
                   <p className="text-xl text-right">
                     O'zbekiston bo'ylab yetkazib berish!
                   </p>
@@ -90,10 +91,10 @@ export default function SwiperSlides() {
                   {car?.text}
                 </p>
                 <NavLink>
-                  <button className="mt-5 bg-[#000000a6] text-white relative overflow-hidden group border-2 border-[#b9fa15] px-7 py-4 max-sm:py-2 transform duration-500 rounded-full hover:text-black flex items-center gap-3">
+                  <button className="mt-5 bg-[#000000a6] text-white relative overflow-hidden group border-2 border-[#0B954C] px-7 py-4 max-sm:py-2 transform duration-500 rounded-full hover:text-black flex items-center gap-3">
                     <span className="z-20 text-xl max-sm:text-sm">KATALOGGA O‘TISH</span>{" "}
-                    <span className=" z-20 text-2xl ">↗</span>
-                    <span className="w-full h-full z-10 absolute -left-72 bg-[#b9fa15]  group-hover:left-0 transform duration-500 transition-all"></span>
+                    <span className=" z-20 text-2xl "><RiArrowRightUpLine /></span>
+                    <span className="w-full h-full z-10 absolute -left-72 bg-[#0B954C]  group-hover:left-0 transform duration-500 transition-all"></span>
                   </button>
                 </NavLink>
               </div>
@@ -101,10 +102,10 @@ export default function SwiperSlides() {
           </SwiperSlide>
         ))}
         {/* Custom Arrow Buttons */}
-        <div className="custom-prev absolute max-lg:hidden right-35 bottom-16 w-[60px] h-[60px] rounded-[50%] -translate-y-1/2 z-10 cursor-pointer border text-xl font-bold bg-black/70 text-white hover:bg-[#323131d3] hover:text-[#b9fa15] transition flex items-center justify-center">
+        <div className="custom-prev absolute max-lg:hidden right-35 bottom-16 w-[60px] h-[60px] rounded-[50%] -translate-y-1/2 z-10 cursor-pointer border text-xl font-bold bg-black/70 text-white hover:bg-[#323131d3] hover:text-[#0B954C] transition flex items-center justify-center">
           <FaArrowLeft />
         </div>
-        <div className="custom-next absolute max-lg:hidden right-15 bottom-16 w-[60px] h-[60px] -translate-y-1/2 z-10 cursor-pointer border text-xl font-bold bg-black/70 text-white p-3 rounded-full hover:bg-[#323131d3] hover:text-[#b9fa15] transition flex items-center justify-center">     
+        <div className="custom-next absolute max-lg:hidden right-15 bottom-16 w-[60px] h-[60px] -translate-y-1/2 z-10 cursor-pointer border text-xl font-bold bg-black/70 text-white p-3 rounded-full hover:bg-[#323131d3] hover:text-[#0B954C] transition flex items-center justify-center">     
           <FaArrowRight />
         </div>
 
