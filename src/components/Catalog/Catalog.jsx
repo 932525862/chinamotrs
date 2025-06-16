@@ -9,7 +9,7 @@ import { NavLink } from "react-router-dom";
 function Catalog() {
   return (
     <section className=" bg-neutral-50 py-16">
-      <div className="max-x-7xl px-5">
+      <div className="max-w-7xl px-5 mx-auto">
         <div className="flex flex-col items-center relative">
           <h1 className="w-[450px] text-4xl max-md:text-2xl max-md:w-full font-bold text-center">
             YANGI VA SIFATLI TOVARLARIMIZ
