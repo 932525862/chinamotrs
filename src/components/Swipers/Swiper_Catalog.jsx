@@ -128,7 +128,7 @@ export default function Swiper_Catalog() {
           <SwiperSlide key={index}>
             <NavLink>
               <div className="w-[210px] h-[240px] max-[550px]:w-full max-[550px]:px-5 relative my-16 shadow-md hover:shadow-lg group p-3 rounded-xl bg-white flex items-center justify-center transition-transform duration-400 hover:scale-103">
-                <h2 className="text-center text-lg font-medium">{car.title}</h2>
+                <h2 className="text-center text-lg font-one">{car.title}</h2>
                 <div className="bg-black/10 backdrop-blur-xs group-hover:block hidden duration-300 cursor-pointer absolute top-0 left-0 w-full h-full rounded-xl">
                   <p className="text-center pt-20 text-[#17f80b] text-shadow-2xs sm:md md:lg lg:text-xl font-bold">
                     Catigoriaga o'tish
@@ -146,10 +146,7 @@ export default function Swiper_Catalog() {
           <FaArrowRight />
         </div>
         {/* Custom Pagination */}
-        <div className="custom-pagination-catalog hidden lg:block max-md:hidden absolute bottom-5 left-1/3 z-10 max-lg:left-1/2 max-lg:bottom-16"></div>
-
-        {/* <div className="w-[100px] h-full bg-gray-100 absolute top-0 left-0 z-10"></div>
-        <div className="w-[100px] h-full bg-gray-100 absolute top-0 right-0 z-10"></div> */}
+        <div className="custom-pagination-catalog  hidden lg:block max-md:hidden absolute bottom-5 left-1/3 z-10 max-lg:left-1/2 max-lg:bottom-16"></div>
       </Swiper>
     </div>
   );

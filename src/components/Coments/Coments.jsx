@@ -37,7 +37,7 @@ export default function Coments() {
 
   return (
     <div className="relative w-full mx-auto p-5 my-7">
-      <h2 className="lg:text-4xl md:3xl font-semibold text-center">Mijozlarimiz fikirlari</h2>
+      <h2 className="lg:text-4xl md:3xl font-one text-center">Mijozlarimiz fikirlari</h2>
       <Swiper
         modules={[Autoplay, Navigation]}
         loop={true}
