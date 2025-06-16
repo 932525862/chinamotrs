@@ -57,7 +57,7 @@ export const ProductCard = ({ product }) => {
                     {/* Button with isolated hover */}
                     <button
                         onClick={() => setOpen(true)}
-                        className="relative group border-[3px] border-green-500 overflow-hidden rounded-full p-2 flex items-center gap-2"
+                        className="relative cursor-pointer group border-[3px] border-green-500 overflow-hidden rounded-full p-2 flex items-center gap-2"
                     >
                         <span className="font-one text-green-500 group-hover:text-white relative duration-300 z-10">
                             Add to cart

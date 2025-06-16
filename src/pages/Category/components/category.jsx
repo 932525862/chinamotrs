@@ -5,6 +5,7 @@ import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { productData } from '../fake-data/data';
+import ProductsGrid from './products-grid';
 
 const CategoryOnePage = () => {
   const [showShareOptions, setShowShareOptions] = useState(false);
@@ -76,7 +77,7 @@ const CategoryOnePage = () => {
               {/* Header with Share Button */}
               <div className="flex items-start justify-between gap-4">
                 <div className="flex-1 min-w-0">
-                  <Badge variant="secondary" className="bg-blue-100 text-blue-800 border-blue-200 mb-2 sm:mb-3 px-2 sm:px-3 py-1 text-xs sm:text-sm">
+                  <Badge variant="secondary" className="bg-green-500 text-white border-none mb-2 sm:mb-3 px-2 sm:px-3 py-1 text-xs sm:text-sm">
                     {productData.category}
                   </Badge>
                   <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold mb-2 sm:mb-4 leading-tight text-gray-900 break-words">
@@ -88,7 +89,7 @@ const CategoryOnePage = () => {
                   <Button
                     variant="outline"
                     size="sm"
-                    className="bg-white border-gray-200 text-gray-700 hover:bg-blue-50 hover:border-blue-300 hover:text-blue-600 transition-all duration-300 shadow-sm text-xs sm:text-sm"
+                    className="bg-white border-gray-200 text-gray-700 hover:bg-blue-50 hover:border-green-500 hover:text-green-500 transition-all duration-300 shadow-sm text-xs sm:text-sm"
                     onClick={() => setShowShareOptions(!showShareOptions)}
                   >
                     <Share2 className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
@@ -96,7 +97,7 @@ const CategoryOnePage = () => {
                   </Button>
 
                   {showShareOptions && (
-                    <Card className="absolute top-10 sm:top-12 right-0 z-10 bg-white border-gray-200 shadow-xl p-3 sm:p-4 w-40 sm:w-48 rounded-lg">
+                    <Card className="absolute top-10 sm:top-12 right-0 z-20 bg-white border-gray-200 shadow-xl p-3 sm:p-4 w-52 sm:w-52 rounded-lg">
                       <div className="space-y-1 sm:space-y-2">
                         <Button
                           variant="ghost"
@@ -167,7 +168,7 @@ const CategoryOnePage = () => {
                       <span className="text-lg sm:text-xl text-gray-600">{productData.currency}</span>
                     </div>
                     <button
-                      className="relative group border-[3px] border-green-500 overflow-hidden rounded-full px-10 py-2 flex items-center gap-2"
+                      className="relative cursor-pointer group border-[3px] border-green-500 overflow-hidden rounded-full px-5 sm:px-10 py-2 flex items-center gap-2"
                     >
                       <span className="font-one text-green-500 group-hover:text-white relative duration-300 z-10">
                         Add to cart
@@ -219,6 +220,7 @@ const CategoryOnePage = () => {
           />
         )}
       </div>
+      {/* <ProductsGrid sub={true} /> */}
     </>
   );
 };

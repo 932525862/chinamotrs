@@ -2,16 +2,14 @@ import { useState } from 'react';
 import {
     Search,
     Filter,
-    Grid3X3,
-    List,
     ChevronDown
 } from 'lucide-react';
 import { categories, products } from './fake-data/data';
-import { ProductCard } from './components/product-card';
 import { useParams } from 'react-router-dom';
+import ProductsGrid from './components/products-grid';
+import PaginationComponent from './components/pagination';
 
 const CategoryPage = () => {
-    const [viewMode, setViewMode] = useState('grid');
     const [sortBy, setSortBy] = useState('popular');
     const [priceRange, setPriceRange] = useState([0, 1000]);
     const [selectedCategories, setSelectedCategories] = useState([]);
@@ -144,55 +142,16 @@ const CategoryPage = () => {
                                         </select>
                                         <ChevronDown className="absolute right-2 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
                                     </div>
-
-                                    {/* View Mode Toggle */}
-                                    <div className="flex items-center border border-gray-300 rounded-lg overflow-hidden">
-                                        <button
-                                            className={`p-2 ${viewMode === 'grid' ? 'bg-blue-600 text-white' : 'bg-white text-gray-600 hover:bg-gray-50'} transition-colors`}
-                                            onClick={() => setViewMode('grid')}
-                                        >
-                                            <Grid3X3 className="w-4 h-4" />
-                                        </button>
-                                        <button
-                                            className={`p-2 ${viewMode === 'list' ? 'bg-blue-600 text-white' : 'bg-white text-gray-600 hover:bg-gray-50'} transition-colors`}
-                                            onClick={() => setViewMode('list')}
-                                        >
-                                            <List className="w-4 h-4" />
-                                        </button>
-                                    </div>
                                 </div>
                             </div>
                         </div>
 
                         {/* Products Grid */}
-                        <div className={`grid gap-6 ${viewMode === 'grid' ? 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3' : 'grid-cols-1'}`}>
-                            {products.map((product) => (
-                                <ProductCard key={product.id} product={product} />
-                            ))}
-                        </div>
+                        <ProductsGrid />
 
                         {/* Pagination */}
-                        <div className="mt-12 flex items-center justify-center">
-                            <div className="flex flex-wrap items-center gap-2">
-                                <button className="px-4 py-2 border border-gray-300 rounded-lg text-gray-600 hover:bg-gray-50 transition-colors">
-                                    Previous
-                                </button>
-                                {[1, 2, 3, 4, 5].map((page) => (
-                                    <button
-                                        key={page}
-                                        className={`px-4 py-2 rounded-lg transition-colors ${page === 1
-                                            ? 'bg-blue-600 text-white'
-                                            : 'border border-gray-300 text-gray-600 hover:bg-gray-50'
-                                            }`}
-                                    >
-                                        {page}
-                                    </button>
-                                ))}
-                                <button className="px-4 py-2 border border-gray-300 rounded-lg text-gray-600 hover:bg-gray-50 transition-colors">
-                                    Next
-                                </button>
-                            </div>
-                        </div>
+                        <PaginationComponent totalPages={10} />
+
                     </div>
                 </div>
             </div>
