@@ -3,6 +3,13 @@ import line from '../../assets/decor-right-black.svg'
 import image from '../../assets/news-img.png'
 import { FaArrowAltCircleRight } from 'react-icons/fa'
 
+// Qo‘shimcha importlar kerak
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Navigation, Pagination, Autoplay } from 'swiper/modules'
+import 'swiper/css'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
+
 export const base = [
   {
     id: 1,
@@ -37,43 +44,61 @@ export const base = [
 ]
 
 function HomeNews() {
-  const items = base.slice(0, 4)
   return (
     <div className="bg-gray-100">
-      <section className="mx-auto max-w-7xl mt-15 flex flex-col items-start py-10">
-        <h3 className="text-xl md:text-2xl text-black/90 lg:text-4xl flex font-bold items-center font-one gap-3 pb-10">
+      <section className="mx-auto max-w-7xl mt-15 flex flex-col items-start py-10 px-[1rem]">
+        <h3 className="text-xl md:text-2xl text-black/90 lg:text-4xl flex font-bold items-center font-one gap-3 ">
           <span className="">YANGILIKLAR</span>
           <img src={line} alt="" className="hidden sm:block sm:max-w-40 md:max-w-70" />
         </h3>
-        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
-          {items.map((item) => (
-            <li key={item.id} className="group">
-              <Link to={`/news/${item.id}`} className="">
-                <div className="overflow-hidden rounded-2xl bg-white p-3   shadow-xl">
-                  <div className="overflow-hidden rounded-t-xl rounded-b-sm">
-                    <img
-                      src={item.img}
-                      alt={item.title}
-                      className="w-full h-full group-hover:scale-105 duration-300"
-                    />
+
+        <Swiper
+          modules={[Navigation, Pagination, Autoplay]}
+          spaceBetween={20}
+          slidesPerView={1}
+          autoplay={{ delay: 4000, disableOnInteraction: false }}
+          speed={1500}
+          navigation
+          pagination={{ clickable: true }}
+          loop={true}
+          breakpoints={{
+            500: { slidesPerView: 2 },
+            768: { slidesPerView: 3 },
+            1024: { slidesPerView: 4 },
+          }}
+          className="w-full lg:h-110"
+        >
+          <div className="py-10">
+            {base.map((item) => (
+              <SwiperSlide key={item.id}>
+                <Link to={`/news/${item.id}`} className="block group">
+                  <div className="overflow-hidden rounded-2xl bg-white p-3 shadow-md h-full my-10">
+                    <div className="overflow-hidden rounded-t-xl rounded-b-sm">
+                      <img
+                        src={item.img}
+                        alt={item.title}
+                        className="w-full h-full object-cover group-hover:scale-105 duration-300"
+                      />
+                    </div>
+                    <p className="font-medium text-[17px] text-gray-900 line-clamp-2 group-hover:text-blue-500 pt-2">
+                      {item.desc}
+                    </p>
                   </div>
-                  <p className="font-medium text-[17px]  text-gray-900 line-clamp-2 group-hover:text-blue-500  pt-2">
-                    {item.desc}
-                  </p>
-                </div>
-              </Link>
-            </li>
-          ))}
-        </ul>
+                </Link>
+              </SwiperSlide>
+            ))}
+          </div>
+        </Swiper>
+
         <NavLink
           to="/news"
-          className="mx-auto relative group border-[3px] border-blue-500 overflow-hidden rounded-full px-10 py-2 flex items-center gap-2"
+          className="mx-auto relative group border-[3px] border-green-500 overflow-hidden rounded-full px-10 py-2 mt-5 flex items-center gap-2"
         >
-          <span className="font-one text-blue-500 group-hover:text-white relative duration-300 z-1">
+          <span className="font-one text-green-500 group-hover:text-white relative duration-300 z-1">
             Barcha Yangiliklar
           </span>
-          <FaArrowAltCircleRight className="text-blue-500 group-hover:text-white relative duration-300 z-1" />
-          <span className="bg-blue-500 absolute w-full h-full left-0 top-0 -translate-x-full group-hover:translate-x-0 transition-transform duration-500 z-0" />
+          <FaArrowAltCircleRight className="text-green-500 group-hover:text-white relative duration-300 z-1" />
+          <span className="bg-green-500 absolute w-full h-full left-0 top-0 -translate-x-full group-hover:translate-x-0 transition-transform duration-500 z-0" />
         </NavLink>
       </section>
     </div>
