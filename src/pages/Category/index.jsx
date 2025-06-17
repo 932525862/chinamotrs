@@ -2,18 +2,19 @@ import { useState } from 'react';
 import {
     Search,
     Filter,
-    Grid3X3,
-    List,
     ChevronDown
 } from 'lucide-react';
 import { categories, products } from './fake-data/data';
-import { ProductCard } from './components/product-card';
+import { useParams } from 'react-router-dom';
+import ProductsGrid from './components/products-grid';
+import PaginationComponent from './components/pagination';
 
 const CategoryPage = () => {
-    const [viewMode, setViewMode] = useState('grid');
     const [sortBy, setSortBy] = useState('popular');
     const [priceRange, setPriceRange] = useState([0, 1000]);
     const [selectedCategories, setSelectedCategories] = useState([]);
+
+    const { slug: sub } = useParams();
 
     return (
         <div className="min-h-screen bg-gray-50">
@@ -41,70 +42,80 @@ const CategoryPage = () => {
 
             <div className="max-w-7xl mx-auto px-4 py-8">
                 <div className="flex flex-col lg:flex-row gap-8">
-                    {/* Sidebar Filters */}
-                    <div className="w-full lg:w-80 flex-shrink-0">
-                        <div className="bg-white rounded-xl shadow-sm p-6 sticky top-8">
-                            <div className="flex items-center gap-2 mb-6">
-                                <Filter className="w-5 h-5 text-gray-600" />
-                                <h2 className="text-lg font-semibold text-gray-800">Filters</h2>
-                            </div>
 
-                            {/* Categories */}
-                            <div className="mb-6">
-                                <h3 className="font-medium text-gray-800 mb-3">Categories</h3>
-                                <div className="space-y-2">
-                                    {categories.map((category) => (
-                                        <label key={category.name} className="flex items-center justify-between cursor-pointer group">
-                                            <div className="flex items-center">
-                                                <input
-                                                    type="checkbox"
-                                                    className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                                                    onChange={(e) => {
-                                                        if (e.target.checked) {
-                                                            setSelectedCategories([...selectedCategories, category.name]);
-                                                        } else {
-                                                            setSelectedCategories(selectedCategories.filter(c => c !== category.name));
-                                                        }
-                                                    }}
-                                                />
-                                                <span className="ml-2 text-gray-700 group-hover:text-blue-600 transition-colors">
-                                                    {category.name}
-                                                </span>
-                                            </div>
-                                            <span className="text-sm text-gray-500">({category.count})</span>
-                                        </label>
-                                    ))}
-                                </div>
-                            </div>
-
-                            {/* Price Range */}
-                            <div className="mb-6">
-                                <h3 className="font-medium text-gray-800 mb-3">Price Range</h3>
-                                <div className="space-y-3">
-                                    <div className="flex items-center gap-2">
-                                        <input
-                                            type="number"
-                                            placeholder="Min"
-                                            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                            value={priceRange[0]}
-                                            onChange={(e) => setPriceRange([parseInt(e.target.value) || 0, priceRange[1]])}
-                                        />
-                                        <span className="text-gray-500">-</span>
-                                        <input
-                                            type="number"
-                                            placeholder="Max"
-                                            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                            value={priceRange[1]}
-                                            onChange={(e) => setPriceRange([priceRange[0], parseInt(e.target.value) || 1000])}
-                                        />
+                    {!sub && (
+                        <>
+                            {/* Sidebar Filters */}
+                            <div className="w-full lg:w-80 flex-shrink-0">
+                                <div className="bg-white rounded-xl shadow-sm p-6 sticky top-8">
+                                    <div className="flex items-center gap-2 mb-6">
+                                        <Filter className="w-5 h-5 text-gray-600" />
+                                        <h2 className="text-lg font-semibold text-gray-800">Filters</h2>
                                     </div>
-                                    <button className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors">
-                                        Apply
-                                    </button>
+
+                                    {/* Categories */}
+                                    <div className="mb-6">
+                                        <h3 className="font-medium text-gray-800 mb-3">Categories</h3>
+                                        <div className="space-y-2">
+                                            {categories.map((category) => (
+                                                <label key={category.name} className="flex items-center justify-between cursor-pointer group">
+                                                    <div className="flex items-center">
+                                                        <input
+                                                            type="checkbox"
+                                                            className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                                                            onChange={(e) => {
+                                                                if (e.target.checked) {
+                                                                    setSelectedCategories([...selectedCategories, category.name]);
+                                                                } else {
+                                                                    setSelectedCategories(selectedCategories.filter(c => c !== category.name));
+                                                                }
+                                                            }}
+                                                        />
+                                                        <span className="ml-2 text-gray-700 group-hover:text-blue-600 transition-colors">
+                                                            {category.name}
+                                                        </span>
+                                                    </div>
+                                                    <span className="text-sm text-gray-500">({category.count})</span>
+                                                </label>
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    {/* Price Range */}
+                                    <div className="mb-6">
+                                        <h3 className="font-medium text-gray-800 mb-3">Price Range</h3>
+                                        <div className="space-y-3">
+                                            <div className="flex items-center gap-2">
+                                                <input
+                                                    type="number"
+                                                    placeholder="Min"
+                                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                                    value={priceRange[0]}
+                                                    onChange={(e) => setPriceRange([parseInt(e.target.value) || 0, priceRange[1]])}
+                                                />
+                                                <span className="text-gray-500">-</span>
+                                                <input
+                                                    type="number"
+                                                    placeholder="Max"
+                                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                                    value={priceRange[1]}
+                                                    onChange={(e) => setPriceRange([priceRange[0], parseInt(e.target.value) || 1000])}
+                                                />
+                                            </div>
+                                            <button
+                                                className="relative w-full group border-[3px] border-green-500 overflow-hidden rounded-full p-2 flex items-center justify-center gap-2"
+                                            >
+                                                <span className="font-one text-green-500 group-hover:text-white relative duration-300 z-10">
+                                                    Apply
+                                                </span>
+                                                <span className="bg-green-500 absolute w-full h-full left-0 top-0 -translate-x-full group-hover:translate-x-0 transition-transform duration-500 z-0" />
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
+                        </>
+                    )}
 
                     {/* Main Content */}
                     <div className="flex-1">
@@ -131,55 +142,16 @@ const CategoryPage = () => {
                                         </select>
                                         <ChevronDown className="absolute right-2 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
                                     </div>
-
-                                    {/* View Mode Toggle */}
-                                    <div className="flex items-center border border-gray-300 rounded-lg overflow-hidden">
-                                        <button
-                                            className={`p-2 ${viewMode === 'grid' ? 'bg-blue-600 text-white' : 'bg-white text-gray-600 hover:bg-gray-50'} transition-colors`}
-                                            onClick={() => setViewMode('grid')}
-                                        >
-                                            <Grid3X3 className="w-4 h-4" />
-                                        </button>
-                                        <button
-                                            className={`p-2 ${viewMode === 'list' ? 'bg-blue-600 text-white' : 'bg-white text-gray-600 hover:bg-gray-50'} transition-colors`}
-                                            onClick={() => setViewMode('list')}
-                                        >
-                                            <List className="w-4 h-4" />
-                                        </button>
-                                    </div>
                                 </div>
                             </div>
                         </div>
 
                         {/* Products Grid */}
-                        <div className={`grid gap-6 ${viewMode === 'grid' ? 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3' : 'grid-cols-1'}`}>
-                            {products.map((product) => (
-                                <ProductCard key={product.id} product={product} />
-                            ))}
-                        </div>
+                        <ProductsGrid />
 
                         {/* Pagination */}
-                        <div className="mt-12 flex items-center justify-center">
-                            <div className="flex flex-wrap items-center gap-2">
-                                <button className="px-4 py-2 border border-gray-300 rounded-lg text-gray-600 hover:bg-gray-50 transition-colors">
-                                    Previous
-                                </button>
-                                {[1, 2, 3, 4, 5].map((page) => (
-                                    <button
-                                        key={page}
-                                        className={`px-4 py-2 rounded-lg transition-colors ${page === 1
-                                            ? 'bg-blue-600 text-white'
-                                            : 'border border-gray-300 text-gray-600 hover:bg-gray-50'
-                                            }`}
-                                    >
-                                        {page}
-                                    </button>
-                                ))}
-                                <button className="px-4 py-2 border border-gray-300 rounded-lg text-gray-600 hover:bg-gray-50 transition-colors">
-                                    Next
-                                </button>
-                            </div>
-                        </div>
+                        <PaginationComponent totalPages={10} />
+
                     </div>
                 </div>
             </div>

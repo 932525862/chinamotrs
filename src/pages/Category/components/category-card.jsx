@@ -1,13 +1,10 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { IoMdArrowForward } from "react-icons/io";
-import { RiArrowRightUpLine } from "react-icons/ri";
-
-export const ProductCard = ({ product }) => {
+export const CategoryCard = ({ product }) => {
     const navigate = useNavigate();
-    const { slug: sub } = useParams();
 
     const handleCardClick = () => {
-        navigate(!sub ? `id/${product?.id}` : `/category/id/${product?.id}`);
+        navigate("/category");
         scrollTo({ top: 0 });
     };
 
@@ -41,8 +38,6 @@ export const ProductCard = ({ product }) => {
             >
                 <IoMdArrowForward className="rotate-[315deg] text-3xl max-md:text-2xl" />
             </button>
-
-
         </div>
     );
 };

@@ -1,3 +1,4 @@
+import AboutHome from '../../components/About/AboutHome'
 import Catalog from '../../components/Catalog/Catalog'
 import Coments from '../../components/Coments/Coments'
 import HomeNews from '../../components/News/HomeNews'
@@ -10,6 +11,7 @@ const HomePage = () => {
       <SwiperSlides />
       <Swiper_Catalog/>
       <Catalog/>
+      <AboutHome/>
       <HomeNews />
       <Coments/>
     </div>

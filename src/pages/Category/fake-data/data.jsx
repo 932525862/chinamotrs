@@ -1,4 +1,10 @@
+
+import basseyn from "../../../assets/catalog.basseyn.png";
+import trenijor from "../../../assets/catalog.trenijor.png";
+import masajnistol from "../../../assets/catalog.masajnistol.png";
+import velodarojka from "../../../assets/catalog.velodarojka.png";
 // Mock data for products
+
 export const products = [
     {
         id: 1,
@@ -8,7 +14,7 @@ export const products = [
         originalPrice: 109.99,
         rating: 4.8,
         reviews: 234,
-        image: "https://images.pexels.com/photos/4162449/pexels-photo-4162449.jpeg?auto=compress&cs=tinysrgb&w=400",
+        image: basseyn,
         category: "Protein",
         inStock: true,
         isNew: true,
@@ -22,7 +28,7 @@ export const products = [
         originalPrice: null,
         rating: 4.6,
         reviews: 156,
-        image: "https://images.pexels.com/photos/4162588/pexels-photo-4162588.jpeg?auto=compress&cs=tinysrgb&w=400",
+        image: trenijor,
         category: "Amino Acids",
         inStock: true,
         isNew: false,
@@ -36,7 +42,7 @@ export const products = [
         originalPrice: 39.99,
         rating: 4.9,
         reviews: 89,
-        image: "https://images.pexels.com/photos/4162451/pexels-photo-4162451.jpeg?auto=compress&cs=tinysrgb&w=400",
+        image: masajnistol,
         category: "Creatine",
         inStock: false,
         isNew: false,
@@ -50,7 +56,7 @@ export const products = [
         originalPrice: null,
         rating: 4.7,
         reviews: 312,
-        image: "https://images.pexels.com/photos/4162590/pexels-photo-4162590.jpeg?auto=compress&cs=tinysrgb&w=400",
+        image: velodarojka,
         category: "Pre-Workout",
         inStock: true,
         isNew: true,
@@ -96,3 +102,21 @@ export const categories = [
     { name: "Fat Burners", count: 19 },
     { name: "Post-Workout", count: 15 }
 ];
+
+export const productData = {
+    title: 'Виниловый гантель STARFIT 1кг',
+    category: 'Гантели',
+    price: '279 000',
+    currency: 'сум',
+    rating: 5,
+    reviews: 0,
+    description: 'Профессиональный виниловый гантель STARFIT весом 1кг. Идеально подходит для домашних тренировок, фитнеса и реабилитации. Виниловое покрытие обеспечивает комфортный хват и защищает поверхность от повреждений.',
+    features: [
+        'Вес: 1 кг',
+        'Материал: винил',
+        'Цвет: красный',
+        'Удобная эргономичная форма',
+        'Антискользящее покрытие'
+    ],
+    image: 'https://images.pexels.com/photos/416717/pexels-photo-416717.jpeg?auto=compress&cs=tinysrgb&w=800'
+};
