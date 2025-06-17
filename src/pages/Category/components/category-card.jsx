@@ -1,19 +1,11 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { IoMdArrowForward } from "react-icons/io";
-import { RiArrowRightUpLine } from "react-icons/ri";
-
-export const ProductCard = ({ product }) => {
+export const CategoryCard = ({ product }) => {
     const navigate = useNavigate();
-    const { slug: sub } = useParams();
 
     const handleCardClick = () => {
-        navigate(!sub ? `id/${product?.id}` : `/category/id/${product?.id}`);
-        scrollTo({ top: 0 });
-    };
-
-    const handlePurchaseClick = (e) => {
-        e.stopPropagation();
         navigate("/category");
+        scrollTo({ top: 0 });
     };
 
     return (
@@ -46,20 +38,6 @@ export const ProductCard = ({ product }) => {
             >
                 <IoMdArrowForward className="rotate-[315deg] text-3xl max-md:text-2xl" />
             </button>
-
-            {/* Top Left "xaridlar" Button */}
-            {sub && (
-                <button
-                    onClick={handlePurchaseClick}
-                    className="px-3 py-[1px] max-[550px]:px-2 rounded-xl border-2 border-green-500 text-green-500 group overflow-hidden cursor-pointer absolute top-5 left-5 hover:text-white flex items-center justify-center gap-1 transition duration-500"
-                >
-                    <span className="z-20 max-[550px]:text-[12px]">xaridlar</span>
-                    <span className="z-20 text-xl max-[550px]:text-[15px]">
-                        <RiArrowRightUpLine />
-                    </span>
-                    <span className="w-full h-full z-10 absolute -left-72 bg-green-500 group-hover:left-0 transition-all duration-500 rounded-xl" />
-                </button>
-            )}
         </div>
     );
 };

@@ -1,7 +1,11 @@
+import { Toaster } from 'sonner';
 import RouteProvider from './routes/route';
 const App = () => {
   return (
-    <RouteProvider />
+    <>
+      <RouteProvider />
+      <Toaster richColors position="top-center" />
+    </>
   )
 }
 

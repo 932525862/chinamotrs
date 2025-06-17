@@ -31,6 +31,7 @@ const Navbar = () => {
               <Link
                 key={item.name}
                 to={item.path}
+                onClick={() => scrollTo({ top: 0 })}
                 className="hover:text-blue-600 relative group transition-colors"
               >
                 {item.name}
@@ -85,7 +86,7 @@ const Navbar = () => {
                 <Link
                   key={item.name}
                   to={item.path}
-                  onClick={() => setIsOpen(false)}
+                  onClick={() => { setIsOpen(false); scrollTo({ top: 0 }) }}
                   className="hover:text-blue-600 transition-colors"
                 >
                   {item.name}
