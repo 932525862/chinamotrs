@@ -21,6 +21,7 @@ const CategoryOnePage = () => {
         text: `Проверьте этот ${productData.title}`,
         url: window.location.href
       });
+      toast.success('Ссылка скопирована!');
     } else {
       navigator.clipboard.writeText(window.location.href);
       toast.success('Ссылка скопирована!');

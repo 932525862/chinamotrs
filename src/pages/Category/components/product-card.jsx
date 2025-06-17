@@ -11,11 +11,6 @@ export const ProductCard = ({ product }) => {
         scrollTo({ top: 0 });
     };
 
-    const handlePurchaseClick = (e) => {
-        e.stopPropagation();
-        navigate("/category");
-    };
-
     return (
         <div
             className="bg-white shadow-lg cursor-pointer hover:shadow-neutral-400 duration-300 rounded-2xl p-7 max-md:p-3 relative flex flex-col justify-between"
@@ -47,19 +42,7 @@ export const ProductCard = ({ product }) => {
                 <IoMdArrowForward className="rotate-[315deg] text-3xl max-md:text-2xl" />
             </button>
 
-            {/* Top Left "xaridlar" Button */}
-            {sub && (
-                <button
-                    onClick={handlePurchaseClick}
-                    className="px-3 py-[1px] max-[550px]:px-2 rounded-xl border-2 border-green-500 text-green-500 group overflow-hidden cursor-pointer absolute top-5 left-5 hover:text-white flex items-center justify-center gap-1 transition duration-500"
-                >
-                    <span className="z-20 max-[550px]:text-[12px]">xaridlar</span>
-                    <span className="z-20 text-xl max-[550px]:text-[15px]">
-                        <RiArrowRightUpLine />
-                    </span>
-                    <span className="w-full h-full z-10 absolute -left-72 bg-green-500 group-hover:left-0 transition-all duration-500 rounded-xl" />
-                </button>
-            )}
+
         </div>
     );
 };
