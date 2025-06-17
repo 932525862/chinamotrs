@@ -12,6 +12,30 @@
   width: 40px;
 }
 
+.custom-pagination-catalog .swiper-pagination-bullet {
+  background-color: rgba(141, 141, 141, 0.09);
+  opacity: 1;
+  transition: all 0.3s ease;
+}
+
+.custom-pagination-catalog .swiper-pagination-bullet-active {
+  background-color: #48dc12; /* Tailwind sariq: yellow-400 */
+  opacity: 1;
+  width: 20px;
+}
+
+.custom-pagination-news .swiper-pagination-bullet {
+  background-color: rgba(141, 141, 141, 0.09);
+  opacity: 1;
+  transition: all 0.3s ease;
+}
+
+.custom-pagination-news .swiper-pagination-bullet-active {
+  background-color: #48dc12; /* Tailwind sariq: yellow-400 */
+  opacity: 1;
+  width: 50px;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {

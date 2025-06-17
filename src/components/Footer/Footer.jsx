@@ -40,27 +40,27 @@ function Footer() {
     window.scrollTo(0, 0)
   }
   return (
-    <footer className="bg-gray-200 mt-10">
+    <footer className="bg-gray-200">
       <div className="max-w-7xl mx-auto">
         <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 ">
           <li className="border-r border-gray-600 px-5 text-center py-10">
             <ul className="flex flex-col items-center gap-5">
               <li className="flex flex-col items-center gap-1">
-                <FaHome className="text-4xl text-green-700" />
+                <FaHome className="text-4xl text-green-500" />
                 <div className="text-xl font-bold text-blue-950/80">Manzil:</div>
                 <p className="font-medium text-gray-900">
                   Toshkent shahri, chilonzor tumani, naqqoshlik ko'chasi
                 </p>
               </li>
               <li className="flex flex-col items-center gap-1">
-                <IoIosMail className="text-4xl text-green-700" />
+                <IoIosMail className="text-4xl text-green-500" />
                 <div className="text-xl font-bold text-blue-950/80">Email:</div>
                 <a href="mailto:info@example.com" className="font-medium text-gray-900">
                   info@example.com
                 </a>
               </li>
               <li className="flex flex-col items-center gap-1">
-                <FaPhone className="text-4xl text-green-700" />
+                <FaPhone className="text-4xl text-green-500" />
                 <div className="text-xl font-bold text-blue-950/80">Yagona bog'lanish markazi:</div>
                 <a href="tel:+998999999999" className="font-medium text-gray-900">
                   +998999999999
@@ -76,7 +76,7 @@ function Footer() {
                   <li key={index} className="">
                     <NavLink
                       to={item.to}
-                      className="text-xl tracking-wider font-medium text-blue-950/90 hover:text-green-700"
+                      className="text-xl tracking-wider font-medium text-blue-950/90 hover:text-green-500"
                     >
                       {item.text}
                     </NavLink>
@@ -87,8 +87,8 @@ function Footer() {
                 onClick={navigateTop}
                 className="cursor-pointer flex flex-col items-center mt-6"
               >
-                <TiArrowDownOutline className="rotate-180 text-5xl text-green-700/74 animate-bounce" />
-                <span className="text-xl font-medium mt-3 text-green-700/74 border-3 rounded-full py-1 px-3 border-green-700/74">
+                <TiArrowDownOutline className="rotate-180 text-5xl text-green-500 animate-bounce" />
+                <span className="text-xl font-medium mt-3 text-green-500 border-3 rounded-full py-1 px-3 border-green-500">
                   Yuqoriga chiqish
                 </span>
               </button>
@@ -101,7 +101,7 @@ function Footer() {
                 <Link
                   key={item.id}
                   to={`/category/${item.id}`}
-                  className="text-gray-800 font-medium hover:text-green-700 cursor-pointer"
+                  className="text-gray-800 font-medium hover:text-green-500 cursor-pointer"
                 >
                   {item.name}
                 </Link>

@@ -1,15 +1,12 @@
 import { Link, NavLink } from 'react-router-dom'
 import line from '../../assets/decor-right-black.svg'
 import image from '../../assets/news-img.png'
-import { FaArrowAltCircleRight } from 'react-icons/fa'
+import { FaArrowAltCircleRight, FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 
-// Qo‘shimcha importlar kerak
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation, Pagination, Autoplay } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/navigation'
-import 'swiper/css/pagination'
-
 export const base = [
   {
     id: 1,
@@ -58,8 +55,16 @@ function HomeNews() {
           slidesPerView={1}
           autoplay={{ delay: 4000, disableOnInteraction: false }}
           speed={1500}
-          navigation
-          pagination={{ clickable: true }}
+          navigation={{
+            nextEl: '.custom-next',
+            prevEl: '.custom-prev',
+          }}
+          pagination={{
+            el: '.custom-pagination-news',
+            clickable: true,
+            renderBullet: (index, className) =>
+              `<span class="${className} w-10 h-2 inline-block mx-1 rounded-xl border-1 border-[#54ed21] transition-all duration-300"></span>`,
+          }}
           loop={true}
           breakpoints={{
             500: { slidesPerView: 2 },
@@ -80,7 +85,7 @@ function HomeNews() {
                         className="w-full h-full object-cover group-hover:scale-105 duration-300"
                       />
                     </div>
-                    <p className="font-medium text-[17px] text-gray-900 line-clamp-2 group-hover:text-blue-500 pt-2">
+                    <p className="font-medium text-[17px] text-gray-900 line-clamp-2 group-hover:text-green-500 pt-2">
                       {item.desc}
                     </p>
                   </div>
@@ -88,6 +93,13 @@ function HomeNews() {
               </SwiperSlide>
             ))}
           </div>
+          <div className="custom-prev absolute left-0 bottom-1/2 w-[40px] h-[40px] rounded-[50%] -translate-y-1/2 z-20 cursor-pointer border text-lg font-bold bg-black/30 backdrop-blur-sm text-green-500 hover:bg-[#323131d3] transition flex items-center justify-center">
+            <FaArrowLeft />
+          </div>
+          <div className="custom-next absolute right-0 bottom-1/2 w-[40px] h-[40px] -translate-y-1/2 z-20 cursor-pointer border text-xl font-bold bg-black/30 backdrop-blur-sm text-green-500 p-3 rounded-full hover:bg-[#323131d3] transition flex items-center justify-center">
+            <FaArrowRight />
+          </div>
+          <div className="custom-pagination-news absolute hidden sm:block sm:-bottom-[1px] md:-bottom-1 lg:bottom-0 left-1/2 -translate-x-1/2 z-10 max-lg:left-1/2 max-lg:bottom-16"></div>
         </Swiper>
 
         <NavLink
