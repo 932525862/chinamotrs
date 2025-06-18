@@ -5,7 +5,7 @@ const App = () => {
     <>
       <RouteProvider />
       <Toaster richColors position="top-center" />
-    </>
+    </> 
   )
 }
 
