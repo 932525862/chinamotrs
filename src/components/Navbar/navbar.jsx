@@ -1,19 +1,34 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Menu, X, Search } from "lucide-react";
 import logo from "../../assets/gran.png";
 import { Link } from "react-router-dom";
+import i18n from "../../i18n";
+import { useTranslation } from "react-i18next";
 
 const Navbar = () => {
-  const [language, setLanguage] = useState("en");
+  const { t } = useTranslation();
+  const [language, setLanguage] = useState("uz");
   const [isOpen, setIsOpen] = useState(false);
   const [showMobileSearch, setShowMobileSearch] = useState(false);
 
+  useEffect(() => {
+    const currentLang = i18n.language || "uz";
+    setLanguage(currentLang);
+  }, []);
+
+  const handleLanguageChange = (e) => {
+    const newLang = e.target.value;
+    setLanguage(newLang);
+    i18n.changeLanguage(newLang);
+    localStorage.setItem("i18nextLng", newLang);
+  };
+
   const categories = [
-    { name: "Home", path: "/" },
-    { name: "About", path: "/about" },
-    { name: "Category", path: "/category" },
-    { name: "News", path: "/news" },
-    { name: "Contact", path: "/contact" },
+    { name: t("navbar.home"), path: "/" },
+    { name: t("navbar.about"), path: "/about" },
+    { name: t("navbar.category"), path: "/category" },
+    { name: t("navbar.news"), path: "/news" },
+    { name: t("navbar.contact"), path: "/contact" },
   ];
 
   return (
@@ -32,7 +47,7 @@ const Navbar = () => {
                 key={item.name}
                 to={item.path}
                 onClick={() => scrollTo({ top: 0 })}
-                className="hover:text-blue-600 relative group transition-colors"
+                className="hover:text-green-500 relative group transition-colors"
               >
                 {item.name}
                 <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-green-500 group-hover:w-full transition-all duration-300" />
@@ -45,7 +60,7 @@ const Navbar = () => {
             <div className="relative max-w-xs w-full">
               <input
                 type="text"
-                placeholder="Search..."
+                placeholder={t("navbar.searchPlaceholder")}
                 className="w-full pl-4 pr-10 py-2 border border-green-500 rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500"
               />
               <Search className="absolute right-3 top-2.5 text-green-500 w-5 h-5" />
@@ -53,8 +68,8 @@ const Navbar = () => {
 
             <select
               value={language}
-              onChange={(e) => setLanguage(e.target.value)}
-              className="border border-gray-300 rounded-full px-4 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              onChange={handleLanguageChange}
+              className="border border-green-500 rounded-full px-4 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="uz">UZ</option>
               <option value="ru">RU</option>
@@ -86,7 +101,10 @@ const Navbar = () => {
                 <Link
                   key={item.name}
                   to={item.path}
-                  onClick={() => { setIsOpen(false); scrollTo({ top: 0 }) }}
+                  onClick={() => {
+                    setIsOpen(false);
+                    scrollTo({ top: 0 });
+                  }}
                   className="hover:text-blue-600 transition-colors"
                 >
                   {item.name}
@@ -96,7 +114,7 @@ const Navbar = () => {
 
             <select
               value={language}
-              onChange={(e) => setLanguage(e.target.value)}
+              onChange={handleLanguageChange}
               className="mt-2 w-full border border-gray-300 rounded-full px-4 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="uz">UZ</option>
@@ -108,12 +126,13 @@ const Navbar = () => {
 
       {/* Mobile Sliding Search Field */}
       <div
-        className={`lg:hidden overflow-hidden transition-all duration-300 ${showMobileSearch ? "max-h-32 py-3" : "max-h-0"
-          } bg-white px-4 shadow-sm border-b`}
+        className={`lg:hidden overflow-hidden transition-all duration-300 ${
+          showMobileSearch ? "max-h-32 py-3" : "max-h-0"
+        } bg-white px-4 shadow-sm border-b`}
       >
         <input
           type="text"
-          placeholder="Search..."
+          placeholder={t("navbar.searchPlaceholder")}
           className="w-full px-4 py-2 border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500"
         />
       </div>
