@@ -107,10 +107,10 @@ export default function Swiper_Catalog() {
       .then((res) => res.json())
       .then((data) => {
         setName(data?.data);
-        console.log(data?.data);
+        // console.log(data?.data);
       })
       .catch((err) => {
-        console.error("Xatolik yuz berdi:", err);
+        // console.error("Xatolik yuz berdi:", err);
       });
   }, []);
   // console.log(name);

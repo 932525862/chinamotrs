@@ -8,14 +8,21 @@ import hero1 from "../../assets/hero.1.jpg";
 import hero2 from "../../assets/hero.4.jpg";
 import hero3 from "../../assets/hero.2.png";
 import hero4 from "../../assets/hero.3.jpg";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { RiArrowRightUpLine } from "react-icons/ri";
+
 
 export default function SwiperSlides() {
   // const swiperRef = useRef(null);
   // const [activeIndex, setActiveIndex] = useState(1);
-
+  const navigate = useNavigate();
+  
+  const handleCardClick = () => {
+      navigate("/category");
+      scrollTo({ top: 0 });
+  };
+  
   const cards = [
     {
       id: "01",
@@ -90,13 +97,15 @@ export default function SwiperSlides() {
                 <p className="text-2xl z-10 max-md:text-xl max-sm:text-xl max-sm:text-center font-one text-[#595757]">
                   {car?.text}
                 </p>
-                <NavLink>
-                  <button className="mt-5 bg-[#000000a6] font-one text-white relative overflow-hidden group border-2 border-green-500 px-7 py-4 max-sm:py-2 transform duration-500 rounded-full flex items-center gap-3">
+                <div>
+                  <button
+                  onClick={handleCardClick}
+                  className="mt-5 bg-[#000000a6] font-one text-white relative overflow-hidden group cursor-pointer border-2 border-green-500 px-7 py-4 max-sm:py-2 transform duration-500 rounded-full flex items-center gap-3">
                     <span className="z-20 text-xl max-sm:text-sm">KATALOGGA O‘TISH</span>{" "}
                     <span className=" z-20 text-2xl "><RiArrowRightUpLine /></span>
                     <span className="w-full h-full z-10 absolute -left-100 bg-green-500  group-hover:left-0 transform duration-500 transition-all"></span>
                   </button>
-                </NavLink>
+                </div>
               </div>
             </div>
           </SwiperSlide>
