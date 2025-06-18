@@ -7,6 +7,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation, Pagination, Autoplay } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/navigation'
+import { useEffect, useState } from 'react'
 export const base = [
   {
     id: 1,
@@ -41,6 +42,26 @@ export const base = [
 ]
 
 function HomeNews() {
+  // const [data, setData] = useState([])
+  // const url = 'http://142.93.111.17:3002/api/news'
+  // const getApi = () => {
+  //   fetch(url)
+  //     .then((res) => {
+  //       return res.json()
+  //     })
+  //     .then((data) => {
+  //       setData(data)
+  //     })
+  //     .catch((err) => {
+  //       console.error('Xatolik:', err)
+  //     })
+  // }
+
+  // useEffect(() => {
+  //   getApi()
+  // }, [])
+
+  // console.log(data)
   return (
     <div className="bg-gray-100">
       <section className="mx-auto max-w-7xl mt-15 flex flex-col items-start py-10 px-[1rem]">
