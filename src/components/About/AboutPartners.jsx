@@ -7,6 +7,7 @@ import lifegym from '../../assets/about-marque-lifegym.png'
 import fitland from '../../assets/about-marque-fitland.png'
 import express from '../../assets/about-marque-express.png'
 import abad from '../../assets/about-marque-abad.png'
+// import { useEffect, useState } from 'react'
 
 const base = [
   {
@@ -32,6 +33,23 @@ const base = [
   },
 ]
 function AboutPartners() {
+  // const [data, setData] = useState([])
+  // const getApi = () => {
+  //   fetch(`${urlApi}/partners`)
+  //     .then((data) => {
+  //       setData(data)
+  //     })
+  //     .catch((err) => {
+  //       console.error('Xatolik:', err)
+  //     })
+  // }
+
+  // useEffect(() => {
+  //   getApi()
+  // }, [])
+
+  // console.log(data)
+
   return (
     <div>
       <section className="max-w-7xl mx-auto py-15 px-[1rem]">
@@ -41,7 +59,10 @@ function AboutPartners() {
         </h3>
         <Marquee>
           {base.map((item, index) => (
-            <div key={index} className="p-5 mx-3 md:mx-5 rounded-2xl shadow-[5px_5px_20px]/15 my-5 w-auto">
+            <div
+              key={index}
+              className="p-5 mx-3 md:mx-5 rounded-2xl shadow-[5px_5px_20px]/15 my-5 w-auto"
+            >
               <img src={item.img} alt="" className="w-20 h-18 md:w-35 md:h-30 object-contain" />
             </div>
           ))}
