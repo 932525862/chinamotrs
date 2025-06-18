@@ -42,26 +42,28 @@ export const base = [
 ]
 
 function HomeNews() {
-  // const [data, setData] = useState([])
-  // const url = 'http://142.93.111.17:3002/api/news'
-  // const getApi = () => {
-  //   fetch(url)
-  //     .then((res) => {
-  //       return res.json()
-  //     })
-  //     .then((data) => {
-  //       setData(data)
-  //     })
-  //     .catch((err) => {
-  //       console.error('Xatolik:', err)
-  //     })
-  // }
+  // const baseUrl = import.meta.env.VITE_BASE_URL;
 
-  // useEffect(() => {
-  //   getApi()
-  // }, [])
+  const [data, setData] = useState([])
+  const url = 'http://142.93.111.17:3002/api/news'
+  const getApi = () => {
+    fetch(url)
+      .then((res) => {
+        return res.json()
+      })
+      .then((data) => {
+        setData(data.data)
+      })
+      .catch((err) => {
+        console.error('Xatolik:', err)
+      })
+  }
 
-  // console.log(data)
+  useEffect(() => {
+    getApi()
+  }, [])
+
+  console.log(data)
   return (
     <div className="bg-gray-100">
       <section className="mx-auto max-w-7xl mt-15 flex flex-col items-start py-10 px-[1rem]">
@@ -95,7 +97,7 @@ function HomeNews() {
           className="w-full lg:h-110"
         >
           <div className="py-10">
-            {base.map((item) => (
+            {data.map((item) => (
               <SwiperSlide key={item.id}>
                 <Link to={`/news/${item.id}`} className="block group">
                   <div className="overflow-hidden rounded-2xl bg-white p-3 shadow-md h-full my-10">
@@ -107,7 +109,7 @@ function HomeNews() {
                       />
                     </div>
                     <p className="font-medium text-[17px] text-gray-900 line-clamp-2 group-hover:text-green-500 pt-2">
-                      {item.desc}
+                      {item.text.ru}
                     </p>
                   </div>
                 </Link>
