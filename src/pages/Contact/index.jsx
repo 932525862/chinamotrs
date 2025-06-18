@@ -1,7 +1,43 @@
 import { useTranslation } from 'react-i18next';
+import { useState } from 'react';
+import axios from 'axios';
 
 const ContactPage = () => {
   const { t } = useTranslation();
+
+  const [firstName, setFirstName] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [modelName, setModelName] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const payload = {
+      firstName,
+      phoneNumber: '+998' + phoneNumber,
+      modelName,
+    };
+
+    try {
+      const res = await axios.post('http://142.93.111.17:3002/api/orders', payload);
+      console.log('Yuborildi:', res.data);
+
+      setFirstName('');
+      setPhoneNumber('');
+      setModelName('');
+      setIsModalOpen(true); // modalni ochamiz
+      setSuccessMessage('');
+
+      setTimeout(() => {
+        setIsModalOpen(false);
+      }, 3000); // 3 soniyadan keyin yopamiz
+    } catch (error) {
+      console.error('Xatolik:', error);
+      setSuccessMessage('Xatolik yuz berdi. Iltimos, qayta urinib ko‘ring.');
+    }
+  };
 
   return (
     <div
@@ -32,23 +68,34 @@ const ContactPage = () => {
           {t('contact.formSubtitle')}
         </p>
 
-        <form className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <form className="grid grid-cols-1 md:grid-cols-2 gap-4" onSubmit={handleSubmit}>
           <div>
             <label className="block mb-1 font-medium">{t('contact.nameLabel')}</label>
             <input
               type="text"
               className="w-full border border-gray-300 rounded-md p-2"
               placeholder={t('contact.namePlaceholder')}
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              required
             />
           </div>
 
           <div>
             <label className="block mb-1 font-medium">{t('contact.phoneLabel')}</label>
-            <input
-              type="text"
-              className="w-full border border-gray-300 rounded-md p-2"
-              placeholder={t('contact.phonePlaceholder')}
-            />
+            <div className="flex">
+              <span className="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-100 text-gray-600 text-sm">
+                +998
+              </span>
+              <input
+                type="tel"
+                className="w-full border border-gray-300 rounded-r-md p-2"
+                placeholder="90 123 45 67"
+                value={phoneNumber}
+                onChange={(e) => setPhoneNumber(e.target.value)}
+                required
+              />
+            </div>
           </div>
 
           <div className="md:col-span-2">
@@ -56,15 +103,25 @@ const ContactPage = () => {
             <textarea
               className="w-full border border-gray-300 rounded-md p-2 h-24"
               placeholder={t('contact.messagePlaceholder')}
+              value={modelName}
+              onChange={(e) => setModelName(e.target.value)}
+              required
             />
           </div>
 
           <div className="md:col-span-2 flex justify-center mt-4">
-            <button className="px-6 py-2 border-2 border-lime-500 text-black rounded-full hover:bg-lime-500 hover:text-white transition">
+            <button
+              type="submit"
+              className="px-6 py-2 border-2 border-lime-500 text-black rounded-full hover:bg-lime-500 hover:text-white transition"
+            >
               {t('contact.submit')}
             </button>
           </div>
         </form>
+
+        {successMessage && (
+          <p className="text-center text-red-600 font-semibold mt-4">{successMessage}</p>
+        )}
 
         <p className="text-center text-sm text-gray-500 mt-6">
           {t('contact.privacyNotice')}{' '}
@@ -78,6 +135,16 @@ const ContactPage = () => {
         <a href="#">Facebook</a>
         <a href="#">YouTube</a>
       </div>
+
+      {/* MODAL */}
+      {isModalOpen && (
+      <div className="fixed inset-0 flex items-center justify-center bg-white/40 z-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm text-center">
+            <h3 className="text-xl font-semibold mb-2 text-green-600">✅ So‘rov yuborildi!</h3>
+            <p>Sizning so‘rovingiz muvaffaqiyatli yuborildi.<br />Tez orada siz bilan bog‘lanamiz.</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
