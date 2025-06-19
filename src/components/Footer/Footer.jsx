@@ -1,8 +1,9 @@
-import { FaHome, FaPhone } from 'react-icons/fa';
-import { IoIosMail } from 'react-icons/io';
-import { TiArrowDownOutline } from 'react-icons/ti';
-import { Link, NavLink } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
+import { FaHome, FaPhone } from 'react-icons/fa'
+import { IoIosMail } from 'react-icons/io'
+import { TiArrowDownOutline } from 'react-icons/ti'
+import { Link, NavLink } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
+import { useEffect, useState } from 'react'
 
 const nav = [
   {
@@ -25,27 +26,33 @@ const nav = [
     textKey: 'footer.nav.contact',
     to: '/contact',
   },
-];
-
-export const categoryBase = [
-  { id: 'gantellar', nameKey: 'categories.gantellar' },
-  { id: 'massaj-kreslolari', nameKey: 'categories.massaj' },
-  { id: 'yugurish-yolakchalari', nameKey: 'categories.yugurish' },
-  { id: 'velotrenajyorlar', nameKey: 'categories.velo' },
-  { id: 'fitnes-toplari', nameKey: 'categories.fitnes' },
-  { id: 'qorish-mashinalari', nameKey: 'categories.qorish' },
-  { id: 'trenajorlar', nameKey: 'categories.trenajor' },
-];
+]
 
 function Footer() {
-  const { t } = useTranslation();
-
+  const { t } = useTranslation()
+  const baseUrl = import.meta.env.VITE_BASE_URL
   const navigateTop = () => {
-    window.scrollTo(0, 0);
-  };
+    window.scrollTo(0, 0)
+  }
+  const { i18n } = useTranslation()
+  const lang = ['uz', 'ru'].includes(i18n.language) ? i18n.language : 'uz'
 
+  const [data, setData] = useState([])
+  const getCategory = () => {
+    fetch(`${baseUrl}/api/categories`)
+      .then((res) => res.json())
+      .then((result) => {
+        setData(result?.data || [])
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+  useEffect(() => {
+    getCategory()
+  }, [])
   return (
-    <footer className=""style={{ backgroundColor: "rgb(214, 214, 214)" }}>
+    <footer className="" style={{ backgroundColor: 'rgb(214, 214, 214)' }}>
       <div className="max-w-7xl mx-auto">
         <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 ">
           {/* Contact section */}
@@ -67,13 +74,12 @@ function Footer() {
                 <FaPhone className="text-4xl text-green-500" />
                 <div className="text-xl font-bold text-blue-950/80">{t('footer.phoneTitle')}</div>
                 <a href="tel:+998977052027" className="font-medium text-gray-900">
-                +998 97 705 20 27
+                  +998 97 705 20 27
                 </a>
               </li>
             </ul>
           </li>
 
-          {/* Nav section */}
           <li className="border-r border-gray-600 py-10">
             <nav className="text-center flex flex-col items-center">
               <div className="text-xl font-bold text-black">{t('footer.menuTitle')}</div>
@@ -101,17 +107,16 @@ function Footer() {
             </nav>
           </li>
 
-          {/* Category section */}
           <li className="py-10 flex flex-col items-center text-center">
             <div className="text-xl font-bold mb-4">{t('footer.categoriesTitle')}</div>
             <div className="flex flex-col gap-2">
-              {categoryBase.map((item) => (
+              {data.map((item) => (
                 <Link
-                  key={item.id}
-                  to={`/category/${item.id}`}
+                  key={item?.id}
+                  to={`/category/${item?.id}`}
                   className="text-gray-800 font-medium hover:text-green-500 cursor-pointer"
                 >
-                  {t(item.nameKey)}
+                  {item?.name?.[lang] || 'No name'}
                 </Link>
               ))}
             </div>
@@ -119,7 +124,7 @@ function Footer() {
         </ul>
       </div>
     </footer>
-  );
+  )
 }
 
-export default Footer;
+export default Footer
