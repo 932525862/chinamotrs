@@ -3,31 +3,26 @@ import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/autoplay";
-import { NavLink } from "react-router-dom";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { useEffect, useState } from "react";
-import i18n from "../../i18n";
 import { useTranslation } from "react-i18next";
 export default function Swiper_Catalog() {
 
   
   const {i18n } = useTranslation();
   const lang = ['uz' , 'ru'].includes(i18n.language) ? i18n.language : 'uz'
-
   const [name, setName] = useState();
 
+  const baseUrl = import.meta.env.VITE_BASE_URL
   useEffect(() => {
-    fetch("http://142.93.111.17:3002/api/categories")
+    fetch(`${baseUrl}/api/categories`)
       .then((res) => res.json())
       .then((data) => {
         setName(data?.data);
-        // console.log(data?.data);
       })
       .catch((err) => {
-        // console.error("Xatolik yuz berdi:", err);
       });
   }, []);
-  // console.log(name);
 
   return (
     <div className="relative p-5 bg-gray-100">
