@@ -5,7 +5,7 @@ export const useCategoryStore = create((set) => ({
     categories: [],
     selectedCategory: null,
     loading: false,
-    error: null,
+    error: null, 
 
     // Get all categories
     fetchCategories: async () => {
