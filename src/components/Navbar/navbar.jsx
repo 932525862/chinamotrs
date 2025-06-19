@@ -4,12 +4,20 @@ import logo from "../../assets/gran.png";
 import { Link } from "react-router-dom";
 import i18n from "../../i18n";
 import { useTranslation } from "react-i18next";
+import axios from "axios";
+import { CategoryCard } from "../../pages/Category/components/category-card";
+
+// ✅ .env fayldan URL larni olish
+const baseUrl = import.meta.env.VITE_BASE_URL;
+const uploadBase = import.meta.env.VITE_UPLOAD_BASE;
 
 const Navbar = () => {
   const { t } = useTranslation();
   const [language, setLanguage] = useState("uz");
   const [isOpen, setIsOpen] = useState(false);
   const [showMobileSearch, setShowMobileSearch] = useState(false);
+  const [searchText, setSearchText] = useState("");
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
     const currentLang = i18n.language || "uz";
@@ -21,6 +29,18 @@ const Navbar = () => {
     setLanguage(newLang);
     i18n.changeLanguage(newLang);
     localStorage.setItem("i18nextLng", newLang);
+  };
+
+  const handleSearch = async () => {
+    if (searchText.trim() === "") return;
+    try {
+      const response = await axios.get(`${baseUrl}/products`, {
+        params: { name: searchText },
+      });
+      setProducts(response.data);
+    } catch (error) {
+      console.error("Qidirishda xatolik:", error);
+    }
   };
 
   const categories = [
@@ -62,8 +82,14 @@ const Navbar = () => {
                 type="text"
                 placeholder={t("navbar.searchPlaceholder")}
                 className="w-full pl-4 pr-10 py-2 border border-green-500 rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+                value={searchText}
+                onChange={(e) => setSearchText(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && handleSearch()}
               />
-              <Search className="absolute right-3 top-2.5 text-green-500 w-5 h-5" />
+              <Search
+                className="absolute right-3 top-2.5 text-green-500 w-5 h-5 cursor-pointer"
+                onClick={handleSearch}
+              />
             </div>
 
             <select
@@ -134,8 +160,28 @@ const Navbar = () => {
           type="text"
           placeholder={t("navbar.searchPlaceholder")}
           className="w-full px-4 py-2 border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)}
+          onKeyDown={(e) => e.key === "Enter" && handleSearch()}
         />
       </div>
+
+      {/* 🔽 Mahsulotlar ro'yxati */}
+      {searchText.trim() !== "" && (
+        <>
+          {products.length > 0 ? (
+            <div className="max-w-7xl mx-auto px-4 py-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+              {products.map((product) => (
+                <CategoryCard key={product.id} product={product} uploadBase={uploadBase} />
+              ))}
+            </div>
+          ) : (
+            <p className="text-center text-red-600 text-lg py-8 font-semibold">
+              Bunday mahsulot mavjud emas
+            </p>
+          )}
+        </>
+      )}
     </>
   );
 };

@@ -6,7 +6,9 @@
         "category": "Категории",
         "news": "Новости",
         "contact": "Контакт",
-        "searchPlaceholder": "Поиск..."
+        "searchPlaceholder": "Поиск...",
+        "searchPlaceholder1": " Такой продукт не найден"
+       
       },
 
 
