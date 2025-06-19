@@ -5,11 +5,7 @@ import { Link } from "react-router-dom";
 import i18n from "../../i18n";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
-import { CategoryCard } from "../../pages/Category/components/category-card";
-
-// ✅ .env fayldan URL larni olish
-const baseUrl = import.meta.env.VITE_BASE_URL;
-const uploadBase = import.meta.env.VITE_UPLOAD_BASE;
+import { CategoryCard } from "../../pages/Category/components/category-card"; // 🔁 CategoryCard manzilini to‘g‘ri kiriting
 
 const Navbar = () => {
   const { t } = useTranslation();
@@ -34,7 +30,7 @@ const Navbar = () => {
   const handleSearch = async () => {
     if (searchText.trim() === "") return;
     try {
-      const response = await axios.get(`${baseUrl}/products`, {
+      const response = await axios.get("https://api.grandfitness.com.uz/api/products", {
         params: { name: searchText },
       });
       setProducts(response.data);
@@ -172,12 +168,12 @@ const Navbar = () => {
           {products.length > 0 ? (
             <div className="max-w-7xl mx-auto px-4 py-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
               {products.map((product) => (
-                <CategoryCard key={product.id} product={product} uploadBase={uploadBase} />
+                <CategoryCard key={product.id} product={product} />
               ))}
             </div>
           ) : (
             <p className="text-center text-red-600 text-lg py-8 font-semibold">
-              Bunday mahsulot mavjud emas
+              {t("navbar.searchPlaceholder1")}
             </p>
           )}
         </>
