@@ -71,7 +71,7 @@ const baseUrl = import.meta.env.VITE_API_BASE_URL;
               {loading ? (
                 <SkeletonTheme className="w-[210px] h-[240px] max-[550px]:w-full" />
               ) : (
-                <div className="w-[210px] h-[200px] max-[550px]:w-full group max-[550px]:px-5 relative my-16 shadow-md hover:shadow-lg p-3 rounded-xl bg-white hover:bg-[#cecece2d] hover:backdrop-blur-xs flex items-center justify-center transition-transform duration-400 hover:scale-103">
+                <div className="w-[210px] h-[200px] max-[550px]:w-full group max-[550px]:px-5 relative my-16 border border-[#d2e5d190] hover:border-[#17f80b9e] shadow-md hover:shadow-lg p-3 rounded-xl bg-white hover:bg-[#cecece2d] hover:backdrop-blur-xs flex items-center justify-center transition-transform duration-400 hover:scale-103">
                   <h2 className="text-center text-lg font-one group-hover:text-xl text-shadow-2xs duration-300 group-hover:text-[#17f80b]">
                     {card?.name[lang]}
                   </h2>

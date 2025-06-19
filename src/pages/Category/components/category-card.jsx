@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 
 export const CategoryCard = ({ product }) => {
   const navigate = useNavigate();
-  const { i18n } = useTranslation();
+  const { t , i18n } = useTranslation();
   const lang = ["uz", "ru"].includes(i18n.language) ? i18n.language : "uz";
 
   const uploadUrl = import.meta.env.VITE_API_UPLOAD_BASE;
@@ -46,7 +46,7 @@ export const CategoryCard = ({ product }) => {
 
         {price ? (
           <p className="text-neutral-500 lg:text-[15px] font-one text-[12px]">
-            <span>{price.toLocaleString("uz-UZ")}</span> so'm
+            <span>{price.toLocaleString("uz-UZ")}</span> {t("categories.so'm")}
           </p>
         ) : (
           <p className="text-neutral-400 text-sm">Narx mavjud emas</p>

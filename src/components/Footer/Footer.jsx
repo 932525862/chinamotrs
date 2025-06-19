@@ -31,9 +31,6 @@ const nav = [
 function Footer() {
   const { t } = useTranslation()
   const baseUrl = import.meta.env.VITE_API_BASE_URL
-  const navigateTop = () => {
-    window.scrollTo(0, 0)
-  }
   const { i18n } = useTranslation()
   const lang = ['uz', 'ru'].includes(i18n.language) ? i18n.language : 'uz'
 
@@ -95,10 +92,7 @@ function Footer() {
                   </li>
                 ))}
               </ul>
-              <button
-                onClick={navigateTop}
-                className="cursor-pointer flex flex-col items-center mt-6"
-              >
+              <button className="cursor-pointer flex flex-col items-center mt-6">
                 <TiArrowDownOutline className="rotate-180 text-5xl text-green-500 animate-bounce" />
                 <span className="text-xl font-medium mt-3 text-green-500 border-3 rounded-full py-1 px-3 border-green-500">
                   {t('footer.scrollTop')}

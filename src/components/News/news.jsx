@@ -1,4 +1,4 @@
-import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import line from '../../assets/decor-right-black.svg'
 import { useEffect, useState } from 'react'
 import { IoArrowUndoCircleOutline } from 'react-icons/io5'
@@ -8,14 +8,13 @@ import 'react-loading-skeleton/dist/skeleton.css'
 
 const News = () => {
   const navigate = useNavigate()
-  const { pathname } = useLocation()
 
   //import url
   const baseUrl = import.meta.env.VITE_API_BASE_URL
   const uploadBase = import.meta.env.VITE_API_UPLOAD_BASE
 
   //i18n
-  const { i18n } = useTranslation()
+  const { i18n,t } = useTranslation()
   const lang = ['uz', 'ru'].includes(i18n.language) ? i18n.language : 'uz'
 
   //statelar
@@ -48,10 +47,6 @@ const News = () => {
     getApi()
   }, [])
 
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [pathname])
-
   const item = parsedId ? data.find((el) => el.id === parsedId) : null
   const randomItem = data.length > 0 ? data[Math.floor(Math.random() * data.length)] : null
 
@@ -82,7 +77,7 @@ const News = () => {
                 className="relative group cursor-pointer border-[3px] border-green-500 overflow-hidden rounded-full px-10 py-2 flex items-center gap-2"
               >
                 <span className="font-one text-green-500 group-hover:text-white relative duration-300 z-1">
-                  Orqaga qaytish
+                  {t('news.prev')}
                 </span>
                 <IoArrowUndoCircleOutline className="text-green-500 text-2xl group-hover:text-white relative duration-300 z-1" />
                 <span className="bg-green-500 absolute w-full h-full left-0 top-0 -translate-x-full group-hover:translate-x-0 transition-transform duration-500 z-0" />
@@ -92,7 +87,7 @@ const News = () => {
         ) : (
           <main>
             <h3 className="text-xl md:text-2xl text-black/90 lg:text-4xl flex font-bold items-center font-one gap-3 pb-5">
-              <span>Tavsiya Etilgan Yangiliklar</span>
+              <span>{t('news.random')}</span>
               <img src={line} alt="" className="hidden sm:block sm:max-w-40 md:max-w-70" />
             </h3>
             {randomItem && (
@@ -113,7 +108,7 @@ const News = () => {
         {/* Barcha yangiliklar */}
         <div className="mt-15">
           <h3 className="text-xl pb-7 md:text-2xl text-black/90 lg:text-4xl flex font-bold items-center font-one gap-3">
-            <span>Barcha Yangiliklar</span>
+            <span>{t('news.allNews')}</span>
             <img src={line} alt="" className="hidden sm:block sm:max-w-40 md:max-w-70" />
           </h3>
 

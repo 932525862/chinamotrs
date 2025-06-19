@@ -1,28 +1,32 @@
 {
+  "navbar": {
+    "home": "Bosh sahifa",
+    "about": "Biz haqimizda",
+    "category": "Kategoriyalar",
+    "news": "Yangiliklar",
+    "contact": "Aloqa",
+    "searchPlaceholder": "Qidiruv...",
+    "searchPlaceholder1": "Bunday mahsulot topilmadi "
+  },
 
-    "navbar": {
-        "home": "Bosh sahifa",
-        "about": "Biz haqimizda",
-        "category": "Kategoriyalar",
-        "news": "Yangiliklar",
-        "contact": "Aloqa",
-        "searchPlaceholder": "Qidiruv...",
-        "searchPlaceholder1": "Bunday mahsulot topilmadi "
-        
-      },
-
-      "aboutHome": {
+  "aboutHome": {
     "title": "BIZ HAQIMIZDA",
     "subtitle": "GRANT FITNES - FAQAT ONLINE DOKON EMAS",
     "description": "GRANT FITNESS — sport mahsulotlari bo‘yicha ishonchli hamkoringiz! Biz turli sport turlari uchun mo‘ljallangan keng assortimentni taklif etamiz: havaskor sportchilar uchun ham, professional sport klublari va zallari uchun ham barcha kerakli jihozlar bizda mavjud — sport kiyimlaridan tortib, trenajyorlar va zamonaviy sport zali uskunalarigacha!",
-    "button": "KO'PROQ BILISH"
+    "button": "KO'PROQ BILISH",
+    "part": "HAMKORLARIMIZ",
+    "next":"Katalokga O'tish",
+    "xizmat":"O'zbekiston bo'ylab yetkazib berish"
+
   },
 
   "aboutTop": {
     "title": "GRANT FITNES - FAQAT ONLINE DOKON EMAS",
-    "description": "GRANT FITNESS — sport mahsulotlari bo‘yicha ishonchli hamkoringiz!  Biz turli sport turlari uchun mo‘ljallangan keng assortimentni taklif etamiz: havaskor sportchilar uchun ham, professional sport klublari va zallari uchun ham barcha kerakli jihozlar bizda mavjud — sport kiyimlaridan tortib, trenajyorlar va zamonaviy sport zali uskunalarigacha!"
+    "description": "GRANT FITNESS — sport mahsulotlari bo‘yicha ishonchli hamkoringiz!  Biz turli sport turlari uchun mo‘ljallangan keng assortimentni taklif etamiz: havaskor sportchilar uchun ham, professional sport klublari va zallari uchun ham barcha kerakli jihozlar bizda mavjud — sport kiyimlaridan tortib, trenajyorlar va zamonaviy sport zali uskunalarigacha!",
+    "title2": "GRANT FITNES sport buyumlari sotadigan O'zbekistondagi eng katta do'konlardan biri hisoblanadi.",
+    "text": "Do'kon bundan keyin ham o'z tovarlari bilan xaridorlarini xayron qilish va quvontirishda davom etadi."
   },
-  
+
   "footer": {
     "addressTitle": "Manzil:",
     "address": "📍Toshkent shahri, Amir Temur ko‘chasi, 10-uy.Mo‘ljal: Alay dehqon bozori",
@@ -40,27 +44,29 @@
     }
   },
 
-
-    "contact": {
-      "title": "BOG'LANISH",
-      "addressTitle": "Manzil:",
-      "address": "📍Toshkent shahri, Amir Temur ko‘chasi, 10-uy.\nMo‘ljal: Alay dehqon bozori",
-      "phoneTitle": "Yagona ma'lumot markazi:",
-      "formTitle": "Bizga nima xizmatinigiz bor?",
-      "formSubtitle": "MUTAXASSISLARIMIZ 5 DAQIQA SIZGA TELEFON QILIB BILMOQCHI BO'LGAN BARCHA SAVOLLARINGIZGA JAVOB BERISHADI",
-      "nameLabel": "Sizning ismingiz *",
-      "namePlaceholder": "Ismingizni kiriting",
-      "phoneLabel": "Telefon raqami *",
-      "phonePlaceholder": "Telefon raqamingizni kiriting",
-      "messageLabel": "Sizning fikringiz",
-      "messagePlaceholder": "Xabar yoki fikringizni yozing",
-      "submit": "YUBORISH",
-      "privacyNotice": "Jo'natish tugmasini bosganda o'zingiz haqingizdagi",
-      "privacyConsent": "shaxsiy ma'lumot ishlanishiga ruxsat bergan bo'lasiz"
-    },
-  
-  
-  
+  "contact": {
+    "title": "BOG'LANISH",
+    "addressTitle": "Manzil:",
+    "address": "📍Toshkent shahri, Amir Temur ko‘chasi, 10-uy.\nMo‘ljal: Alay dehqon bozori",
+    "phoneTitle": "Yagona ma'lumot markazi:",
+    "formTitle": "Bizga nima xizmatinigiz bor?",
+    "formSubtitle": "MUTAXASSISLARIMIZ 5 DAQIQA SIZGA TELEFON QILIB BILMOQCHI BO'LGAN BARCHA SAVOLLARINGIZGA JAVOB BERISHADI",
+    "nameLabel": "Sizning ismingiz *",
+    "namePlaceholder": "Ismingizni kiriting",
+    "phoneLabel": "Telefon raqami *",
+    "phonePlaceholder": "Telefon raqamingizni kiriting",
+    "messageLabel": "Sizning fikringiz",
+    "messagePlaceholder": "Xabar yoki fikringizni yozing",
+    "submit": "YUBORISH",
+    "privacyNotice": "Jo'natish tugmasini bosganda o'zingiz haqingizdagi",
+    "privacyConsent": "shaxsiy ma'lumot ishlanishiga ruxsat bergan bo'lasiz"
+  },
+  "news": {
+    "homeTitle": "YANGILIKLAR",
+    "random": "Tavsiya Etilgan Yangiliklar",
+    "allNews": "Barcha Yangiliklar",
+    "prev": "Orqaga qaytish"
+  },
 
   "categories": {
     "gantellar": "Gantellar",
@@ -69,36 +75,37 @@
     "velo": "Velotrenajyorlar",
     "fitnes": "Fitnes to‘plari",
     "qorish": "Qorish mashinalari",
-    "trenajor": "Trenajorlar"
+    "trenajor": "Trenajorlar",
+    "so'm":"so‘m"
   },
-    "advantages": {
-      "title": "AFZALLIKLARIMIZ",
-      "subtitle": "Nima uchun mijozlarimiz aynan bizning do'konimizni tanlashadi?",
-      "cards": [
-        {
-          "title": "XIZMAT QILISH VA KAFOLAT BERISH",
-          "desc": "'GRANT FITNES' internet do'konida sotib olingan tovarlar buzilgan bo'lsa tuzatib beriladi, olingan tovarning kafolati bo'ladi."
-        },
-        {
-          "title": "TEZ VA ISHONCHLI YETKAZIB BERISH",
-          "desc": "Buyurtmalaringizni O'zbekiston bo'ylab tez va xavfsiz yetkazib beramiz."
-        },
-        {
-          "title": "MALAKALI TA'MIRLASH XIZMATI",
-          "desc": "Mutaxassislarimiz tomonidan kafolatli ta’mirlash xizmatlari taqdim etiladi."
-        },
-        {
-          "title": "BUTUN DUNYO BO‘YICHA MUROJAATLAR",
-          "desc": "Bizga xorijdan ham bemalol buyurtma berish mumkin."
-        }
-      ]
-    },
-    "catalog": {
+  "advantages": {
+    "title": "AFZALLIKLARIMIZ",
+    "subtitle": "Nima uchun mijozlarimiz aynan bizning do'konimizni tanlashadi?",
+    "cards": [
+      {
+        "title": "XIZMAT QILISH VA KAFOLAT BERISH",
+        "desc": "'GRANT FITNES' internet do'konida sotib olingan tovarlar buzilgan bo'lsa tuzatib beriladi, olingan tovarning kafolati bo'ladi."
+      },
+      {
+        "title": "TEZ VA ISHONCHLI YETKAZIB BERISH",
+        "desc": "Buyurtmalaringizni O'zbekiston bo'ylab tez va xavfsiz yetkazib beramiz."
+      },
+      {
+        "title": "MALAKALI TA'MIRLASH XIZMATI",
+        "desc": "Mutaxassislarimiz tomonidan kafolatli ta’mirlash xizmatlari taqdim etiladi."
+      },
+      {
+        "title": "BUTUN DUNYO BO‘YICHA MUROJAATLAR",
+        "desc": "Bizga xorijdan ham bemalol buyurtma berish mumkin."
+      }
+    ]
+  },
+  "catalog": {
     "title": "YANGI VA SIFATLI TOVARLARIMIZ",
     "subtitle": "Sening asosiy dushmaning - harakatsiliging bo'ladi"
   },
 
-    "catalogms": {
+  "catalogms": {
     "title": "Zamonaviy texnologiyali massaj kursilari",
     "subtitle": "Dam oling va rohatlaning: Eng yaxshi massaj kursilari shu yerda!"
   },
@@ -106,6 +113,4 @@
   "coments": {
     "title": "Mahsulotlarimiz bo‘yicha qisqacha ma’lumot"
   }
-
-  }
-  
+}
