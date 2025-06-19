@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { axiosInstance } from "@/lib/axiosIntance";
+import { axiosInstance } from "../lib/axiosInstance";
 
 export const useCategoryStore = create((set) => ({
     categories: [],
