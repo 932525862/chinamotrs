@@ -6,22 +6,24 @@ import "swiper/css/autoplay";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { SkeletonTheme } from "react-loading-skeleton";
 export default function Swiper_Catalog() {
-
-  
-  const {i18n } = useTranslation();
-  const lang = ['uz' , 'ru'].includes(i18n.language) ? i18n.language : 'uz'
+  const [loading, setLoading] = useState(false);
+  const { i18n } = useTranslation();
+  const lang = ["uz", "ru"].includes(i18n.language) ? i18n.language : "uz";
   const [name, setName] = useState();
 
-  const baseUrl = import.meta.env.VITE_BASE_URL
+const baseUrl = import.meta.env.VITE_API_BASE_URL;
+
   useEffect(() => {
+    setLoading(true);
     fetch(`${baseUrl}/api/categories`)
       .then((res) => res.json())
       .then((data) => {
         setName(data?.data);
+        setLoading(false);
       })
-      .catch((err) => {
-      });
+      .catch((err) => {});
   }, []);
 
   return (
@@ -66,11 +68,15 @@ export default function Swiper_Catalog() {
         {Array.isArray(name) &&
           name.map((card) => (
             <SwiperSlide key={card?.id}>
+              {loading ? (
+                <SkeletonTheme className="w-[210px] h-[240px] max-[550px]:w-full" />
+              ) : (
                 <div className="w-[210px] h-[240px] max-[550px]:w-full group max-[550px]:px-5 relative my-16 shadow-md hover:shadow-lg p-3 rounded-xl bg-white hover:bg-[#cecece2d] hover:backdrop-blur-xs flex items-center justify-center transition-transform duration-400 hover:scale-103">
                   <h2 className="text-center text-lg font-one group-hover:text-xl text-shadow-2xs duration-300 group-hover:text-[#17f80b]">
-                     {card?.name[lang]}
+                    {card?.name[lang]}
                   </h2>
                 </div>
+              )}
             </SwiperSlide>
           ))}
         {/* Custom Arrow Buttons */}
