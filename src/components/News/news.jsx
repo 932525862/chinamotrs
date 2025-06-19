@@ -9,11 +9,16 @@ import 'react-loading-skeleton/dist/skeleton.css'
 const News = () => {
   const navigate = useNavigate()
   const { pathname } = useLocation()
-  const baseUrl = import.meta.env.VITE_BASE_URL
-  const uploadBase = import.meta.env.VITE_UPLOAD_BASE
+
+  //import url
+  const baseUrl = import.meta.env.VITE_API_BASE_URL
+  const uploadBase = import.meta.env.VITE_API_UPLOAD_BASE
+
+  //i18n
   const { i18n } = useTranslation()
   const lang = ['uz', 'ru'].includes(i18n.language) ? i18n.language : 'uz'
 
+  //statelar
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
