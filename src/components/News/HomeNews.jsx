@@ -6,7 +6,9 @@ import { Navigation, Autoplay } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import { useEffect, useState } from 'react'
-import { useTranslation } from 'react-i18next' // <-- tilni olish uchun
+import { useTranslation } from 'react-i18next'
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 function HomeNews() {
   const baseUrl = import.meta.env.VITE_BASE_URL
@@ -15,20 +17,26 @@ function HomeNews() {
   const lang = ['uz', 'ru'].includes(i18n.language) ? i18n.language : 'uz'
 
   const [data, setData] = useState([])
-  const getApi = () => {
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    setLoading(true)
     fetch(`${baseUrl}/api/news`)
-      .then((res) => {
-        return res.json()
-      })
-      .then((data) => {
-        setData(data?.data)
+      .then((res) => res.json())
+      .then((resData) => {
+        if (Array.isArray(resData?.data)) {
+          setData(resData.data)
+        } else {
+          setData([]) 
+        }
       })
       .catch((err) => {
         console.error('Xatolik:', err)
+        setData([]) 
       })
-  }
-  useEffect(() => {
-    getApi()
+      .finally(() => {
+        setLoading(false)
+      })
   }, [])
 
   return (
@@ -36,7 +44,11 @@ function HomeNews() {
       <section className="mx-auto max-w-7xl mt-15 flex flex-col items-start py-10 px-[1rem]">
         <h3 className="text-xl md:text-2xl text-black/90 lg:text-4xl flex font-bold items-center font-one gap-3 ">
           <span className="">YANGILIKLAR</span>
-          <img src={line} alt="" className="hidden sm:block sm:max-w-40 md:max-w-70" />
+          <img
+            src={line}
+            alt="Line Decoration"
+            className="hidden sm:block sm:max-w-40 md:max-w-70"
+          />
         </h3>
 
         <Swiper
@@ -57,30 +69,45 @@ function HomeNews() {
           }}
           className="w-full lg:h-110"
         >
-          <div className="">
-            {data.map((item) => (
-              <SwiperSlide key={item.id}>
-                <Link to={`/news/${item.id}`} className="block group">
-                  <div className="overflow-hidden rounded-2xl bg-white p-3 shadow-md my-10">
-                    <div className="overflow-hidden rounded-t-xl rounded-b-sm h-70">
-                      <img
-                        src={`${uploadBase}${item.image_url}`}
-                        alt={item.text[lang]}
-                        className="w-full h-full object-cover group-hover:scale-105 duration-300"
-                      />
+          <div>
+            {loading
+              ? Array.from({ length: 4 }).map((_, idx) => (
+                  <SwiperSlide key={idx}>
+                    <div className="overflow-hidden rounded-2xl bg-white p-3 shadow-md my-10">
+                      <Skeleton height={200} className="rounded-t-xl rounded-b-sm" />
+                      <Skeleton height={20} style={{ marginTop: 10 }} count={2} />
                     </div>
-                    <p className="font-medium text-[17px] text-gray-900 line-clamp-2 group-hover:text-green-500 pt-2">
-                      {item.text[lang]}
-                    </p>
-                  </div>
-                </Link>
-              </SwiperSlide>
-            ))}
+                  </SwiperSlide>
+                ))
+              : data.filter(Boolean).map((item) => (
+                  <SwiperSlide key={item?.id}>
+                    <Link to={`/news/${item?.id}`} className="block group">
+                      <div className="overflow-hidden rounded-2xl bg-white p-3 shadow-md my-10">
+                        <div className="overflow-hidden rounded-t-xl rounded-b-sm h-70">
+                          <img
+                            src={
+                              item?.image_url
+                                ? `${uploadBase}${encodeURI(item.image_url)}`
+                                : '/default-news.jpg'
+                            }
+                            alt={item?.text?.[lang] || 'Yangilik rasmi'}
+                            className="w-full h-full object-cover group-hover:scale-105 duration-300"
+                          />
+                        </div>
+                        <p className="font-medium text-[17px] text-gray-900 line-clamp-2 group-hover:text-green-500 pt-2">
+                          {item?.text?.[lang] || 'Sarlavha mavjud emas'}
+                        </p>
+                      </div>
+                    </Link>
+                  </SwiperSlide>
+                ))}
           </div>
-          <div className="custom-prev absolute left-0 bottom-1/2 w-[40px] h-[40px] rounded-[50%] -translate-y-1/2 z-20 cursor-pointer border text-lg font-bold bg-black/30 backdrop-blur-sm text-green-500 hover:bg-[#323131d3] transition flex items-center justify-center">
+
+          {/* Custom Arrows */}
+          <div className="custom-prev absolute left-0 bottom-1/2 w-[40px] h-[40px] rounded-full -translate-y-1/2 z-20 cursor-pointer border text-lg font-bold bg-black/30 backdrop-blur-sm text-green-500 hover:bg-[#323131d3] transition flex items-center justify-center">
             <FaArrowLeft />
           </div>
-          <div className="custom-next absolute right-0 bottom-1/2 w-[40px] h-[40px] -translate-y-1/2 z-20 cursor-pointer border text-xl font-bold bg-black/30 backdrop-blur-sm text-green-500 p-3 rounded-full hover:bg-[#323131d3] transition flex items-center justify-center">
+          <div className="custom-next absolute right-0 bottom-1/2 w-[40px] h-[40px] rounded-full -translate-y-1/2 z-20 cursor-pointer border text-xl font-bold bg-black/30 backdrop-blur-sm text-green-500 p-3 hover:bg-[#323131d3] transition flex items-center justify-center">
             <FaArrowRight />
           </div>
         </Swiper>
