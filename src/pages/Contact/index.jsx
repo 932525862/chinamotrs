@@ -21,7 +21,7 @@ const ContactPage = () => {
     };
 
     try {
-      const res = await axios.post('http://142.93.111.17:3002/api/orders', payload);
+      const res = await axios.post('https://api.grandfitness.com.uz/api/orders', payload);
       console.log('Yuborildi:', res.data);
 
       setFirstName('');
