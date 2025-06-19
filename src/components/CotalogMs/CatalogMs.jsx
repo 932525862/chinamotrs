@@ -1,6 +1,6 @@
 import decor from "../../assets/decor-right-black.svg";
-import CategoryGrid from "../../pages/Category/components/category-grid";
 import { useTranslation } from "react-i18next"; // ✅ tarjima uchun
+import MassageChairGrid from "../../pages/Category/components/MassageChairGrid";
 
 function CatalogMs() {
   const { t } = useTranslation();
@@ -26,7 +26,7 @@ function CatalogMs() {
             className="inline-block max-md:hidden absolute top-1/2 right-16 max-lg:right-0"
           />
         </div>
-        <CategoryGrid />
+        <MassageChairGrid />
       </div>
     </section>
   );
