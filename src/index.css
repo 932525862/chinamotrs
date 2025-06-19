@@ -7,7 +7,7 @@
 }
 
 .custom-pagination .swiper-pagination-bullet-active {
-  background-color: #0B954C; /* Tailwind sariq: yellow-400 */
+  background-color: #48dc12; /* Tailwind sariq: yellow-400 */
   opacity: 1;
   width: 40px;
 }
