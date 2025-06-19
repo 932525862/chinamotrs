@@ -3,8 +3,10 @@ import Marquee from 'react-fast-marquee'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import line from '../../assets/decor-right-black.svg'
+import { useTranslation } from 'react-i18next'
 
 function AboutPartners() {
+  const {t}= useTranslation()
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -37,7 +39,7 @@ function AboutPartners() {
     <div>
       <section className="max-w-7xl mx-auto py-15 px-[1rem]">
         <h3 className="text-xl md:text-2xl text-black/90 lg:text-4xl flex font-bold items-center font-one gap-3 pb-5">
-          <span className="">HAMKORLARIMIZ</span>
+          <span className="">{t('aboutHome.part')}</span>
           <img src={line} alt="" className="hidden sm:block sm:max-w-40 md:max-w-70" />
         </h3>
 
