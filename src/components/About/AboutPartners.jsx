@@ -25,7 +25,7 @@ function AboutPartners() {
           <img src={line} alt="" className="hidden sm:block sm:max-w-40 md:max-w-70" />
         </h3>
         <Marquee>
-          {data.map((item) => (
+          {data?.map((item) => (
             <div
               key={item.id}
               className="p-5 mx-3 md:mx-5 rounded-2xl shadow-[5px_5px_20px]/15 my-5 w-auto"
