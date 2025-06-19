@@ -11,8 +11,8 @@ import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 
 function HomeNews() {
-  const baseUrl = import.meta.env.VITE_BASE_URL
-  const uploadBase = import.meta.env.VITE_UPLOAD_BASE
+  const baseUrl = import.meta.env.VITE_API_BASE_URL
+  const uploadBase = import.meta.env.VITE_API_UPLOAD_BASE
   const { i18n } = useTranslation()
   const lang = ['uz', 'ru'].includes(i18n.language) ? i18n.language : 'uz'
 
@@ -27,12 +27,12 @@ function HomeNews() {
         if (Array.isArray(resData?.data)) {
           setData(resData.data)
         } else {
-          setData([]) 
+          setData([])
         }
       })
       .catch((err) => {
         console.error('Xatolik:', err)
-        setData([]) 
+        setData([])
       })
       .finally(() => {
         setLoading(false)

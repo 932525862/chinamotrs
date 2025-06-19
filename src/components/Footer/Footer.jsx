@@ -30,7 +30,7 @@ const nav = [
 
 function Footer() {
   const { t } = useTranslation()
-  const baseUrl = import.meta.env.VITE_BASE_URL
+  const baseUrl = import.meta.env.VITE_API_BASE_URL
   const navigateTop = () => {
     window.scrollTo(0, 0)
   }

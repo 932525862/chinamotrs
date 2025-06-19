@@ -9,8 +9,8 @@ function AboutPartners() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
-  const baseUrl = import.meta.env.VITE_BASE_URL
-  const uploadBase = import.meta.env.VITE_UPLOAD_BASE
+  const baseUrl = import.meta.env.VITE_API_BASE_URL
+  const uploadBase = import.meta.env.VITE_API_UPLOAD_BASE
 
   useEffect(() => {
     setLoading(true)
