@@ -6,7 +6,9 @@
         "category": "Kategoriyalar",
         "news": "Yangiliklar",
         "contact": "Aloqa",
-        "searchPlaceholder": "Qidiruv..."
+        "searchPlaceholder": "Qidiruv...",
+        "searchPlaceholder1": "Bunday mahsulot topilmadi "
+        
       },
 
       "aboutHome": {
