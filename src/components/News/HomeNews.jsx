@@ -13,7 +13,7 @@ import 'react-loading-skeleton/dist/skeleton.css'
 function HomeNews() {
   const baseUrl = import.meta.env.VITE_API_BASE_URL
   const uploadBase = import.meta.env.VITE_API_UPLOAD_BASE
-  const { i18n } = useTranslation()
+  const { i18n ,t} = useTranslation()
   const lang = ['uz', 'ru'].includes(i18n.language) ? i18n.language : 'uz'
 
   const [data, setData] = useState([])
@@ -43,7 +43,7 @@ function HomeNews() {
     <div className="bg-gray-100">
       <section className="mx-auto max-w-7xl mt-15 flex flex-col items-start py-10 px-[1rem]">
         <h3 className="text-xl md:text-2xl text-black/90 lg:text-4xl flex font-bold items-center font-one gap-3 ">
-          <span className="">YANGILIKLAR</span>
+          <span className="">{t('news.homeTitle')}</span>
           <img
             src={line}
             alt="Line Decoration"
@@ -117,7 +117,7 @@ function HomeNews() {
           className="mx-auto relative group border-[3px] border-green-500 overflow-hidden rounded-full px-10 py-2 mt-5 flex items-center gap-2"
         >
           <span className="font-one text-green-500 group-hover:text-white relative duration-300 z-1">
-            Barcha Yangiliklar
+            {t('news.allNews')}
           </span>
           <FaArrowAltCircleRight className="text-green-500 group-hover:text-white relative duration-300 z-1" />
           <span className="bg-green-500 absolute w-full h-full left-0 top-0 -translate-x-full group-hover:translate-x-0 transition-transform duration-500 z-0" />
