@@ -1,5 +1,5 @@
 import aboutBg from '../../assets/decor-line-bg.svg';
-import aboutImg from '../../assets/about-img.jpg';
+import aboutImg from '../../assets/homeAbout.png';
 import decorLeft from '../../assets/about-image-line.svg';
 import { useTranslation } from 'react-i18next'; // i18n chaqirildi
 

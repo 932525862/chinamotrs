@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import aboutImg from "../../assets/about-img.jpg";
+import aboutImg from "../../assets/homeAbout.png";
 import line from "../../assets/decor-right-black.svg";
 import {
   FaArrowAltCircleRight,

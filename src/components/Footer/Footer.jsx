@@ -2,7 +2,7 @@ import { FaHome, FaPhone } from 'react-icons/fa';
 import { IoIosMail } from 'react-icons/io';
 import { TiArrowDownOutline } from 'react-icons/ti';
 import { Link, NavLink } from 'react-router-dom';
-import { useTranslation } from 'react-i18next'; // Tarjima uchun
+import { useTranslation } from 'react-i18next';
 
 const nav = [
   {
