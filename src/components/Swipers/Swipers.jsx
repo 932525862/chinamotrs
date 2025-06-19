@@ -1,47 +1,39 @@
-import React, { useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/autoplay";
-import hero1 from "../../assets/hero.1.jpg";
-import hero2 from "../../assets/hero.4.jpg";
-import hero3 from "../../assets/hero.2.png";
-import hero4 from "../../assets/hero.3.jpg";
-import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { RiArrowRightUpLine } from "react-icons/ri";
+import { useTranslation } from "react-i18next";
+
 
 export default function SwiperSlides() {
-  // const swiperRef = useRef(null);
-  // const [activeIndex, setActiveIndex] = useState(1);
 
-  const cards = [
-    {
-      id: "01",
-      img: hero1,
-      title: "TANANGIZNI O‘ZINGIZ XOHLAGAN TARZDA QILING",
-      text: "YUGURISH YO‘LAKCHALARI KATALOGI",
-    },
-    {
-      id: "02",
-      img: hero2,
-      title: "YUGURISH YO‘LAKCHALARINI SOTIB OLING",
-      text: "YUGURISH YO‘LAKCHALARI KATALOGI",
-    },
-    {
-      id: "03",
-      img: hero3,
-      title: "TANANGIZNI O‘ZINGIZ XOHLAGAN TARZDA QILING",
-      text: "YUGURISH YO‘LAKCHALARI KATALOGI",
-    },
-    {
-      id: "04",
-      img: hero4,
-      title: "TANANGIZNI O‘ZINGIZ XOHLAGAN TARZDA QILING",
-      text: "KUCH ISHLATILADIGAN TRENAJYORLAR KATALOGI",
-    },
-  ];
+  const { t , i18n } = useTranslation();
+  const lang = ['uz' , 'ru'].includes(i18n.language) ? i18n.language : 'uz'
+  const navigate = useNavigate();
+  const handleCardClick = () => {
+      navigate("/category");
+      scrollTo({ top: 0 });
+  };
+
+    const baseUrl = import.meta.env.VITE_BASE_URL
+    const uploadBase = import.meta.env.VITE_UPLOAD_BASE
+    const [baner, setBaner] = useState();
+  
+    useEffect(() => {
+      fetch(`${baseUrl}/api/banners`)
+        .then((res) => res.json())
+        .then((data) => {
+          setBaner(data?.data);
+        })
+        .catch((err) => {
+          console.error("Xatolik yuz berdi:", err);
+        });
+    }, []);
 
   return (
     <div className="relative">
@@ -49,8 +41,8 @@ export default function SwiperSlides() {
         modules={[Autoplay, Navigation, Pagination]}
         loop={true}
         centeredSlides={true}
-        autoplay={{ delay: 3000, disableOnInteraction: false }}
-        speed={1000}
+        autoplay={{ delay: 4000, disableOnInteraction: false }}
+        speed={2000}
         slidesPerView={1}
         pagination={{
           el: ".custom-pagination",
@@ -64,19 +56,19 @@ export default function SwiperSlides() {
         }}
         className="w-full"
       >
-        {cards.map((car, index) => (
-          <SwiperSlide key={index}>
+        {Array.isArray(baner) && baner.map((car) => (
+          <SwiperSlide key={car?.id}>
             <div
               style={{
-                backgroundImage: `url(${car.img})`,
+                backgroundImage: `url(${uploadBase}${car?.image_url})`,
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover",
                 backgroundPosition: "center",
               }}
-              className="md:h-[100dvh] h-[80dvh] w-full px-10 py-20 text-white relative"
+              className="md:h-[90dvh] h-[80dvh] w-full px-10 py-20 text-white relative"
             >
-              <div className="max-w-7xl h-full mx-auto flex flex-col max-sm:items-center gap-6">
-
+              <div className="max-w-7xl h-full mx-auto flex flex-col max-sm:items-center text-shadow-2xs gap-6">
+                {/* <img src={`url(${ImgUrl}upload/${car?.image_url})`} alt="" /> */}
                 <span className="w-full h-full min-md:hidden bg-black/40 absolute top-0 left-0"></span>
 
                 <div className="w-[250px] z-10 max-sm:hidden mt-3 border-b-2 border-r-2 border-green-500 rounded-[50%] px-7 py-4">
@@ -85,18 +77,18 @@ export default function SwiperSlides() {
                   </p>
                 </div>
                 <h1 className="min-md:w-[600px] z-10 max-md:text-2xl max-sm:text-xl max-sm:text-center text-4xl font-one mt-5">
-                  {car?.title}
+                  {car?.text[lang]}
                 </h1>
                 <p className="text-2xl z-10 max-md:text-xl max-sm:text-xl max-sm:text-center font-one text-[#595757]">
-                  {car?.text}
+                  {car?.title[lang]}
                 </p>
-                <NavLink>
-                  <button className="mt-5 bg-[#000000a6] font-one text-white relative overflow-hidden group border-2 border-green-500 px-7 py-4 max-sm:py-2 transform duration-500 rounded-full flex items-center gap-3">
-                    <span className="z-20 text-xl max-sm:text-sm">KATALOGGA O‘TISH</span>{" "}
+                  <button
+                  onClick={handleCardClick}
+                  className="mt-5 bg-[#000000a6] sm:w-[300px] w-[270px] h-[55px] font-one text-white relative overflow-hidden group cursor-pointer border-2 border-green-500 max-sm:py-2 transform duration-500 rounded-full flex items-center justify-center gap-3">
+                    <span className="z-20 sm:text-xl text-sm">KATALOGGA O‘TISH</span>{" "}
                     <span className=" z-20 text-2xl "><RiArrowRightUpLine /></span>
                     <span className="w-full h-full z-10 absolute -left-100 bg-green-500  group-hover:left-0 transform duration-500 transition-all"></span>
                   </button>
-                </NavLink>
               </div>
             </div>
           </SwiperSlide>
@@ -110,7 +102,7 @@ export default function SwiperSlides() {
         </div>
 
         {/* Custom Pagination */}
-        <div className="custom-pagination max-md:hidden absolute bottom-20 left-10 z-10 max-lg:left-1/2 max-lg:bottom-16"></div>
+        <div className="custom-pagination max-md:hidden absolute bottom-22 left-10 z-10 max-lg:left-1/2 max-lg:bottom-16"></div>
       </Swiper>
     </div>
   );
