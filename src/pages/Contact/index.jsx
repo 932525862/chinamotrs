@@ -90,7 +90,7 @@ const ContactPage = () => {
               <input
                 type="tel"
                 className="w-full border border-gray-300 rounded-r-md p-2"
-                placeholder="90 123 45 67"
+                placeholder="90 123 45 77"
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
                 required
