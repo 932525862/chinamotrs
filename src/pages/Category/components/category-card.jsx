@@ -40,7 +40,7 @@ export const CategoryCard = ({ product }) => {
 
       {/* Product Info */}
       <div className="mt-4">
-        <p className="hover:text-green-500 lg:text-[19px] md:text-lg sm:text-[17px] font-one max-[550px]:text-[12px]">
+        <p className="hover:text-green-500 lg:text-[18px] sm:text-[16px] font-one max-[550px]:text-[12px]">
           {product?.name?.[lang] || "Kategoriya nomi"}
         </p>
 
