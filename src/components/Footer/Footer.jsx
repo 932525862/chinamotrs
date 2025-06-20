@@ -49,7 +49,7 @@ function Footer() {
     getCategory()
   }, [])
   return (
-    <footer className="" style={{ backgroundColor: 'rgb(214, 214, 214)' }}>
+    <footer className="bg-gray-50">
       <div className="max-w-7xl mx-auto">
         <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 ">
           {/* Contact section */}

@@ -19,33 +19,33 @@ export const CategoryCard = ({ product }) => {
 
   return (
     <div
-      className="bg-white shadow-lg cursor-pointer hover:shadow-neutral-400 duration-300 rounded-2xl p-7 max-md:p-3 relative flex flex-col justify-between"
+      className="bg-white shadow-lg cursor-pointer hover:shadow-neutral-400 duration-300 rounded-2xl p-5 max-md:p-3 relative flex flex-col justify-between"
       onClick={handleCardClick}
     >
       {/* Image Container */}
-      <div className="w-full aspect-[4/3] rounded-xl flex items-center justify-center">
+      <div className="w-full p-3 rounded-xl flex items-center justify-center">
         {imagePath ? (
           <img
             src={`${uploadUrl}${imagePath}`}
             alt={product?.name?.[lang]}
             style={{ mixBlendMode: "multiply" }}
-            className="transition-transform duration-300 hover:scale-105 object-cover w-full h-full"
+            className="transition-transform duration-300 hover:scale-105 object-contain w-full h-full"
           />
         ) : (
-          <div className="w-full h-full bg-gray-100 text-sm text-gray-400 flex items-center justify-center">
+          <div className="w-full h-full bg-gray-100 text-md text-gray-400 flex items-center justify-center">
             Rasm yo‘q
           </div>
         )}
       </div>
 
       {/* Product Info */}
-      <div className="mt-4 lg:text-lg md:text-lg sm:text-[17px] font-one max-[550px]:text-[12px]">
-        <p className="hover:text-green-500">
+      <div className="mt-4">
+        <p className="hover:text-green-500 lg:text-[19px] md:text-lg sm:text-[17px] font-one max-[550px]:text-[12px]">
           {product?.name?.[lang] || "Kategoriya nomi"}
         </p>
 
         {price ? (
-          <p className="text-neutral-500">
+          <p className="text-neutral-500 lg:text-[15px] font-one text-[12px]">
             <span>{price.toLocaleString("uz-UZ")}</span> so'm
           </p>
         ) : (

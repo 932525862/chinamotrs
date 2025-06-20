@@ -40,15 +40,15 @@ const MassageCategoryCard = ({ product }) => {
       </div>
 
       {/* Product nomi va narxi */}
-      <div className="mt-4 lg:text-xl md:text-lg sm:text-[18px] font-one max-[550px]:text-[12px]">
-        <p className="hover:text-green-500">{productName || "Nomi yo‘q"}</p>
+      <div className="mt-4">
+        <p className="hover:text-green-500 lg:text-[19px] md:text-lg sm:text-[17px] font-one max-[550px]:text-[12px]">{productName || "Nomi yo‘q"}</p>
 
         {productPrice ? (
-          <p className="text-neutral-500">
+          <p className="text-neutral-500 lg:text-[15px] font-one text-[12px]">
             <span>{productPrice.toLocaleString("uz-UZ")}</span> so'm
           </p>
         ) : (
-          <p className="text-neutral-400 text-sm">Narx ko‘rsatilmagan</p>
+          <p className="text-neutral-400 text-md">Narx ko‘rsatilmagan</p>
         )}
       </div>
 
