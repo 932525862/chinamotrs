@@ -73,7 +73,7 @@ export default function Swiper_Catalog() {
               {loading ? (
                 <SkeletonTheme className="w-[210px] h-[240px] max-[550px]:w-full" />
               ) : (
-                <div className="w-[210px] h-[200px] max-[550px]:w-full group max-[550px]:px-5 relative my-16 shadow-md hover:shadow-lg p-3 rounded-xl bg-white hover:bg-[#cecece2d] hover:backdrop-blur-xs flex items-center justify-center transition-transform duration-400 hover:scale-103 border-[#54ed21] border">
+                <div className="w-[225px] h-[210px] max-[550px]:w-full group max-[550px]:px-5 relative my-16 shadow-md hover:shadow-lg p-3 rounded-xl bg-white hover:bg-[#cecece2d] hover:backdrop-blur-xs flex items-center justify-center transition-transform duration-400 hover:scale-103 border-[#54ed21] border">
                   <h2 className="text-center text-lg font-one group-hover:text-xl text-shadow-2xs duration-300 group-hover:text-[#17f80b]">
                     {card?.name[lang]}
                   </h2>
@@ -89,7 +89,7 @@ export default function Swiper_Catalog() {
           <FaArrowRight />
         </div>
         {/* Custom Pagination */}
-        <div className="custom-pagination-catalog  hidden lg:block max-md:hidden absolute bottom-5 left-1/3 z-10 max-lg:left-1/2 max-lg:bottom-16"></div>
+        <div className="custom-pagination-catalog absolute bottom-5 -translate-x-1/2 left-1/2 z-10 max-[450px]:bottom-4 max-[450px]:w-full"></div>
       </Swiper>
     </div>
   );

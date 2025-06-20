@@ -84,7 +84,7 @@ export default function SwiperSlides() {
                     <h1 className="min-md:w-[600px] z-10 max-md:text-2xl max-sm:text-xl max-sm:text-center text-4xl font-one mt-5">
                       {car?.text[lang]}
                     </h1>
-                    <p className="text-2xl z-10 max-md:text-xl max-sm:text-xl max-sm:text-center font-one text-[#595757]">
+                    <p className="text-2xl z-10 max-md:text-xl max-sm:text-xl max-sm:text-center font-one text-[#e3e3e3]">
                       {car?.title[lang]}
                     </p>
                     <button
