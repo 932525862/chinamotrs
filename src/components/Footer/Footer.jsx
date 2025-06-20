@@ -104,7 +104,7 @@ function Footer() {
           <li className="py-10 flex flex-col items-center text-center">
             <div className="text-xl font-bold mb-4">{t('footer.categoriesTitle')}</div>
             <div className="flex flex-col gap-2">
-              {data.map((item) => (
+              {data.slice(0, 9).map((item) => (
                 <Link
                   key={item?.id}
                   to={`/category/${item?.id}`}
