@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { RiArrowRightUpLine } from "react-icons/ri";
 import { useTranslation } from "react-i18next";
-import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import { SkeletonTheme } from "react-loading-skeleton";
 
 export default function SwiperSlides() {
   const { t, i18n } = useTranslation();
@@ -78,7 +78,7 @@ export default function SwiperSlides() {
 
                     <div className="w-[250px] z-10 max-sm:hidden mt-3 border-b-2 border-r-2 border-green-500 rounded-[50%] px-7 py-4">
                       <p className="text-xl text-right ">
-                        O'zbekiston bo'ylab yetkazib berish!
+                        {t("aboutHome.xizmat")}
                       </p>
                     </div>
                     <h1 className="min-md:w-[600px] z-10 max-md:text-2xl max-sm:text-xl max-sm:text-center text-4xl font-one mt-5">
@@ -92,7 +92,7 @@ export default function SwiperSlides() {
                       className="mt-5 bg-[#000000a6] sm:w-[300px] w-[270px] h-[55px] font-one text-white relative overflow-hidden group cursor-pointer border-2 border-green-500 max-sm:py-2 transform duration-500 rounded-full flex items-center justify-center gap-3"
                     >
                       <span className="z-20 sm:text-xl text-sm">
-                        KATALOGGA O‘TISH
+                         {t("aboutHome.next")}
                       </span>{" "}
                       <span className=" z-20 text-2xl ">
                         <RiArrowRightUpLine />
