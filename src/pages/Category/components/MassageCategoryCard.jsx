@@ -41,7 +41,7 @@ const MassageCategoryCard = ({ product }) => {
 
       {/* Product nomi va narxi */}
       <div className="mt-4">
-        <p className="hover:text-green-500 lg:text-[19px] md:text-lg sm:text-[17px] font-one max-[550px]:text-[12px]">{productName || "Nomi yo‘q"}</p>
+        <p className="hover:text-green-500 lg:text-[18px] sm:text-[16px] font-one max-[550px]:text-[12px]">{productName || "Nomi yo‘q"}</p>
 
         {productPrice ? (
           <p className="text-neutral-500 lg:text-[15px] font-one text-[12px]">

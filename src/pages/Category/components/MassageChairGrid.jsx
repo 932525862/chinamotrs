@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import MassageCategoryCard from "./MassageCategoryCard";
 
 const MassageChairGrid = () => {
-  const [categories, setCategories] = useState([]);
+  const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
   useEffect(() => {
-    fetch(`${baseUrl}/api/categories/with-one-product`)
+    fetch(`${baseUrl}/api/products`)
       .then((res) => res.json())
       .then((data) => {
         const searchKeywords = [
@@ -17,17 +17,20 @@ const MassageChairGrid = () => {
           "kreslo",
           "massage",
           "chair",
+          "moslama",
+          "uskunasi",
+          "ustgich",
         ];
 
-        const filtered = (data?.data || []).filter((item) =>
-          Object.values(item?.product?.name || {}).some((val) =>
+        const filtered = (data?.data || []).filter((product) =>
+          Object.values(product?.name || {}).some((val) =>
             searchKeywords.some((keyword) =>
-              val?.toLowerCase().includes(keyword)
+              val?.toLowerCase()?.includes(keyword)
             )
           )
         );
 
-        setCategories(filtered);
+        setProducts(filtered);
         setLoading(false);
       })
       .catch((err) => {
@@ -40,12 +43,12 @@ const MassageChairGrid = () => {
     <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-5">
       {loading ? (
         <p>Yuklanmoqda...</p>
-      ) : categories.length > 0 ? (
-        categories.map((item) => (
-          <MassageCategoryCard key={item.id} product={item} />
+      ) : products.length > 0 ? (
+        products.map((product) => (
+          <MassageCategoryCard key={product.id} product={{ product }} />
         ))
       ) : (
-        <p>Massaj kursilari topilmadi.</p>
+        <p>Massaj uskunalari topilmadi.</p>
       )}
     </div>
   );
