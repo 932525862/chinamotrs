@@ -1,9 +1,9 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { IoMdArrowForward } from "react-icons/io";
-import { RiArrowRightUpLine } from "react-icons/ri";
-
 export const ProductCard = ({ product }) => {
     const navigate = useNavigate();
+
+    const imageUrl = import.meta.env.VITE_API_UPLOAD_BASE;
     const { slug: sub } = useParams();
 
     const handleCardClick = () => {
@@ -19,7 +19,7 @@ export const ProductCard = ({ product }) => {
             {/* Image Container */}
             <div className="w-full aspect-[4/3] rounded-xl overflow-hidden flex items-center justify-center">
                 <img
-                    src={product?.image}
+                    src={`${imageUrl}${product?.images[0]?.path}`}
                     alt={product?.name}
                     style={{ mixBlendMode: "multiply" }}
                     className="transition-transform duration-300 hover:scale-105 object-cover w-full h-full"
@@ -28,9 +28,9 @@ export const ProductCard = ({ product }) => {
 
             {/* Product Info */}
             <div className="mt-4 lg:text-xl md:text-lg sm:text-[18px] font-one max-[550px]:text-[12px]">
-                <p className="hover:text-green-500">{product?.name}</p>
+                <p className="hover:text-green-500">{product?.name?.uz}</p>
                 <p className="text-neutral-500">
-                    <span>7 840 000</span> so'm
+                    <span>{product?.price}</span> so'm
                 </p>
             </div>
 

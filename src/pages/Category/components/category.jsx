@@ -7,12 +7,37 @@ import { Separator } from '@/components/ui/separator';
 import { productData } from '../fake-data/data';
 import { UserInfoDialog } from '../modals/user-info';
 import { toast } from 'sonner';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
 const CategoryOnePage = () => {
   const [showImageModal, setShowImageModal] = useState(false);
   const [open, setOpen] = useState(false);
   const [showShareOptions, setShowShareOptions] = useState(false);
+
+  const [data, setData] = useState()
   const shareRef = useRef(null);
+
+  const { id } = useParams()
+
+  const base_url = import.meta.env.VITE_API_BASE_URL
+  const upload_base = import.meta.env.VITE_API_UPLOAD_BASE
+
+  const getOneById = async (id) => {
+    try {
+      const data = await axios.get(`${base_url}/api/products/${id}`);
+      console.log(data.data.data, "data from one")
+      setData(data.data.data);
+    } catch (error) {
+      console.error("Error fetching product by ID:", error);
+
+    }
+  }
+
+  useEffect(() => {
+    if (id) getOneById(id)
+  }, [id])
+
 
   const handleCopyLink = () => {
     if (navigator.share) {
@@ -62,7 +87,7 @@ const CategoryOnePage = () => {
                   onClick={() => setShowImageModal(true)}
                 >
                   <img
-                    src={productData.image}
+                    src={`${upload_base}${data?.images[0]?.path}`}
                     alt="Product"
                     className="w-full h-full object-contain transform group-hover:scale-105 transition-transform duration-500"
                   />
@@ -75,10 +100,10 @@ const CategoryOnePage = () => {
               <div className="flex items-start justify-between gap-4">
                 <div className="flex-1 min-w-0">
                   <Badge variant="secondary" className="bg-green-500 text-white border-none mb-2 sm:mb-3 px-2 sm:px-3 py-1 text-xs sm:text-sm">
-                    {productData.category}
+                    {data?.category?.name?.uz}
                   </Badge>
                   <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold mb-2 sm:mb-4 leading-tight text-gray-900 break-words">
-                    {productData.title}
+                    {data?.name?.uz}
                   </h1>
                 </div>
 
@@ -119,9 +144,9 @@ const CategoryOnePage = () => {
                   <div className="flex gap-5 items-center justify-between">
                     <div className="flex items-baseline gap-2">
                       <span className="text-2xl sm:text-3xl lg:text-4xl font-bold text-green-600">
-                        {productData.price.toLocaleString()}
+                        {data?.price.toLocaleString()}
                       </span>
-                      <span className="text-lg sm:text-xl text-gray-600">{productData.currency}</span>
+                      <span className="text-lg sm:text-xl text-gray-600">so`m</span>
                     </div>
                     <button
                       className="relative cursor-pointer group border-[3px] border-green-500 overflow-hidden rounded-full px-5 sm:px-10 py-2 flex items-center gap-2"
