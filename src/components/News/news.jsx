@@ -14,7 +14,7 @@ const News = () => {
   const uploadBase = import.meta.env.VITE_API_UPLOAD_BASE
 
   //i18n
-  const { i18n,t } = useTranslation()
+  const { i18n, t } = useTranslation()
   const lang = ['uz', 'ru'].includes(i18n.language) ? i18n.language : 'uz'
 
   //statelar
@@ -63,9 +63,12 @@ const News = () => {
           <p className="text-red-600 text-lg font-medium py-5">{error}</p>
         ) : item ? (
           <main>
-            <p className="text-xl md:text-2xl font-medium mb-5">
-              {item.text?.[lang] || 'Matn mavjud emas'}
-            </p>
+            <h2 className="text-md md:text-2xl font-medium mb-5">
+                  {item.title?.[lang] || 'Matn mavjud emas'}
+                </h2>
+                <p className="text-sm md:text-xl mb-5">
+                  {item.text?.[lang] || 'Matn mavjud emas'}
+                </p>
             <img
               src={`${uploadBase}${item.image_url}`}
               alt={item.text?.[lang] || 'Yangilik rasmi'}
@@ -92,7 +95,10 @@ const News = () => {
             </h3>
             {randomItem && (
               <>
-                <p className="text-xl md:text-2xl font-medium mb-5">
+                <h2 className="text-md md:text-2xl font-medium mb-5">
+                  {randomItem.title?.[lang] || 'Matn mavjud emas'}
+                </h2>
+                <p className="text-sm md:text-xl mb-5">
                   {randomItem.text?.[lang] || 'Matn mavjud emas'}
                 </p>
                 <img
@@ -112,7 +118,7 @@ const News = () => {
             <img src={line} alt="" className="hidden sm:block sm:max-w-40 md:max-w-70" />
           </h3>
 
-          <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
+          <ul className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mb-10">
             {loading
               ? Array(4)
                   .fill(0)
@@ -126,15 +132,15 @@ const News = () => {
                   <li key={item?.id || idx} className="group">
                     <Link to={`/news/${item.id}`}>
                       <div className="overflow-hidden rounded-2xl bg-white p-3 shadow-xl">
-                        <div className="overflow-hidden rounded-t-xl rounded-b-sm h-70">
+                        <div className="overflow-hidden rounded-t-xl rounded-b-sm h-40 md:h-70">
                           <img
                             src={`${uploadBase}${item.image_url}`}
                             alt={item.text?.[lang] || 'Yangilik rasmi'}
                             className="w-full h-full object-cover group-hover:scale-105 duration-300"
                           />
                         </div>
-                        <p className="font-medium text-[17px] text-gray-900 line-clamp-2 group-hover:text-green-500 pt-2">
-                          {item.text?.[lang] || 'Sarlavha yo‘q'}
+                        <p className="font-medium text-[12px] md:text-[15px] text-gray-900 line-clamp-2 group-hover:text-green-500 pt-2">
+                          {item.title?.[lang] || 'Sarlavha yo‘q'}
                         </p>
                       </div>
                     </Link>

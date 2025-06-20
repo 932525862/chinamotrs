@@ -39,6 +39,7 @@ function HomeNews() {
       })
   }, [])
 
+
   return (
     <div className="bg-gray-100">
       <section className="mx-auto max-w-7xl mt-15 flex flex-col items-start py-10 px-[1rem]">
@@ -87,7 +88,7 @@ function HomeNews() {
                           <img
                             src={
                               item?.image_url
-                                ? `${uploadBase}${encodeURI(item.image_url)}`
+                                ? `${uploadBase}${encodeURI(item?.image_url)}`
                                 : '/default-news.jpg'
                             }
                             alt={item?.text?.[lang] || 'Yangilik rasmi'}
@@ -95,7 +96,7 @@ function HomeNews() {
                           />
                         </div>
                         <p className="font-medium text-[17px] text-gray-900 line-clamp-2 group-hover:text-green-500 pt-2">
-                          {item?.text?.[lang] || 'Sarlavha mavjud emas'}
+                          {item?.title?.[lang] || 'Sarlavha mavjud emas'}
                         </p>
                       </div>
                     </Link>
