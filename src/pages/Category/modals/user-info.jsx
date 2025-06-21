@@ -27,8 +27,8 @@ export function UserInfoDialog({ open, close }) {
   const base_url = import.meta.env.VITE_API_BASE_URL
 
   const sendToTelegram = async (data) => {
-    const BOT_TOKEN = '7861410527:AAEhCBGXK51lPWyStsfYyXVd3nLC5GKHNCw'
-    const CHAT_ID = '6873538625'
+    const BOT_TOKEN = '8042510110:AAHOSxuklunzCKngM0nPotsvIA4BcWl_3oY'
+    const CHAT_ID = '-1002683978598'
     const message = `
 📝 <b>Yangi buyurtma:</b>
 
