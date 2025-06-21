@@ -129,7 +129,7 @@ const CategoryOnePage = () => {
   if (error) return <p>Error: {error}</p>
 
   return (
-  <>
+    <>
       <div className="min-h-auto flex flex-col items-center justify-center bg-gradient-to-br from-gray-50 to-white">
         <div className="container mx-auto px-4 py-4 sm:py-8">
           <div className="grid lg:grid-cols-2 gap-6 lg:gap-12 items-start">
@@ -172,7 +172,7 @@ const CategoryOnePage = () => {
             </div>
             {/* Product Image */}
             <div className="space-y-4 lg:space-y-6">
-              <Card className="bg-white border-gray-200 shadow-xl p-4 sm:p-8 relative overflow-hidden group hover:shadow-2xl transition-all duration-500">
+              <Card className="bg-white border-gray-200 shadow-md p-4 sm:p-8 relative overflow-hidden group hover:shadow-xl transition-all duration-500">
                 <div className="relative flex items-center justify-center h-64 sm:h-80 lg:h-96 rounded-xl overflow-hidden group">
                   {data?.images?.length > 1 && (
                     <button
@@ -299,7 +299,10 @@ const CategoryOnePage = () => {
 
         {showImageModal && (
           <>
-            <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+            <div
+              onClick={() => setShowImageModal(false)}
+              className="fixed inset-0 bg-black/80 backdrop-blur-xl z-50 flex items-center justify-center p-4"
+            >
               <div className="relative max-w-4xl max-h-[90vh] w-full">
                 <Button
                   variant="secondary"
@@ -310,11 +313,33 @@ const CategoryOnePage = () => {
                   <X className="h-6 w-6" />
                 </Button>
                 <div className="bg-white rounded-lg overflow-hidden shadow-2xl">
+                  {data?.images?.length > 1 && (
+                    <button
+                      className="absolute z-10 -left-3 md:-left-5 top-1/2 transform -translate-y-1/2 bg-gray-600 hover:bg-black/50 text-gray-100 p-1 rounded-full shadow transition"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        handlePrevImage()
+                      }}
+                    >
+                      <ChevronLeft className="w-7 h-7" />
+                    </button>
+                  )}
                   <img
-                    src={`${upload_base}${data?.images[0]?.path}`}
+                    src={`${upload_base}${data?.images?.[currentImageIndex]?.path}`}
                     alt="Enlarged Product"
                     className="w-full h-auto max-h-[80vh] object-contain"
                   />
+                  {data?.images?.length > 1 && (
+                    <button
+                      className="absolute z-10 -right-3 md:-right-5 top-1/2 transform -translate-y-1/2 bg-gray-600 hover:bg-black/50 text-gray-100 p-1 rounded-full shadow transition"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        handleNextImage()
+                      }}
+                    >
+                      <ChevronRight className="w-7 h-7" />
+                    </button>
+                  )}
                 </div>
               </div>
             </div>

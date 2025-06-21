@@ -1,154 +1,177 @@
 import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
-} from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { parsePhoneNumberFromString } from "libphonenumber-js";
-import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { parsePhoneNumberFromString } from 'libphonenumber-js'
+import { useState, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 
 export function UserInfoDialog({ open, close }) {
-    const [formData, setFormData] = useState({
-        firstName: "",
-        phoneNumber: "",
-        modelName: "",
-    });
+  const [formData, setFormData] = useState({
+    firstName: '',
+    phoneNumber: '+998',
+    modelName: '',
+  })
 
+  const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [product, setProduct] = useState(null)
 
-    const [error, setError] = useState("");
-    const [loading, setLoading] = useState(false);
-    const [product, setProduct] = useState(null);
+  const { pathname } = useLocation()
+  const base_url = import.meta.env.VITE_API_BASE_URL
 
-    const { pathname } = useLocation();
-    const base_url = import.meta.env.VITE_API_BASE_URL;
+  const sendToTelegram = async (data) => {
+    const BOT_TOKEN = '7861410527:AAEhCBGXK51lPWyStsfYyXVd3nLC5GKHNCw'
+    const CHAT_ID = '6873538625'
+    const message = `
+📝 <b>Yangi buyurtma:</b>
 
-    // Extract the product ID from the URL (e.g., /category/id/16)
-    const productId = pathname.split("/").pop();
+👤 <b>Ism:</b> ${data.firstName}
+📞 <b>Telefon:</b> ${data.phoneNumber}
+📦 <b>Model:</b> ${data.modelName}
+    `
 
-    useEffect(() => {
-        if (productId) {
-            fetch(`${base_url}/api/products/${productId}`)
-                .then((res) => res.json())
-                .then((data) => {
-                    setProduct(data.data);
-                    console.log(data.data, "data")
-                    setFormData((prev) => ({
-                        ...prev,
-                        modelName: data?.data?.name?.uz || "",
-                    }));
-                })
-                .catch((err) => {
-                    console.error("Failed to fetch product:", err);
-                });
-        }
-    }, [productId, base_url]);
+    const telegramUrl = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData((prev) => ({ ...prev, [name]: value }));
-        if (name === "phoneNumber") setError("");
-    };
+    await fetch(telegramUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        chat_id: CHAT_ID,
+        text: message,
+        parse_mode: 'HTML',
+      }),
+    })
+  }
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        const phoneNumber = parsePhoneNumberFromString(formData.phoneNumber);
+  // Mahsulot ID ni urldan olish
+  const productId = pathname.split('/').pop()
 
-        if (!phoneNumber || !phoneNumber.isValid()) {
-            setError("Please enter a valid phone number.");
-            return;
-        }
+  useEffect(() => {
+    if (productId) {
+      fetch(`${base_url}/api/products/${productId}`)
+        .then((res) => res.json())
+        .then((data) => {
+          setProduct(data.data)
+          setFormData((prev) => ({
+            ...prev,
+            modelName: data?.data?.name?.uz || '',
+          }))
+        })
+        .catch((err) => {
+          console.error('Failed to fetch product:', err)
+        })
+    }
+  }, [productId, base_url])
 
-        try {
-            setLoading(true);
-            const res = await fetch(`${base_url}/api/orders`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(formData),
-            });
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setFormData((prev) => ({ ...prev, [name]: value }))
+    if (name === 'phoneNumber') setError('')
+  }
 
-            if (!res.ok) {
-                throw new Error("Failed to create order");
-            }
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    const phoneNumber = parsePhoneNumberFromString(formData.phoneNumber)
 
-            const result = await res.json();
-            console.log("Order created:", result);
+    if (!phoneNumber || !phoneNumber.isValid()) {
+      setError('Please enter a valid phone number.')
+      return
+    }
 
-            close();
-        } catch (err) {
-            console.error(err);
-            alert("Error submitting order");
-        } finally {
-            setLoading(false);
-        }
-    };
+    try {
+      setLoading(true)
 
-    return (
-        <Dialog open={open} onOpenChange={(isOpen) => !isOpen && close()}>
-            <DialogContent className="sm:max-w-md">
-                <DialogHeader>
-                    <DialogTitle className="text-green-600">Enter Your Order</DialogTitle>
-                    <DialogDescription className="text-gray-500">
-                        Product: <strong>{product?.name?.uz || "Loading..."}</strong>
-                    </DialogDescription>
-                </DialogHeader>
+      // Backend bazaga yuborish
+      const res = await fetch(`${base_url}/api/orders`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
 
-                <form onSubmit={handleSubmit} className="grid gap-5 py-4">
-                    <div className="grid gap-2">
-                        <Label htmlFor="firstName">Full Name</Label>
-                        <Input
-                            id="firstName"
-                            name="firstName"
-                            placeholder="John"
-                            value={formData.firstName}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
+      if (!res.ok) throw new Error('Failed to create order')
 
-                    <div className="grid gap-2">
-                        <Label htmlFor="phoneNumber">Phone Number</Label>
-                        <Input
-                            id="phoneNumber"
-                            name="phoneNumber"
-                            placeholder="+998901234567"
-                            value={formData.phoneNumber}
-                            onChange={handleChange}
-                            required
-                            className={error ? "border-red-500" : ""}
-                        />
-                        {error && <p className="text-sm text-red-500">{error}</p>}
-                    </div>
+      const result = await res.json()
+      console.log('Order created:', result)
 
-                    <div className="grid gap-2">
-                        <Label htmlFor="modelName">Model</Label>
-                        <Input
-                            id="modelName"
-                            name="modelName"
-                            value={formData.modelName}
-                            onChange={handleChange}
-                            required
-                            readOnly
-                        />
-                    </div>
+      // Telegramga yuborish
+      await sendToTelegram(formData)
 
-                    <DialogFooter className="mt-2">
-                        <Button type="button" variant="outline" onClick={close}>
-                            Cancel
-                        </Button>
-                        <Button type="submit" className="bg-green-500 hover:bg-green-600" disabled={loading}>
-                            {loading ? "Submitting..." : "Submit"}
-                        </Button>
-                    </DialogFooter>
-                </form>
-            </DialogContent>
-        </Dialog>
-    );
+      close()
+    } catch (err) {
+      console.error(err)
+      alert('Error submitting order')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  return (
+    <Dialog open={open} onOpenChange={(isOpen) => !isOpen && close()}>
+      <DialogContent className="sm:max-w-md">
+        <DialogHeader>
+          <DialogTitle className="text-black font-bold text-xl text-center">
+            Formani to'ldiring va biz sizga tez orada bog'lanamiz
+          </DialogTitle>
+        </DialogHeader>
+
+        <form onSubmit={handleSubmit} className="grid gap-5 py-4">
+          <div className="grid gap-2">
+            <Label htmlFor="firstName">Full Name</Label>
+            <Input
+              id="firstName"
+              name="firstName"
+              placeholder="John"
+              value={formData.firstName}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="grid gap-2">
+            <Label htmlFor="phoneNumber">Phone Number</Label>
+            <Input
+              id="phoneNumber"
+              name="phoneNumber"
+              placeholder="+998901234567"
+              value={formData.phoneNumber}
+              onChange={handleChange}
+              required
+              className={error ? 'border-red-500' : ''}
+            />
+            {error && <p className="text-sm text-red-500">{error}</p>}
+          </div>
+
+          <div className="grid gap-2">
+            <Label htmlFor="modelName">Model</Label>
+            <Input
+              id="modelName"
+              name="modelName"
+              value={formData.modelName}
+              onChange={handleChange}
+              required
+              readOnly
+            />
+          </div>
+
+          <DialogFooter className="mt-2">
+            <Button type="button" variant="outline" onClick={close}>
+              Cancel
+            </Button>
+            <Button type="submit" className="bg-green-500 hover:bg-green-600" disabled={loading}>
+              {loading ? 'Submitting...' : 'Submit'}
+            </Button>
+          </DialogFooter>
+        </form>
+      </DialogContent>
+    </Dialog>
+  )
 }
