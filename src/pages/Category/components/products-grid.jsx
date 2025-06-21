@@ -31,7 +31,7 @@ const ProductsGrid = () => {
     if (error) return <p>Error: {error}</p>;
 
     return (
-        <div className="grid lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 gap-4">
+        <div className="grid lg:grid-cols-3 md:grid-cols-3 grid-cols-2 gap-4">
             {products && products?.map((product) => (
                 <ProductCard key={product.id} product={product} />
             ))}
