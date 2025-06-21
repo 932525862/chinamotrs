@@ -10,6 +10,8 @@ import { useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { useTranslation } from 'react-i18next'
 import { ProductCard } from './product-card'
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 const CategoryOnePage = () => {
   const [showImageModal, setShowImageModal] = useState(false)
@@ -104,11 +106,30 @@ const CategoryOnePage = () => {
     (product) => product?.category?.id === data?.category?.id && product?.id !== data?.id
   )
 
-  if (loading) return <p>Loading products...</p>
+  if (loading || !data) {
+    return (
+      <div className="container mx-auto px-4 py-4 sm:py-8">
+        <Skeleton height={40} width={200} />
+        <div className="grid lg:grid-cols-2 gap-6 lg:gap-12 mt-6">
+          <Skeleton height={400} />
+          <div>
+            <Skeleton count={5} height={30} style={{ marginBottom: '10px' }} />
+          </div>
+        </div>
+        <h3 className="font-bold text-2xl mt-10 uppercase">Sizga yoqishi mumkin</h3>
+        <div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-4 mt-4">
+          {[...Array(4)].map((_, idx) => (
+            <Skeleton key={idx} height={250} />
+          ))}
+        </div>
+      </div>
+    )
+  }
+
   if (error) return <p>Error: {error}</p>
 
   return (
-    <>
+  <>
       <div className="min-h-auto flex flex-col items-center justify-center bg-gradient-to-br from-gray-50 to-white">
         <div className="container mx-auto px-4 py-4 sm:py-8">
           <div className="grid lg:grid-cols-2 gap-6 lg:gap-12 items-start">
