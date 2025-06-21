@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import {
-    Search,
+    Search, 
     Filter,
     ChevronDown
 } from 'lucide-react';
