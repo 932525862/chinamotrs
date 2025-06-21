@@ -1,15 +1,15 @@
 import { useState, useEffect, useRef } from 'react'
-import { Share2, Copy, X } from 'lucide-react'
+import { Share2, Copy, X, ChevronLeft, ChevronRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { productData } from '../fake-data/data'
 import { UserInfoDialog } from '../modals/user-info'
 import { toast } from 'sonner'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { useTranslation } from 'react-i18next'
-import { ChevronLeft, ChevronRight } from 'lucide-react' // ustiga import qilish kerak
+import { ProductCard } from './product-card'
 
 const CategoryOnePage = () => {
   const [showImageModal, setShowImageModal] = useState(false)
@@ -17,6 +17,7 @@ const CategoryOnePage = () => {
   const [showShareOptions, setShowShareOptions] = useState(false)
   const { i18n } = useTranslation()
   const lang = ['uz', 'ru'].includes(i18n.language) ? i18n.language : 'uz'
+  const navigate = useNavigate()
 
   const [data, setData] = useState()
   const shareRef = useRef(null)
@@ -53,45 +54,105 @@ const CategoryOnePage = () => {
     setShowShareOptions(false)
   }
 
-  // Close share on outside click
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (shareRef.current && !shareRef.current.contains(event.target)) {
         setShowShareOptions(false)
       }
     }
-
     if (showShareOptions) {
       document.addEventListener('mousedown', handleClickOutside)
     } else {
       document.removeEventListener('mousedown', handleClickOutside)
     }
-
     return () => {
       document.removeEventListener('mousedown', handleClickOutside)
     }
   }, [showShareOptions])
 
-  const [currentImageIndex, setCurrentImageIndex] = useState(0) // state qo‘shiladi
-
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const handlePrevImage = () => {
     setCurrentImageIndex((prevIndex) => (prevIndex === 0 ? data.images.length - 1 : prevIndex - 1))
   }
-
   const handleNextImage = () => {
     setCurrentImageIndex((prevIndex) => (prevIndex === data.images.length - 1 ? 0 : prevIndex + 1))
   }
+
+  const [products, setProducts] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+
+  const getProducts = async () => {
+    try {
+      const response = await fetch(`${base_url}/api/products`)
+      if (!response.ok) throw new Error('Failed to fetch products')
+      const data = await response.json()
+      setProducts(data?.data)
+    } catch (err) {
+      console.error('Error fetching products:', err)
+      setError(err.message || 'Something went wrong')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    getProducts()
+  }, [])
+
+  const recommended = products.filter(
+    (product) => product?.category?.id === data?.category?.id && product?.id !== data?.id
+  )
+
+  if (loading) return <p>Loading products...</p>
+  if (error) return <p>Error: {error}</p>
 
   return (
     <>
       <div className="min-h-auto flex flex-col items-center justify-center bg-gradient-to-br from-gray-50 to-white">
         <div className="container mx-auto px-4 py-4 sm:py-8">
           <div className="grid lg:grid-cols-2 gap-6 lg:gap-12 items-start">
+            <div className="flex items-start justify-between gap-4 lg:hidden">
+              <div className="w-full">
+                <Badge
+                  variant="secondary"
+                  className="bg-green-500 text-white border-none mb-2 sm:mb-3 px-2 sm:px-3 py-1 text-xs sm:text-sm"
+                >
+                  {data?.category?.name?.[lang]}
+                </Badge>
+                <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold mb-2 sm:mb-4 text-gray-900">
+                  {data?.name?.[lang]}
+                </h1>
+              </div>
+              <div className="relative flex-shrink-0" ref={shareRef}>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="bg-white border-gray-200 text-gray-700 hover:bg-blue-50 hover:border-green-500 hover:text-green-500 transition-all duration-300 shadow-sm text-xs sm:text-sm"
+                  onClick={() => setShowShareOptions((prev) => !prev)}
+                >
+                  <Share2 className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
+                  <span className="hidden sm:inline">Поделиться</span>
+                </Button>
+                {showShareOptions && (
+                  <Card className="absolute top-10 sm:top-12 right-0 z-20 bg-white border-gray-200 shadow-xl p-3 sm:p-1 w-52 sm:w-52 rounded-lg">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="w-full justify-start text-gray-600 hover:text-purple-600 hover:bg-purple-50 text-xs sm:text-sm"
+                      onClick={handleCopyLink}
+                    >
+                      <Copy className="h-3 w-3 sm:h-4 sm:w-4 mr-2" />
+                      Скопировать ссылку
+                    </Button>
+                  </Card>
+                )}
+              </div>
+            </div>
             {/* Product Image */}
             <div className="space-y-4 lg:space-y-6">
               <Card className="bg-white border-gray-200 shadow-xl p-4 sm:p-8 relative overflow-hidden group hover:shadow-2xl transition-all duration-500">
                 <div className="relative flex items-center justify-center h-64 sm:h-80 lg:h-96 rounded-xl overflow-hidden group">
-                  {/* Oldinga tugma */}
                   {data?.images?.length > 1 && (
                     <button
                       className="absolute z-10 -left-0 top-1/2 transform -translate-y-1/2 bg-black/90 hover:bg-black/50 text-gray-100 p-1 rounded-full shadow transition"
@@ -103,8 +164,6 @@ const CategoryOnePage = () => {
                       <ChevronLeft className="w-5 h-5" />
                     </button>
                   )}
-
-                  {/* Rasm */}
                   <div
                     className="w-full h-full flex items-center justify-center cursor-pointer"
                     onClick={() => setShowImageModal(true)}
@@ -115,8 +174,6 @@ const CategoryOnePage = () => {
                       className="w-full h-full object-contain transform group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>
-
-                  {/* Keyingi tugma */}
                   {data?.images?.length > 1 && (
                     <button
                       className="absolute z-10 -right-0 top-1/2 transform -translate-y-1/2 bg-black/90 hover:bg-black/50 text-gray-100 p-1 rounded-full shadow transition"
@@ -134,7 +191,7 @@ const CategoryOnePage = () => {
 
             {/* Product Details */}
             <div className="space-y-2 lg:space-y-0">
-              <div className="flex items-start justify-between gap-4">
+              <div className=" items-start justify-between gap-4 hidden lg:flex">
                 <div className="w-full">
                   <Badge
                     variant="secondary"
@@ -146,9 +203,7 @@ const CategoryOnePage = () => {
                     {data?.name?.[lang]}
                   </h1>
                 </div>
-
                 <div className="relative flex-shrink-0" ref={shareRef}>
-                  {/* kopirovat button */}
                   <Button
                     variant="outline"
                     size="sm"
@@ -175,7 +230,7 @@ const CategoryOnePage = () => {
               </div>
               <div className="">
                 <div className=" line-through text-gray-700">
-                  {Number(data?.price * 1.5).toLocaleString('ru-RU')}
+                  {Number(data?.price * 1.5).toLocaleString('ru-RU')} <span className="">so'm</span>
                 </div>
                 <p className="font-one text-sm">Chegirmadagi narx</p>
                 <div className="flex items-baseline gap-2">
@@ -183,7 +238,7 @@ const CategoryOnePage = () => {
                     {Number(data?.price)?.toLocaleString('ru-RU')}
                   </span>
                   <span className="text-lg sm:text-xl font-sans text-amber-600">so'm</span>
-                </div> 
+                </div>
               </div>
               <div className="my-5 flex gap-5 md:gap-10">
                 <button
@@ -194,7 +249,7 @@ const CategoryOnePage = () => {
                 </button>
                 <a
                   href="http://t.me/Grandfitnessuz "
-                  target="blank"
+                  target="_blank"
                   className="px-5 py-3 flex bg-green-500 hover:bg-green-600 text-sm md:text-md rounded-md text-white font-medium"
                 >
                   Telegramdan yozish
@@ -210,9 +265,17 @@ const CategoryOnePage = () => {
               </div>
             </div>
           </div>
+
+          <h3 className="font-bold text-2xl mt-10 uppercase">Sizga yoqishi mumkin</h3>
+          <div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-4 mt-4">
+            {recommended?.map((product) => (
+              <div key={product.id} onClick={() => navigate(`/category/id/${product.id}`)}>
+                <ProductCard product={product} />
+              </div>
+            ))}
+          </div>
         </div>
 
-        {/* Image Modal */}
         {showImageModal && (
           <>
             <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
