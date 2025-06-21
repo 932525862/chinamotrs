@@ -20,8 +20,8 @@
     "namePlaceholder": "Введите ваше имя",
     "phoneLabel": "Номер телефона *",
     "phonePlaceholder": "Введите номер телефона",
-    "messageLabel": "Ваше сообщение",
-    "messagePlaceholder": "Напишите сообщение или отзыв",
+    "messageLabel": "Ваш Telegram-никнейм",
+    "messagePlaceholder": "имя пользователя",
     "submit": "ОТПРАВИТЬ",
     "privacyNotice": "Нажимая кнопку отправить, вы соглашаетесь на",
     "privacyConsent": "обработку ваших персональных данных"

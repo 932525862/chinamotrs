@@ -15,9 +15,8 @@
     "description": "GRANT FITNESS — sport mahsulotlari bo‘yicha ishonchli hamkoringiz! Biz turli sport turlari uchun mo‘ljallangan keng assortimentni taklif etamiz: havaskor sportchilar uchun ham, professional sport klublari va zallari uchun ham barcha kerakli jihozlar bizda mavjud — sport kiyimlaridan tortib, trenajyorlar va zamonaviy sport zali uskunalarigacha!",
     "button": "KO'PROQ BILISH",
     "part": "HAMKORLARIMIZ",
-    "next":"Katalokga O'tish",
-    "xizmat":"O'zbekiston bo'ylab yetkazib berish"
-
+    "next": "Katalokga O'tish",
+    "xizmat": "O'zbekiston bo'ylab yetkazib berish"
   },
 
   "aboutTop": {
@@ -55,8 +54,8 @@
     "namePlaceholder": "Ismingizni kiriting",
     "phoneLabel": "Telefon raqami *",
     "phonePlaceholder": "Telefon raqamingizni kiriting",
-    "messageLabel": "Sizning fikringiz",
-    "messagePlaceholder": "Xabar yoki fikringizni yozing",
+    "messageLabel": "Telegram foydalanuvchi nomingiz",
+    "messagePlaceholder": "foydalanuvchi nomi",
     "submit": "YUBORISH",
     "privacyNotice": "Jo'natish tugmasini bosganda o'zingiz haqingizdagi",
     "privacyConsent": "shaxsiy ma'lumot ishlanishiga ruxsat bergan bo'lasiz"
@@ -76,7 +75,7 @@
     "fitnes": "Fitnes to‘plari",
     "qorish": "Qorish mashinalari",
     "trenajor": "Trenajorlar",
-    "so'm":"so‘m"
+    "so'm": "so‘m"
   },
   "advantages": {
     "title": "AFZALLIKLARIMIZ",
