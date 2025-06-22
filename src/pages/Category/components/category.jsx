@@ -31,7 +31,8 @@ const CategoryOnePage = () => {
   const getOneById = async (id) => {
     try {
       const data = await axios.get(`${base_url}/api/products/${id}`)
-      setData(data.data.data)
+      setData(data.data.data);
+      console.log(data?.data?.data, "product one from recommendation")
     } catch (error) {
       console.error('Error fetching product by ID:', error)
     }
@@ -88,6 +89,7 @@ const CategoryOnePage = () => {
       const response = await fetch(`${base_url}/api/products`)
       if (!response.ok) throw new Error('Failed to fetch products')
       const data = await response.json()
+      console.log(data?.data, "products from recommendation")
       setProducts(data?.data)
     } catch (err) {
       console.error('Error fetching products:', err)
@@ -101,9 +103,6 @@ const CategoryOnePage = () => {
     getProducts()
   }, [])
 
-  const recommended = products.filter(
-    (product) => product?.category?.id === data?.category?.id && product?.id !== data?.id
-  )
 
   if (loading || !data) {
     return (
@@ -160,7 +159,7 @@ const CategoryOnePage = () => {
                       variant="ghost"
                       size="sm"
                       className="w-full justify-start text-gray-600 hover:text-purple-600 hover:bg-purple-50 text-xs sm:text-sm"
-                      // onClick={handleCopyLink}
+                    // onClick={handleCopyLink}
                     >
                       <Copy className="h-3 w-3 sm:h-4 sm:w-4 mr-2" />
                       Скопировать ссылку
@@ -239,7 +238,7 @@ const CategoryOnePage = () => {
                         variant="ghost"
                         size="sm"
                         className="w-full justify-start text-gray-600 hover:text-purple-600 hover:bg-purple-50 text-xs sm:text-sm"
-                        // onClick={handleCopyLink}
+                      // onClick={handleCopyLink}
                       >
                         <Copy className="h-3 w-3 sm:h-4 sm:w-4 mr-2" />
                         Скопировать ссылку
@@ -288,7 +287,7 @@ const CategoryOnePage = () => {
 
           <h3 className="font-bold text-2xl mt-10 uppercase">Sizga yoqishi mumkin</h3>
           <div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-4 mt-4">
-            {recommended?.map((product) => (
+            {products && Array.from(products)?.map((product) => (
               <div key={product.id} onClick={() => navigate(`/category/id/${product.id}`)}>
                 <ProductCard product={product} />
               </div>

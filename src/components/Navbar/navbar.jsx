@@ -20,6 +20,8 @@ const Navbar = () => {
     setLanguage(currentLang);
   }, []);
 
+  const base_url = import.meta.env.VITE_API_BASE_URL
+
   const handleLanguageChange = (e) => {
     const newLang = e.target.value;
     setLanguage(newLang);
@@ -30,10 +32,9 @@ const Navbar = () => {
   const handleSearch = async () => {
     if (searchText.trim() === "") return;
     try {
-      const response = await axios.get("https://api.grandfitness.com.uz/api/products", {
-        params: { name: searchText },
-      });
+      const response = await axios.get(`${base_url}/api/products?name=${searchText}`);
       setProducts(response.data);
+      console.log(response?.data, "search")
     } catch (error) {
       console.error("Qidirishda xatolik:", error);
     }
@@ -148,9 +149,8 @@ const Navbar = () => {
 
       {/* Mobile Sliding Search Field */}
       <div
-        className={`lg:hidden overflow-hidden transition-all duration-300 ${
-          showMobileSearch ? "max-h-32 py-3" : "max-h-0"
-        } bg-white px-4 shadow-sm border-b`}
+        className={`lg:hidden overflow-hidden transition-all duration-300 ${showMobileSearch ? "max-h-32 py-3" : "max-h-0"
+          } bg-white px-4 shadow-sm border-b`}
       >
         <input
           type="text"

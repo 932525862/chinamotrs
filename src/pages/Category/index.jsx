@@ -13,6 +13,7 @@ const CategoryPage = () => {
     const [products, setProducts] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
+    const [name, setName] = useState("");
 
     const { slug: sub } = useParams();
     const base_url = import.meta.env.VITE_API_BASE_URL;
@@ -40,8 +41,6 @@ const CategoryPage = () => {
 
             const res = await axios.get(`${base_url}/api/products?${queryParams.toString()}&page=${page}&limit=10`);
             setProducts(res?.data?.data);
-            console.log(res?.data, "pages")
-            console.log(totalPages, res?.data?.meta?.totalPages || 1, "total pages")
             setTotalPages(res?.data?.meta?.totalPages || 1);
             setCurrentPage(page);
         } catch (error) {
@@ -62,10 +61,17 @@ const CategoryPage = () => {
         }
     };
 
+
+
     useEffect(() => {
         getCategories();
-        getProducts();
+        handleProductFiler()
     }, []);
+
+    useEffect(() => {
+        if (name?.trim()?.length > 2) getProducts()
+    }, [name])
+
 
     return (
         <div className="min-h-screen bg-gray-50">
@@ -83,7 +89,7 @@ const CategoryPage = () => {
                                 <input
                                     type="text"
                                     placeholder="Search products..."
-                                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" onChange={(e) => setName(e?.target?.value)}
                                 />
                             </div>
                         </div>

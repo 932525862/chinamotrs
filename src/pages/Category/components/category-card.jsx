@@ -4,13 +4,13 @@ import { useTranslation } from "react-i18next";
 
 export const CategoryCard = ({ product }) => {
   const navigate = useNavigate();
-  const { t , i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const lang = ["uz", "ru"].includes(i18n.language) ? i18n.language : "uz";
 
   const uploadUrl = import.meta.env.VITE_API_UPLOAD_BASE;
 
   const handleCardClick = () => {
-    navigate("/category");
+    navigate(`/category/id/${product?.product?.id}`);
     scrollTo({ top: 0 });
   };
 
