@@ -27,7 +27,7 @@ const CategoryOnePage = () => {
 
   const base_url = import.meta.env.VITE_API_BASE_URL
   const upload_base = import.meta.env.VITE_API_UPLOAD_BASE
-
+ 
   const getOneById = async (id) => {
     try {
       const data = await axios.get(`${base_url}/api/products/${id}`)
