@@ -6,7 +6,7 @@ export const ProductCard = ({ product }) => {
 
   const imageUrl = import.meta.env.VITE_API_UPLOAD_BASE
   const { slug: sub } = useParams()
-
+ 
   const { i18n } = useTranslation()
   const lang = ['uz', 'ru'].includes(i18n.language) ? i18n.language : 'uz'
 
