@@ -8,12 +8,14 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import { useNavigate } from "react-router-dom"; // ✅ Yangi qo'shildi
 
 export default function Swiper_Catalog() {
   const [loading, setLoading] = useState(false);
   const { i18n } = useTranslation();
   const lang = ["uz", "ru"].includes(i18n.language) ? i18n.language : "uz";
   const [categories, setCategories] = useState([]);
+  const navigate = useNavigate(); // ✅ Yangi qo'shildi
 
   const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
@@ -68,7 +70,10 @@ export default function Swiper_Catalog() {
             ))
           : categories.map((card) => (
               <SwiperSlide key={card?.id}>
-                <div className="max-[400px]:w-[150px] w-[180px] h-[180px] sm:h-[200px] mx-auto group relative sm:my-14 my-12 shadow-md hover:shadow-lg p-3 rounded-xl bg-white hover:bg-[#cecece2d] hover:backdrop-blur-xs flex items-center justify-center transition-transform duration-300 hover:scale-[1.03] border border-[#54ed21]">
+                <div
+                  onClick={() => navigate(`/category/${card?.id}`)} // ✅ Sahifaga yo‘naltirish
+                  className="max-[400px]:w-[150px] w-[180px] h-[180px] sm:h-[200px] mx-auto group relative sm:my-14 my-12 shadow-md hover:shadow-lg p-3 rounded-xl bg-white hover:bg-[#cecece2d] hover:backdrop-blur-xs flex items-center justify-center transition-transform duration-300 hover:scale-[1.03] border border-[#54ed21] cursor-pointer"
+                >
                   <h2 className="text-center text-base sm:text-lg font-one group-hover:text-[#17f80b] transition-all duration-300 text-shadow-2xs">
                     {card?.name?.[lang] || "NOMI YO‘Q"}
                   </h2>
