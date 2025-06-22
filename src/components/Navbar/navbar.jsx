@@ -34,7 +34,7 @@ const Navbar = () => {
     try {
       const response = await axios.get(`${base_url}/api/products?name=${searchText}`);
       setProducts(response.data);
-      console.log(response?.data, "search")
+      console.log(response?.data, "search");
     } catch (error) {
       console.error("Qidirishda xatolik:", error);
     }
