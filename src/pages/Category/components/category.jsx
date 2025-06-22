@@ -275,10 +275,10 @@ const CategoryOnePage = () => {
                 </a>
               </div>
               <div className="space-y-1 bg-gray-100 p-5 rounded-2xl">
-                {data?.details &&
-                  Object.entries(data.details).map(([key, value]) => (
-                    <div key={key} className="text-sm flex gap-1">
-                      <strong>{key}</strong> <span>{value}</span>
+                {Array.isArray(data?.details) &&
+                  data.details.map((item, index) => (
+                    <div key={index} className="text-sm text-gray-800">
+                      {item?.[lang]}
                     </div>
                   ))}
               </div>
