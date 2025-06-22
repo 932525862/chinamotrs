@@ -48,6 +48,8 @@ function Footer() {
   useEffect(() => {
     getCategory()
   }, [])
+
+  console.log(data)
   return (
     <footer className="bg-gray-50 pt-10">
       <div className="max-w-7xl mx-auto">
@@ -64,9 +66,15 @@ function Footer() {
                 <IoIosMail className="text-4xl text-green-500" />
                 <div className="text-xl font-bold text-blue-950/80">{t('footer.emailTitle')}</div>
                 <div className="flex justify-center gap-3 mt-1 text-lime-600">
-                  <a href="#" className='hover:text-lime-900'>Telegram</a>
-                  <a href="#" className='hover:text-lime-900'>Instagram</a>
-                  <a href="#" className='hover:text-lime-900'>Facebook</a>
+                  <a href="#" className="hover:text-lime-900">
+                    Telegram
+                  </a>
+                  <a href="#" className="hover:text-lime-900">
+                    Instagram
+                  </a>
+                  <a href="#" className="hover:text-lime-900">
+                    Facebook
+                  </a>
                 </div>
               </li>
               <li className="flex flex-col items-center gap-1">
@@ -106,15 +114,18 @@ function Footer() {
           <li className="py-10 flex flex-col items-center text-center">
             <div className="text-xl font-bold mb-4">{t('footer.categoriesTitle')}</div>
             <div className="flex flex-col gap-2">
-              {data.slice(0, 9).map((item) => (
-                <Link
-                  key={item?.id}
-                  to={`/category/${item?.id}`}
-                  className="text-gray-800 font-medium hover:text-green-500 cursor-pointer"
-                >
-                  {item?.name?.[lang] || 'No name'}
-                </Link>
-              ))}
+              {data.slice(0, 9).map((item) => {
+                const localizedName = item?.name?.[lang] || 'no-name'
+                return (
+                  <Link
+                    key={item?.id}
+                    to={`/category/${localizedName}`}
+                    className="text-gray-800 font-medium hover:text-green-500 cursor-pointer"
+                  >
+                    {localizedName}
+                  </Link>
+                )
+              })}
             </div>
           </li>
         </ul>
