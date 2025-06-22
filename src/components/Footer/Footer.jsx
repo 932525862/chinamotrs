@@ -49,11 +49,11 @@ function Footer() {
     getCategory()
   }, [])
   return (
-    <footer className="bg-gray-50">
+    <footer className="bg-gray-50 pt-10">
       <div className="max-w-7xl mx-auto">
-        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 ">
+        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
           {/* Contact section */}
-          <li className="border-r border-gray-600 px-5 text-center py-10">
+          <li className="border-r border-gray-600/50 px-5 text-center py-10">
             <ul className="flex flex-col items-center gap-5">
               <li className="flex flex-col items-center gap-1">
                 <FaHome className="text-4xl text-green-500" />
@@ -63,9 +63,11 @@ function Footer() {
               <li className="flex flex-col items-center gap-1">
                 <IoIosMail className="text-4xl text-green-500" />
                 <div className="text-xl font-bold text-blue-950/80">{t('footer.emailTitle')}</div>
-                <a href="mailto:info@example.com" className="font-medium text-gray-900">
-                  info@example.com
-                </a>
+                <div className="flex justify-center gap-3 mt-1 text-lime-600">
+                  <a href="#" className='hover:text-lime-900'>Telegram</a>
+                  <a href="#" className='hover:text-lime-900'>Instagram</a>
+                  <a href="#" className='hover:text-lime-900'>Facebook</a>
+                </div>
               </li>
               <li className="flex flex-col items-center gap-1">
                 <FaPhone className="text-4xl text-green-500" />
@@ -77,7 +79,7 @@ function Footer() {
             </ul>
           </li>
 
-          <li className="border-r border-gray-600 py-10">
+          <li className="border-r border-gray-600/50 py-10">
             <nav className="text-center flex flex-col items-center">
               <div className="text-xl font-bold text-black">{t('footer.menuTitle')}</div>
               <ul className="flex flex-col gap-2 mt-3">
