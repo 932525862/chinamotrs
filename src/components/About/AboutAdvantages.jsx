@@ -21,7 +21,7 @@ function AboutAdvantages() {
     <div className='bg-gray-100'>
        <Helmet>
         <title>Allsports.uz</title>
-        <meta name="description" content="Sport mahsulotlarini , Krossovkalar, kiyimlar va trenajorlar." />
+        <meta name="description" content="Sport mahsulotlarini , Krossovkalar, kiyimlar va trenajorlarning  barcha  turlari." />
       </Helmet>
       <section className="max-w-7xl mx-auto pt-10 pb-15 px-[1rem]">
         <div className="">
