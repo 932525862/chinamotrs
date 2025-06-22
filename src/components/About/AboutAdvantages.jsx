@@ -2,6 +2,7 @@ import { useTranslation } from "react-i18next";
 import line from '../../assets/decor-right-black.svg';
 import { FaGlobeAmericas, FaTruck, FaUserShield } from 'react-icons/fa';
 import { GiAutoRepair } from 'react-icons/gi';
+import { Helmet } from "react-helmet";
 
 function AboutAdvantages() {
   const { t } = useTranslation();
@@ -16,7 +17,12 @@ function AboutAdvantages() {
   const cardData = t("advantages.cards", { returnObjects: true });
 
   return (
+    
     <div className='bg-gray-100'>
+       <Helmet>
+        <title>Allsports.uz</title>
+        <meta name="description" content="Sport mahsulotlarini online xarid qiling. Krossovkalar, kiyimlar va trenajorlar." />
+      </Helmet>
       <section className="max-w-7xl mx-auto pt-10 pb-15 px-[1rem]">
         <div className="">
           <h3 className="text-xl md:text-2xl text-black/90 lg:text-4xl flex font-bold items-center font-one gap-3">

@@ -140,7 +140,7 @@ const ContactPage = () => {
       {isModalOpen && (
       <div className="fixed inset-0 flex items-center justify-center bg-white/40 z-50">
           <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm text-center">
-            <h3 className="text-xl font-semibold mb-2 text-green-600">✅ So‘rov  yuborildi!</h3>
+            <h3 className="text-xl font-semibold mb-2 text-green-600">✅ So‘rov muvaffaqiyatli yuborildi!</h3>
             <p>Sizning so‘rovingiz muvaffaqiyatli yuborildi.<br />Tez orada siz bilan bog‘lanamiz.</p>
           </div>
         </div>

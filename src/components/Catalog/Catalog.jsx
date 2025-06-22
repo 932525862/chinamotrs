@@ -1,12 +1,17 @@
 import decor from "../../assets/decor-right-black.svg";
 import CategoryGrid from "../../pages/Category/components/category-grid";
 import { useTranslation } from "react-i18next"; // ✅ tarjima uchun
+import { Helmet } from "react-helmet";
 
 function Catalog() {
   const { t } = useTranslation();
 
   return (
     <section className="bg-neutral-50 py-16">
+       <Helmet>
+        <title>Grand Fitness</title>
+        <meta name="description" content="Zamonaviy trenajorlar, sport anjomlari va massaj qurilmalari" />
+      </Helmet>
       <div className="max-w-7xl px-5 mx-auto max-md:px-3">
         <div className="flex flex-col items-center relative">
           <h1 className="w-[450px] text-4xl max-md:text-2xl max-md:w-full font-one text-center">
