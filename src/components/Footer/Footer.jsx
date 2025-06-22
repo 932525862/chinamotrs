@@ -115,7 +115,7 @@ function Footer() {
             <div className="text-xl font-bold mb-4">{t('footer.categoriesTitle')}</div>
             <div className="flex flex-col gap-2">
               {data.slice(0, 9).map((item) => {
-                const localizedName = item?.name?.[lang] || 'no-name'
+                const localizedName = item?.name?.uz || 'no-name'
                 return (
                   <Link
                     key={item?.id}
