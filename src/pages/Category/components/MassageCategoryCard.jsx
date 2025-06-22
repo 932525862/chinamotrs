@@ -14,7 +14,7 @@ const MassageCategoryCard = ({ product }) => {
   const productPrice = product?.product?.price;
 
   const handleCardClick = () => {
-    navigate("/category");
+    navigate(`/category/id/${product?.product?.id}`);
     scrollTo({ top: 0 });
   };
 
