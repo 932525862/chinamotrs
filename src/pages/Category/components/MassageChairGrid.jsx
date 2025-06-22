@@ -1,44 +1,41 @@
 import { useEffect, useState } from "react";
 import MassageCategoryCard from "./MassageCategoryCard";
+import { useTranslation } from "react-i18next";
 
 const MassageChairGrid = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+    const { t , i18n } = useTranslation();
+    const lang = ["uz", "ru"].includes(i18n.language) ? i18n.language : "uz";
 
   const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
-  useEffect(() => {
-    fetch(`${baseUrl}/api/products`)
-      .then((res) => res.json())
-      .then((data) => {
-        const searchKeywords = [
-          "massaj",
-          "kursi",
-          "kreslo",
-          "massage",
-          "chair",
-          "moslama",
-          "uskunasi",
-          "ustgich",
-        ];
+useEffect(() => {
+  fetch(`${baseUrl}/api/products`)
+    .then((res) => res.json())
+    .then((data) => {
+      const searchKeywords = [
+        "uqalash uskunalari",
+        "массажное оборудование",
+      ];
 
-        const filtered = (data?.data || []).filter((product) =>
-          Object.values(product?.name || {}).some((val) =>
-            searchKeywords.some((keyword) =>
-              val?.toLowerCase()?.includes(keyword)
-            )
-          )
+      const filtered = (data?.data || []).filter((product) => {
+        const categoryName = product?.category?.name?.[lang]?.toLowerCase();
+
+        return searchKeywords.some((keyword) =>
+          categoryName?.includes(keyword)
         );
-
-        setProducts(filtered);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Xatolik:", err);
-        setLoading(false);
       });
-  }, []);
 
+      setProducts(filtered);
+      setLoading(false);
+    })
+    .catch((err) => {
+      console.error("Xatolik:", err);
+      setLoading(false);
+    });
+}, [lang]);
+   
   return (
     <div className="grid lg:grid-cols-4 md:grid-cols-3 lg:gap-7 grid-cols-2 sm:gap-4 gap-3">
       {loading ? (
