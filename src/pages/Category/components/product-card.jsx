@@ -14,7 +14,7 @@ export const ProductCard = ({ product }) => {
       ? `/category/id/${product?.id}`
       : `/id/${product?.id}`;
 
-    navigate(newPath, { replace: true }); // ✅ avoid stacking history
+    navigate(newPath, { replace: true });
     scrollTo({ top: 0 });
   };
 

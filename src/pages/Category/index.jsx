@@ -13,7 +13,7 @@ const CategoryPage = () => {
   const [products, setProducts] = useState([])
   const [currentPage, setCurrentPage] = useState(1)
   const [totalPages, setTotalPages] = useState(1)
-  const [name, setName] = useState('')
+  const [searchName, setSearchName] = useState('')
 
   const { slug } = useParams()
   const base_url = import.meta.env.VITE_API_BASE_URL
@@ -38,13 +38,14 @@ const CategoryPage = () => {
     }
   }
 
-  const handleProductFiler = async (page = 1) => {
+  const handleProductFiler = async (page = 1, searchName = "") => {
     setLoading(true)
     try {
       const queryParams = new URLSearchParams()
       if (selectedCategories) queryParams.append('category', selectedCategories)
       if (priceRange[0]) queryParams.append('minPrice', priceRange[0])
       if (priceRange[1]) queryParams.append('maxPrice', priceRange[1])
+      if (searchName) queryParams.append('name', searchName)
 
       const res = await axios.get(
         `${base_url}/api/products?${queryParams.toString()}&page=${page}&limit=10`
@@ -58,6 +59,7 @@ const CategoryPage = () => {
       setLoading(false)
     }
   }
+
 
   const getProducts = async () => {
     try {
@@ -85,8 +87,8 @@ const CategoryPage = () => {
   }, [selectedCategories])
 
   useEffect(() => {
-    if (name?.trim()?.length > 2) getProducts()
-  }, [name])
+    if (searchName?.trim()?.length > 2 || searchName?.trim()?.length === 0) handleProductFiler(1, searchName)
+  }, [searchName])
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -109,7 +111,7 @@ const CategoryPage = () => {
                   type="text"
                   placeholder="Search products..."
                   className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  onChange={(e) => setName(e?.target?.value)}
+                  onChange={(e) => setSearchName(e?.target?.value)}
                 />
               </div>
             </div>
@@ -192,11 +194,11 @@ const CategoryPage = () => {
           {/* Main Content */}
           <div className="flex-1">
             {loading ? <Loading /> : <ProductsGrid products={products} />}
-            <PaginationComponent
+            {loading ? <Loading /> : <PaginationComponent
               totalPages={totalPages}
               currentPage={currentPage}
               onPageChange={(page) => handleProductFiler(page)}
-            />
+            />}
           </div>
         </div>
       </div>

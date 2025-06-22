@@ -32,6 +32,7 @@ const CategoryGrid = () => {
       ) : (
         <p>Hech qanday kategoriya topilmadi.</p>
       )}
+      {JSON.stringify(categories?.map((cat) => cat?.name?.uz), "categories")}
     </div>
   );
 };

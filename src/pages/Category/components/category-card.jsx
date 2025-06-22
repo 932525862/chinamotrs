@@ -10,7 +10,7 @@ export const CategoryCard = ({ product }) => {
   const uploadUrl = import.meta.env.VITE_API_UPLOAD_BASE;
 
   const handleCardClick = () => {
-    navigate(`/category/id/${product?.product?.id}`);
+    navigate(`/category/${product?.name?.uz}`, { replace: true });
     scrollTo({ top: 0 });
   };
 

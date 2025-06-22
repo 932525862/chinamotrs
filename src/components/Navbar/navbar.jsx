@@ -1,11 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Menu, X, Search } from "lucide-react";
 import logo from "../../assets/gran.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import i18n from "../../i18n";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
-import { CategoryCard } from "../../pages/Category/components/category-card"; // 🔁 CategoryCard manzilini to‘g‘ri kiriting
 
 const Navbar = () => {
   const { t } = useTranslation();
@@ -14,13 +13,17 @@ const Navbar = () => {
   const [showMobileSearch, setShowMobileSearch] = useState(false);
   const [searchText, setSearchText] = useState("");
   const [products, setProducts] = useState([]);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const searchBoxRef = useRef(null);
+  const mobileSearchRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const currentLang = i18n.language || "uz";
     setLanguage(currentLang);
   }, []);
 
-  const base_url = import.meta.env.VITE_API_BASE_URL
+  const base_url = import.meta.env.VITE_API_BASE_URL;
 
   const handleLanguageChange = (e) => {
     const newLang = e.target.value;
@@ -30,15 +33,33 @@ const Navbar = () => {
   };
 
   const handleSearch = async () => {
-    if (searchText.trim() === "") return;
+    const trimmed = searchText.trim();
+    if (trimmed === "") {
+      setProducts([]);
+      setShowDropdown(false);
+      return;
+    }
     try {
-      const response = await axios.get(`${base_url}/api/products?name=${searchText}`);
-      setProducts(response.data);
-      console.log(response?.data, "search");
+      const response = await axios.get(`${base_url}/api/products?name=${trimmed}`);
+      setProducts(response.data?.data || []);
+      setShowDropdown(true);
     } catch (error) {
       console.error("Qidirishda xatolik:", error);
     }
   };
+
+  useEffect(() => {
+    const handler = (e) => {
+      if (
+        (searchBoxRef.current && !searchBoxRef.current.contains(e.target)) &&
+        (mobileSearchRef.current && !mobileSearchRef.current.contains(e.target))
+      ) {
+        setShowDropdown(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
 
   const categories = [
     { name: t("navbar.home"), path: "/" },
@@ -52,12 +73,10 @@ const Navbar = () => {
     <>
       <nav className="bg-white shadow-md sticky top-0 z-50 border-b">
         <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-          {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
             <img src={logo} alt="Logo" className="h-10 w-auto object-contain" />
           </Link>
 
-          {/* Desktop Menu */}
           <div className="hidden lg:flex gap-6 text-base font-semibold text-gray-700">
             {categories.map((item) => (
               <Link
@@ -72,21 +91,57 @@ const Navbar = () => {
             ))}
           </div>
 
-          {/* Desktop Search & Language */}
-          <div className="hidden lg:flex items-center gap-4">
+          <div className="hidden lg:flex items-center gap-4 relative" ref={searchBoxRef}>
             <div className="relative max-w-xs w-full">
               <input
                 type="text"
                 placeholder={t("navbar.searchPlaceholder")}
                 className="w-full pl-4 pr-10 py-2 border border-green-500 rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500"
                 value={searchText}
-                onChange={(e) => setSearchText(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+                onChange={(e) => {
+                  setSearchText(e.target.value);
+                  if (e.target.value.trim() === "") {
+                    setProducts([]);
+                    setShowDropdown(false);
+                  } else {
+                    handleSearch();
+                  }
+                }}
               />
               <Search
                 className="absolute right-3 top-2.5 text-green-500 w-5 h-5 cursor-pointer"
                 onClick={handleSearch}
               />
+
+              {showDropdown && products.length > 0 && (
+                <div className="absolute top-full mt-2 w-full bg-white rounded-xl border shadow-xl z-50 max-h-[400px] overflow-y-auto">
+                  {products.map((product) => (
+                    <div
+                      key={product.id}
+                      onClick={() => {
+                        navigate(`/category/id/${product.id}`);
+                        setShowDropdown(false);
+                        setSearchText("");
+                      }}
+                      className="flex items-center gap-3 px-4 py-3 hover:bg-gray-100 cursor-pointer"
+                    >
+                      <img
+                        src={`${import.meta.env.VITE_API_UPLOAD_BASE}${product.images?.[0]?.path}`}
+                        alt={product.name?.uz}
+                        className="w-14 h-14 object-contain rounded-md"
+                      />
+                      <div className="flex-1">
+                        <p className="text-sm font-medium text-gray-800">
+                          {product.name?.uz}
+                        </p>
+                        <p className="text-xs text-gray-500">
+                          {Number(product.price).toLocaleString()} so'm
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
 
             <select
@@ -99,7 +154,6 @@ const Navbar = () => {
             </select>
           </div>
 
-          {/* Mobile: Search then Menu */}
           <div className="flex lg:hidden items-center gap-4">
             <button
               onClick={() => setShowMobileSearch((prev) => !prev)}
@@ -116,7 +170,6 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Mobile Menu */}
         {isOpen && (
           <div className="lg:hidden px-4 pb-4 space-y-4">
             <div className="flex flex-col gap-2 text-gray-700 font-medium">
@@ -147,37 +200,57 @@ const Navbar = () => {
         )}
       </nav>
 
-      {/* Mobile Sliding Search Field */}
       <div
-        className={`lg:hidden overflow-hidden transition-all duration-300 ${showMobileSearch ? "max-h-32 py-3" : "max-h-0"
-          } bg-white px-4 shadow-sm border-b`}
+        ref={mobileSearchRef}
+        className={`lg:hidden overflow-visible transition-all duration-300 ${showMobileSearch ? "max-h-[420px] py-3" : "max-h-0"} bg-white px-4 shadow-sm border-b relative`}
       >
         <input
           type="text"
           placeholder={t("navbar.searchPlaceholder")}
           className="w-full px-4 py-2 border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500"
           value={searchText}
-          onChange={(e) => setSearchText(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+          onChange={(e) => {
+            setSearchText(e.target.value);
+            if (e.target.value.trim() === "") {
+              setProducts([]);
+              setShowDropdown(false);
+            } else {
+              handleSearch();
+            }
+          }}
         />
-      </div>
 
-      {/* 🔽 Mahsulotlar ro'yxati */}
-      {searchText.trim() !== "" && (
-        <>
-          {products.length > 0 ? (
-            <div className="max-w-7xl mx-auto px-4 py-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-              {products.map((product) => (
-                <CategoryCard key={product.id} product={product} />
-              ))}
-            </div>
-          ) : (
-            <p className="text-center text-red-600 text-lg py-8 font-semibold">
-              {t("navbar.searchPlaceholder1")}
-            </p>
-          )}
-        </>
-      )}
+        {showDropdown && products.length > 0 && (
+          <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-xl border shadow-xl z-50 max-h-[300px] overflow-y-auto">
+            {products.map((product) => (
+              <div
+                key={product.id}
+                onClick={() => {
+                  navigate(`/category/id/${product.id}`);
+                  setShowDropdown(false);
+                  setSearchText("");
+                  setShowMobileSearch(false);
+                }}
+                className="flex items-center gap-3 px-4 py-3 hover:bg-gray-100 cursor-pointer"
+              >
+                <img
+                  src={`${import.meta.env.VITE_API_UPLOAD_BASE}${product.images?.[0]?.path}`}
+                  alt={product.name?.uz}
+                  className="w-12 h-12 object-contain rounded-md"
+                />
+                <div className="flex-1">
+                  <p className="text-sm font-medium text-gray-800">
+                    {product.name?.uz}
+                  </p>
+                  <p className="text-xs text-gray-500">
+                    {Number(product.price).toLocaleString()} so'm
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
     </>
   );
 };

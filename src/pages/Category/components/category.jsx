@@ -11,6 +11,7 @@ import { useTranslation } from 'react-i18next'
 import { ProductCard } from './product-card'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import { toast } from 'sonner'
 
 const CategoryOnePage = () => {
   const [showImageModal, setShowImageModal] = useState(false)
@@ -27,34 +28,42 @@ const CategoryOnePage = () => {
 
   const base_url = import.meta.env.VITE_API_BASE_URL
   const upload_base = import.meta.env.VITE_API_UPLOAD_BASE
- 
+
   const getOneById = async (id) => {
     try {
       const data = await axios.get(`${base_url}/api/products/${id}`)
       setData(data.data.data);
-      console.log(data?.data?.data, "product one from recommendation")
     } catch (error) {
-      console.error('Error fetching product by ID:', error)
+      console.error('Xatolik:', error)
     }
   }
   useEffect(() => {
     if (id) getOneById(id)
   }, [id])
 
-  // const handleCopyLink = () => {
-  //   if (navigator.share) {
-  //     navigator.share({
-  //       title: productData.title,
-  //       text: `Проверьте этот ${productData.title}`,
-  //       url: window.location.href,
-  //     })
-  //     toast.success('Ссылка скопирована!')
-  //   } else {
-  //     navigator.clipboard.writeText(window.location.href)
-  //     toast.success('Ссылка скопирована!')
-  //   }
-  //   setShowShareOptions(false)
-  // }
+  const handleCopyLink = async () => {
+    try {
+      const shareData = {
+        title: data?.name?.uz || "Mahsulot",
+        text: `Mahsulotni ko'ring: ${data?.name?.uz}`,
+        url: window.location.href,
+      }
+
+      if (navigator.share) {
+        await navigator.share(shareData)
+        toast.success("Ulashildi!") // if you want to show this
+      } else {
+        await navigator.clipboard.writeText(window.location.href)
+        toast.success("Havola nusxalandi!")
+      }
+    } catch (err) {
+      console.error("Ulashishda xatolik yuz berdi", err)
+      toast.error("Nusxalashda xatolik yuz berdi")
+    }
+
+    setShowShareOptions(false)
+  }
+
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -87,13 +96,12 @@ const CategoryOnePage = () => {
   const getProducts = async () => {
     try {
       const response = await fetch(`${base_url}/api/products`)
-      if (!response.ok) throw new Error('Failed to fetch products')
+      if (!response.ok) throw new Error(`Ma'lumot yuklanmadi: ${response.statusText}`)
       const data = await response.json()
-      console.log(data?.data, "products from recommendation")
       setProducts(data?.data)
     } catch (err) {
-      console.error('Error fetching products:', err)
-      setError(err.message || 'Something went wrong')
+      console.error('Maʼlumot yuklanmadi', err)
+      setError(err.message || 'Maʼlumot yuklanmadi')
     } finally {
       setLoading(false)
     }
@@ -159,7 +167,7 @@ const CategoryOnePage = () => {
                       variant="ghost"
                       size="sm"
                       className="w-full justify-start text-gray-600 hover:text-purple-600 hover:bg-purple-50 text-xs sm:text-sm"
-                    // onClick={handleCopyLink}
+                      onClick={handleCopyLink}
                     >
                       <Copy className="h-3 w-3 sm:h-4 sm:w-4 mr-2" />
                       Скопировать ссылку
@@ -238,7 +246,7 @@ const CategoryOnePage = () => {
                         variant="ghost"
                         size="sm"
                         className="w-full justify-start text-gray-600 hover:text-purple-600 hover:bg-purple-50 text-xs sm:text-sm"
-                      // onClick={handleCopyLink}
+                        onClick={handleCopyLink}
                       >
                         <Copy className="h-3 w-3 sm:h-4 sm:w-4 mr-2" />
                         Скопировать ссылку
