@@ -1,19 +1,24 @@
 import { ArrowBigRightDash } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 export const ProductCard = ({ product }) => {
   const navigate = useNavigate()
 
   const imageUrl = import.meta.env.VITE_API_UPLOAD_BASE
-  const { slug: sub } = useParams()
- 
+
   const { i18n } = useTranslation()
   const lang = ['uz', 'ru'].includes(i18n.language) ? i18n.language : 'uz'
-
+ 
   const handleCardClick = () => {
-    navigate(!sub ? `id/${product?.id}` : `/category/id/${product?.id}`)
-    scrollTo({ top: 0 })
-  }
+    const newPath = window.location.pathname.includes('/category')
+      ? `/category/id/${product?.id}`
+      : `/id/${product?.id}`;
+
+    navigate(newPath, { replace: true }); // ✅ avoid stacking history
+    scrollTo({ top: 0 });
+  };
+
+
 
   return (
     <div
