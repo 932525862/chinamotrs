@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import MassageCategoryCard from "./MassageCategoryCard";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
-import { ProductCard } from "./product-card";
 
 const MassageChairGrid = () => {
   const [products, setProducts] = useState([]);
