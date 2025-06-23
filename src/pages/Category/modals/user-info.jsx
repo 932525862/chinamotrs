@@ -20,6 +20,7 @@ export function UserInfoDialog({ open, close }) {
     firstName: '',
     phoneNumber: '+998',
     modelName: '',
+    browser: '', // ✅ qo‘shildi
   })
 
   const [error, setError] = useState('')
@@ -38,6 +39,7 @@ export function UserInfoDialog({ open, close }) {
 👤 <b>Ism:</b> ${data.firstName}
 📞 <b>Telefon:</b> ${data.phoneNumber}
 📦 <b>Model:</b> ${data.modelName}
+🌐 <b>Brauzer:</b> ${data.browser}
     `
 
     const telegramUrl = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`
@@ -53,7 +55,6 @@ export function UserInfoDialog({ open, close }) {
     })
   }
 
-  // Mahsulot ID ni urldan olish
   const productId = pathname.split('/').pop()
 
   useEffect(() => {
@@ -71,6 +72,22 @@ export function UserInfoDialog({ open, close }) {
           console.error('Failed to fetch product:', err)
         })
     }
+
+    // ✅ Brauzer aniqlash
+    const userAgent = navigator.userAgent.toLowerCase()
+    let browser = 'Unknown'
+
+    if (userAgent.includes('yabrowser')) browser = 'Yandex Browser'
+    else if (userAgent.includes('edg')) browser = 'Microsoft Edge'
+    else if (userAgent.includes('opr') || userAgent.includes('opera')) browser = 'Opera'
+    else if (userAgent.includes('chrome') && !userAgent.includes('edg')) browser = 'Google Chrome'
+    else if (userAgent.includes('safari') && !userAgent.includes('chrome')) browser = 'Safari'
+    else if (userAgent.includes('firefox')) browser = 'Mozilla Firefox'
+
+    setFormData((prev) => ({
+      ...prev,
+      browser,
+    }))
   }, [productId, base_url])
 
   const handleChange = (e) => {
@@ -91,7 +108,6 @@ export function UserInfoDialog({ open, close }) {
     try {
       setLoading(true)
 
-      // Backend bazaga yuborish
       const res = await fetch(`${base_url}/api/orders`, {
         method: 'POST',
         headers: {
@@ -105,9 +121,7 @@ export function UserInfoDialog({ open, close }) {
       const result = await res.json()
       console.log('Order created:', result)
 
-      // Telegramga yuborish
       await sendToTelegram(formData)
-
       close()
     } catch (err) {
       console.error(err)
@@ -122,7 +136,7 @@ export function UserInfoDialog({ open, close }) {
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle className="text-black font-bold text-xl text-center">
-          {t('form.fill_form')}
+            {t('form.fill_form')}
           </DialogTitle>
         </DialogHeader>
 
@@ -132,7 +146,6 @@ export function UserInfoDialog({ open, close }) {
             <Input
               id="firstName"
               name="firstName"
-             
               value={formData.firstName}
               onChange={handleChange}
               required
@@ -167,10 +180,10 @@ export function UserInfoDialog({ open, close }) {
 
           <DialogFooter className="mt-2">
             <Button type="button" variant="outline" onClick={close}>
-            {t('form.cancel')}
+              {t('form.cancel')}
             </Button>
             <Button type="submit" className="bg-green-500 hover:bg-green-600" disabled={loading}>
-            {loading ? t('form.submitting') : t('form.submit')}
+              {loading ? t('form.submitting') : t('form.submit')}
             </Button>
           </DialogFooter>
         </form>
