@@ -202,55 +202,60 @@ const Navbar = () => {
 
       <div
         ref={mobileSearchRef}
-        className={`lg:hidden overflow-visible transition-all duration-300 ${showMobileSearch ? "max-h-[420px] py-3" : "max-h-0"} bg-white px-4 shadow-sm border-b relative`}
+        className={`lg:hidden transition-all duration-300 ${showMobileSearch ? "max-h-[420px] py-3 opacity-100 visible" : "max-h-0 py-0 opacity-0 invisible"
+          } bg-white px-4 shadow-sm border-b relative overflow-visible`}
       >
-        <input
-          type="text"
-          placeholder={t("navbar.searchPlaceholder")}
-          className="w-full px-4 py-2 border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500"
-          value={searchText}
-          onChange={(e) => {
-            setSearchText(e.target.value);
-            if (e.target.value.trim() === "") {
-              setProducts([]);
-              setShowDropdown(false);
-            } else {
-              handleSearch();
-            }
-          }}
-        />
+        <div className="relative">
+          <input
+            type="text"
+            placeholder={t("navbar.searchPlaceholder")}
+            className="w-full px-4 py-2 border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+            value={searchText}
+            onChange={(e) => {
+              setSearchText(e.target.value);
+              if (e.target.value.trim() === "") {
+                setProducts([]);
+                setShowDropdown(false);
+              } else {
+                handleSearch();
+              }
+            }}
+          />
 
-        {showDropdown && products.length > 0 && (
-          <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-xl border shadow-xl z-50 max-h-[300px] overflow-y-auto">
-            {products.map((product) => (
-              <div
-                key={product.id}
-                onClick={() => {
-                  navigate(`/category/id/${product.id}`);
-                  setShowDropdown(false);
-                  setSearchText("");
-                  setShowMobileSearch(false);
-                }}
-                className="flex items-center gap-3 px-4 py-3 hover:bg-gray-100 cursor-pointer"
-              >
-                <img
-                  src={`${import.meta.env.VITE_API_UPLOAD_BASE}${product.images?.[0]?.path}`}
-                  alt={product.name?.uz}
-                  className="w-12 h-12 object-contain rounded-md"
-                />
-                <div className="flex-1">
-                  <p className="text-sm font-medium text-gray-800">
-                    {product.name?.uz}
-                  </p>
-                  <p className="text-xs text-gray-500">
-                    {Number(product.price).toLocaleString()} so'm
-                  </p>
+          {showDropdown && products.length > 0 && (
+            <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-xl border shadow-xl z-50 max-h-[300px] overflow-y-auto">
+              {products.map((product) => (
+                <div
+                  key={product.id}
+                  onClick={() => {
+                    navigate(`/category/id/${product.id}`);
+                    setShowDropdown(false);
+                    setSearchText("");
+                    setShowMobileSearch(false);
+                  }}
+                  className="flex items-center gap-3 px-4 py-3 hover:bg-gray-100 cursor-pointer"
+                >
+                  <img
+                    src={`${import.meta.env.VITE_API_UPLOAD_BASE}${product.images?.[0]?.path}`}
+                    alt={product.name?.uz}
+                    className="w-12 h-12 object-contain rounded-md"
+                  />
+                  <div className="flex-1">
+                    <p className="text-sm font-medium text-gray-800">
+                      {product.name?.uz}
+                    </p>
+                    <p className="text-xs text-gray-500">
+                      {Number(product.price).toLocaleString()} so'm
+                    </p>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        )}
+              ))}
+            </div>
+          )}
+        </div>
       </div>
+
+
     </>
   );
 };

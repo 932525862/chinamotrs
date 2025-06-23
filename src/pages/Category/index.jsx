@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Search, Filter } from 'lucide-react'
+import { Search, Filter, Menu } from 'lucide-react'
 import { useParams } from 'react-router-dom'
 import ProductsGrid from './components/products-grid'
 import PaginationComponent from './components/pagination'
@@ -14,6 +14,7 @@ const CategoryPage = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [totalPages, setTotalPages] = useState(1)
   const [searchName, setSearchName] = useState('')
+  const [showFilters, setShowFilters] = useState(false)
 
   const { slug } = useParams()
   const base_url = import.meta.env.VITE_API_BASE_URL
@@ -60,7 +61,6 @@ const CategoryPage = () => {
     }
   }
 
-
   const getProducts = async () => {
     try {
       const res = await axios.get(`${base_url}/api/products?page=1&limit=10`)
@@ -96,13 +96,18 @@ const CategoryPage = () => {
       <div className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 py-6">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-4">
-            <div>
-              <h1 className="text-3xl font-bold text-gray-800">
-                {slug ? decodeURIComponent(slug) : 'Barcha mahsulotlar'}
-              </h1>
-              <p className="text-gray-600 mt-1">
-                Premium products {slug ? 'in this category' : 'available'}
-              </p>
+            <div className="flex items-center gap-4">
+              <button className="lg:hidden" onClick={() => setShowFilters((prev) => !prev)}>
+                <Menu className="w-6 h-6 text-gray-700" />
+              </button>
+              <div>
+                <h1 className="text-3xl font-bold text-gray-800">
+                  {slug ? decodeURIComponent(slug) : 'Barcha mahsulotlar'}
+                </h1>
+                <p className="text-gray-600 mt-1">
+                  Premium products {slug ? 'in this category' : 'available'}
+                </p>
+              </div>
             </div>
             <div className="w-full md:w-auto">
               <div className="relative w-full md:w-80">
@@ -122,7 +127,8 @@ const CategoryPage = () => {
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="flex flex-col lg:flex-row gap-8">
           <div className="w-full lg:w-80 flex-shrink-0">
-            <div className="bg-white rounded-xl shadow-sm p-6 sticky top-8">
+            {/* Show filters only on mobile when toggle is true */}
+            <div className={`bg-white rounded-xl shadow-sm p-6 mt-4 ${showFilters ? 'block' : 'hidden'} lg:block`}>
               <div className="flex items-center gap-2 mb-6">
                 <Filter className="w-5 h-5 text-gray-600" />
                 <h2 className="text-lg font-semibold text-gray-800">Filters</h2>
@@ -193,12 +199,22 @@ const CategoryPage = () => {
 
           {/* Main Content */}
           <div className="flex-1">
-            {loading ? <Loading /> : <ProductsGrid products={products} />}
-            {loading ? <Loading /> : <PaginationComponent
-              totalPages={totalPages}
-              currentPage={currentPage}
-              onPageChange={(page) => handleProductFiler(page)}
-            />}
+            {loading ? <Loading /> : (
+              products?.length > 0 ? (
+                <ProductsGrid products={products} />
+              ) : (
+                <div className="text-center text-gray-500 flex items-center justify-center h-64">
+                  <p>No products found in this category.</p>
+                </div>
+              ))}
+            {loading ? <Loading /> : (
+              totalPages > 1 && (
+                <PaginationComponent
+                  totalPages={totalPages}
+                  currentPage={currentPage}
+                  onPageChange={(page) => handleProductFiler(page)}
+                />
+              ))}
           </div>
         </div>
       </div>
