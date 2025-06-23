@@ -1,41 +1,37 @@
 import { useEffect, useState } from "react";
 import MassageCategoryCard from "./MassageCategoryCard";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import { ProductCard } from "./product-card";
 
 const MassageChairGrid = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-    const { t , i18n } = useTranslation();
-    const lang = ["uz", "ru"].includes(i18n.language) ? i18n.language : "uz";
+  const { t, i18n } = useTranslation();
+  const lang = ["uz", "ru"].includes(i18n.language) ? i18n.language : "uz";
 
   const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
-useEffect(() => {
-  fetch(`${baseUrl}/api/products`)
-    .then((res) => res.json())
-    .then((data) => {
-      const searchKeywords = [
-        "uqalash uskunalari",
-        "массажное оборудование",
-      ];
+  useEffect(() => {
+    fetch(`${baseUrl}/api/products?category=${`Uqalash uskunalari`}`)
+      .then((res) => res.json())
+      .then((data) => {
+        // const searchKeywords = [
+        //   "uqalash uskunalari",
+        //   "массажное оборудование",
+        // ];
 
-      const filtered = (data?.data || []).filter((product) => {
-        const categoryName = product?.category?.name?.[lang]?.toLowerCase();
+        console.log(data?.data, "MassageChairGrid data");
 
-        return searchKeywords.some((keyword) =>
-          categoryName?.includes(keyword)
-        );
+        setProducts(data?.data || [])
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Xatolik:", err);
+        setLoading(false);
       });
+  }, [lang]);
 
-      setProducts(filtered);
-      setLoading(false);
-    })
-    .catch((err) => {
-      console.error("Xatolik:", err);
-      setLoading(false);
-    });
-}, [lang]);
-   
   return (
     <div className="grid lg:grid-cols-4 md:grid-cols-3 lg:gap-7 grid-cols-2 sm:gap-4 gap-3">
       {loading ? (
@@ -47,6 +43,7 @@ useEffect(() => {
       ) : (
         <p>Massaj uskunalari topilmadi.</p>
       )}
+
     </div>
   );
 };

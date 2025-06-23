@@ -7,6 +7,7 @@ import Layout from '../layouts/Layout'
 
 import News from '../components/News/news'
 import CategoryOnePage from '../pages/Category/components/category'
+import MassageOnePage from '../pages/Category/components/Massage'
 
 // Pages
 const Home = lazy(() => import('@/pages/Home'))
@@ -24,6 +25,7 @@ const RouteProvider = () => {
         <Route path="/category" element={<Category />} />
         <Route path="/category/id/:id" element={<CategoryOnePage />} />
         <Route path="/category/:slug" element={<Category />} />
+        <Route path="category/massage/:id" element={<MassageOnePage />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/news/:id" element={<News />} />
         <Route path="/news" element={<News />} />
