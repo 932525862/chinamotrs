@@ -122,7 +122,7 @@ function Footer() {
                     to={`/category/${localizedName}`}
                     className="text-gray-800 font-medium hover:text-green-500 cursor-pointer"
                   >
-                    {localizedName}
+                    {item.name[lang]}
                   </Link>
                 )
               })}
