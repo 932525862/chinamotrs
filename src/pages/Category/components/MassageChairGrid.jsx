@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 const MassageChairGrid = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { t, i18n } = useTranslation();
+  const {  i18n } = useTranslation();
   const lang = ["uz", "ru"].includes(i18n.language) ? i18n.language : "uz";
 
   const baseUrl = import.meta.env.VITE_API_BASE_URL;
