@@ -42,6 +42,20 @@
       "contact": "Bog'lanish"
     }
   },
+  "form":{
+    
+      "fill_form": "Formani to'ldiring va biz sizga tez orada bog'lanamiz",
+      "full_name": "Ism ",
+      "phone_number": "Telefon raqami",
+      "model": "Model",
+      "cancel": "Bekor qilish",
+      "submit": "Yuborish",
+      "submitting": "Yuborilmoqda...",
+      "error_phone": "Iltimos, to‘g‘ri telefon raqamini kiriting."
+    
+    
+  },
+
 
   "contact": {
     "title": "BOG'LANISH",
@@ -49,12 +63,12 @@
     "address": "Toshkent shahri, Amir Temur ko‘chasi, 10-uy.Mo‘ljal: Alay dehqon bozori",
     "phoneTitle": "Yagona ma'lumot markazi:",
     "formTitle": "Bizga nima xizmatinigiz bor?",
-    "formSubtitle": "MUTAXASSISLARIMIZ 10 DAQIQA SIZGA TELEFON QILIB BILMOQCHI BO'LGAN BARCHA SAVOLLARINGIZGA JAVOB BERISHADI",
+    "formSubtitle": "Agar sizni qiziqtirgan savollar bo‘lsa, ushbu formani to‘ldiring mutaxassislarimiz siz bilan bog‘lanadi.",
     "nameLabel": "Sizning ismingiz *",
     "namePlaceholder": "Ismingizni kiriting",
     "phoneLabel": "Telefon raqami *",
     "phonePlaceholder": "Telefon raqamingizni kiriting",
-    "messageLabel": "Telegram foydalanuvchi nomingiz",
+    "messageLabel": "Telegram foydalanuvchi nomingiz (Ixtiyoriy)",
     "messagePlaceholder": "foydalanuvchi nomi",
     "submit": "YUBORISH",
     "privacyNotice": "Jo'natish tugmasini bosganda o'zingiz haqingizdagi",

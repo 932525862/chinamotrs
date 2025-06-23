@@ -10,9 +10,12 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { parsePhoneNumberFromString } from 'libphonenumber-js'
 import { useState, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useLocation } from 'react-router-dom'
 
 export function UserInfoDialog({ open, close }) {
+  const { t } = useTranslation()
+
   const [formData, setFormData] = useState({
     firstName: '',
     phoneNumber: '+998',
@@ -119,17 +122,17 @@ export function UserInfoDialog({ open, close }) {
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle className="text-black font-bold text-xl text-center">
-            Formani to'ldiring va biz sizga tez orada bog'lanamiz
+          {t('form.fill_form')}
           </DialogTitle>
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="grid gap-5 py-4">
           <div className="grid gap-2">
-            <Label htmlFor="firstName">Full Name</Label>
+            <Label htmlFor="firstName">{t('form.full_name')}</Label>
             <Input
               id="firstName"
               name="firstName"
-              placeholder="John"
+             
               value={formData.firstName}
               onChange={handleChange}
               required
@@ -137,7 +140,7 @@ export function UserInfoDialog({ open, close }) {
           </div>
 
           <div className="grid gap-2">
-            <Label htmlFor="phoneNumber">Phone Number</Label>
+            <Label htmlFor="phoneNumber">{t('form.phone_number')}</Label>
             <Input
               id="phoneNumber"
               name="phoneNumber"
@@ -147,11 +150,11 @@ export function UserInfoDialog({ open, close }) {
               required
               className={error ? 'border-red-500' : ''}
             />
-            {error && <p className="text-sm text-red-500">{error}</p>}
+            {error && <p className="text-sm text-red-500">{t('form.error_phone')}</p>}
           </div>
 
           <div className="grid gap-2">
-            <Label htmlFor="modelName">Model</Label>
+            <Label htmlFor="modelName">{t('form.model')}</Label>
             <Input
               id="modelName"
               name="modelName"
@@ -164,10 +167,10 @@ export function UserInfoDialog({ open, close }) {
 
           <DialogFooter className="mt-2">
             <Button type="button" variant="outline" onClick={close}>
-              Cancel
+            {t('form.cancel')}
             </Button>
             <Button type="submit" className="bg-green-500 hover:bg-green-600" disabled={loading}>
-              {loading ? 'Submitting...' : 'Submit'}
+            {loading ? t('form.submitting') : t('form.submit')}
             </Button>
           </DialogFooter>
         </form>
