@@ -9,7 +9,7 @@ const MassageCategoryCard = ({ product }) => {
 
   const uploadUrl = import.meta.env.VITE_API_UPLOAD_BASE;
 
-  const imagePath = product?.images?.[3]?.path;
+  const imagePath = product?.images?.[0]?.path;
   const productName = product?.name?.[lang];
   const productPrice = product?.price;
 
