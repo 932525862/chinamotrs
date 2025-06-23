@@ -4,17 +4,17 @@ import { useTranslation } from "react-i18next";
 
 const MassageCategoryCard = ({ product }) => {
   const navigate = useNavigate();
-  const { t , i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const lang = ["uz", "ru"].includes(i18n.language) ? i18n.language : "uz";
 
   const uploadUrl = import.meta.env.VITE_API_UPLOAD_BASE;
 
-  const imagePath = product?.product?.images?.[0]?.path;
-  const productName = product?.product?.name?.[lang];
-  const productPrice = product?.product?.price;
+  const imagePath = product?.images?.[3]?.path;
+  const productName = product?.name?.[lang];
+  const productPrice = product?.price;
 
   const handleCardClick = () => {
-    navigate(`/category/massage/${product?.product?.id}`);
+    navigate(`/category/massage/${product?.id}`);
     scrollTo({ top: 0 });
   };
 
@@ -41,7 +41,9 @@ const MassageCategoryCard = ({ product }) => {
 
       {/* Product nomi va narxi */}
       <div className="mt-4">
-        <p className="hover:text-green-500 lg:text-[18px] sm:text-[16px] font-one max-[550px]:text-[12px]">{productName || "Nomi yo‘q"}</p>
+        <p className="hover:text-green-500 lg:text-[18px] sm:text-[16px] font-one max-[550px]:text-[12px]">
+          {productName || "Nomi yo‘q"}
+        </p>
 
         {productPrice ? (
           <p className="text-neutral-500 lg:text-[15px] font-one text-[12px]">

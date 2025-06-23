@@ -36,7 +36,7 @@ const MassageChairGrid = () => {
         <p>Yuklanmoqda...</p>
       ) : products.length > 0 ? (
         products.map((product) => (
-          <MassageCategoryCard key={product.id} product={{ product }} />
+          <MassageCategoryCard key={product.id} product={product} />
         ))
       ) : (
         <p>Massaj uskunalari topilmadi.</p>
