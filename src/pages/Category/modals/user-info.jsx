@@ -20,7 +20,8 @@ export function UserInfoDialog({ open, close }) {
     firstName: '',
     phoneNumber: '+998',
     modelName: '',
-    browser: '', // ✅ qo‘shildi
+    browser: '',
+    address: '', // ✅ manzil qo‘shildi
   })
 
   const [error, setError] = useState('')
@@ -40,6 +41,7 @@ export function UserInfoDialog({ open, close }) {
 📞 <b>Telefon:</b> ${data.phoneNumber}
 📦 <b>Model:</b> ${data.modelName}
 🌐 <b>Brauzer:</b> ${data.browser}
+📍 <b>Manzil:</b> ${data.address}
     `
 
     const telegramUrl = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`
@@ -84,10 +86,28 @@ export function UserInfoDialog({ open, close }) {
     else if (userAgent.includes('safari') && !userAgent.includes('chrome')) browser = 'Safari'
     else if (userAgent.includes('firefox')) browser = 'Mozilla Firefox'
 
-    setFormData((prev) => ({
-      ...prev,
-      browser,
-    }))
+    // IP orqali manzil aniqlash
+    fetch('https://ipapi.co/json/')
+      .then((res) => res.json())
+      .then((data) => {
+        const city = data.city
+        const region = data.region
+        const country = data.country_name
+        const fullAddress = `${city}, ${region}, ${country}`
+
+        setFormData((prev) => ({
+          ...prev,
+          browser,
+          address: fullAddress,
+        }))
+      })
+      .catch((err) => {
+        console.error('IP Location fetch error:', err)
+        setFormData((prev) => ({
+          ...prev,
+          browser,
+        }))
+      })
   }, [productId, base_url])
 
   const handleChange = (e) => {
