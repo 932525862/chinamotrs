@@ -53,7 +53,7 @@ export default function SwiperSlides() {
           el: ".custom-pagination",
           clickable: true,
           renderBullet: (index, className) =>
-            `<span class="${className} w-10 h-3 inline-block mx-1 rounded-xl border border-green-500 transition-all duration-300"></span>`,
+            `<span class="${className} w-10 h-3 inline-block mx-1 rounded-xl border border-[#E83630] transition-all duration-300"></span>`,
         }}
         navigation={{
           nextEl: ".custom-next",
@@ -81,7 +81,7 @@ export default function SwiperSlides() {
               >
                 <div className="max-w-7xl h-full mx-auto flex flex-col max-sm:items-center text-shadow-2xs gap-6">
                   <span className="w-full h-full min-md:hidden bg-black/40 absolute top-0 left-0" />
-                  <div className="w-[250px] z-10 max-sm:hidden mt-3 border-b-2 border-r-2 border-green-500 rounded-[50%] px-7 py-4">
+                  <div className="w-[250px] z-10 max-sm:hidden mt-3 border-b-2 border-r-2 border-[#E83630] rounded-[50%] px-7 py-4">
                     <p className="text-xl text-right ">
                       {t("aboutHome.xizmat")}
                     </p>

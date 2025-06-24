@@ -11,8 +11,8 @@
 
   "aboutHome": {
     "title": "BIZ HAQIMIZDA",
-    "subtitle": "GRANT FITNES - FAQAT ONLINE DOKON EMAS",
-    "description": "GRANT FITNESS — sport mahsulotlari bo‘yicha ishonchli hamkoringiz! Biz turli sport turlari uchun mo‘ljallangan keng assortimentni taklif etamiz: havaskor sportchilar uchun ham, professional sport klublari va zallari uchun ham barcha kerakli jihozlar bizda mavjud — sport kiyimlaridan tortib, trenajyorlar va zamonaviy sport zali uskunalarigacha!",
+    "subtitle": "CHINA MOTORS — Bu oddiy avtosalon emas",
+    "description": "Bizning kompaniyamiz avtomobillar yetkazib berishga ixtisoslashgan. Biz mijozlarimizni og‘ir va yengil avtomobillar bilan sifatli servis, qulay narx va kafolat bilan ta’minlaymiz. Bizning avtosalonimiz tabiatga befarq emas – avtosalonimizdagi avtomobillarning aksariyati yengil elektromobillardan iborat.",
     "button": "KO'PROQ BILISH",
     "part": "HAMKORLARIMIZ",
     "next": "Katalokga O'tish",
@@ -20,15 +20,15 @@
   },
 
   "aboutTop": {
-    "title": "GRANT FITNES - FAQAT ONLINE DOKON EMAS",
-    "description": "GRANT FITNESS — sport mahsulotlari bo‘yicha ishonchli hamkoringiz!  Biz turli sport turlari uchun mo‘ljallangan keng assortimentni taklif etamiz: havaskor sportchilar uchun ham, professional sport klublari va zallari uchun ham barcha kerakli jihozlar bizda mavjud — sport kiyimlaridan tortib, trenajyorlar va zamonaviy sport zali uskunalarigacha!",
-    "title2": "GRANT FITNES sport buyumlari sotadigan O'zbekistondagi eng katta do'konlardan biri hisoblanadi.",
-    "text": "Do'kon bundan keyin ham o'z tovarlari bilan xaridorlarini xayron qilish va quvontirishda davom etadi."
+    "title":"CHINA MOTORS — Bu oddiy avtosalon emas",
+    "description": "Bizning kompaniyamiz avtomobillar yetkazib berishga ixtisoslashgan. Biz mijozlarimizni og‘ir va yengil avtomobillar bilan sifatli servis, qulay narx va kafolat bilan ta’minlaymiz. Bizning avtosalonimiz tabiatga befarq emas – avtosalonimizdagi avtomobillarning aksariyati yengil elektromobillardan iborat.",
+    "title2": "CHINA MOTORS — Xitoy avtomobillari bo‘yicha O‘zbekistondagi yetakchi avtosalonlardan biri.",
+    "text": "Sizga ish uchun kuchli yuk mashinasi yoki kundalik hayot uchun zamonaviy yengil avtomobil kerakmi? CHINA MOTORS sizning ehtiyojlaringizga mos mashinalarni qulay narxlarda taklif qiladi. Avtomobil xaridi — bu kelajakka va sayyoramizga qo‘yilgan sarmoya. Biz ishonch va halollik asosida munosabat quramiz, har bir avtomobilimiz esa kafolat bilan ta’minlangan. Bugun bizning avtosalonimizga tashrif buyuring va CHINA MOTORS bilan kelajakka qadam qo‘ying!"
   },
 
   "footer": {
     "addressTitle": "Manzil:",
-    "address": "📍Toshkent shahri, Amir Temur ko‘chasi, 10-uy.Mo‘ljal: Alay dehqon bozori",
+    "address": "📍Тоshkent 100102, Узбекистан",
     "emailTitle": "Email:",
     "phoneTitle": "Yagona bog'lanish markazi:",
     "menuTitle": "Menyu:",

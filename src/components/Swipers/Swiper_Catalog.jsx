@@ -74,8 +74,8 @@ export default function Swiper_Catalog() {
               return (
                 <SwiperSlide key={card?.id}>
                   <Link to={`/category/${localizedName}`} className="block">
-                    <div className="max-[400px]:w-[150px] w-[180px] h-[180px] sm:h-[200px] mx-auto group relative sm:my-14 my-12 shadow-md hover:shadow-lg p-3 rounded-xl bg-white hover:bg-[#cecece2d] hover:backdrop-blur-xs flex items-center justify-center transition-transform duration-300 hover:scale-[1.03] border border-[#54ed21]">
-                      <h2 className="text-center text-base sm:text-lg font-one group-hover:text-[#17f80b] transition-all duration-300 text-shadow-2xs">
+                    <div className="max-[400px]:w-[150px] w-[180px] h-[180px] sm:h-[200px] mx-auto group relative sm:my-14 my-12 shadow-md hover:shadow-lg p-3 rounded-xl bg-white hover:bg-[#cecece2d] hover:backdrop-blur-xs flex items-center justify-center transition-transform duration-300 hover:scale-[1.03] border border-[#E83630]">
+                      <h2 className="text-center text-base sm:text-lg font-one group-hover:text-[#E83630] transition-all duration-300 text-shadow-2xs">
                         {card?.name?.[lang] || 'NOMI YO‘Q'}
                       </h2>
                     </div>

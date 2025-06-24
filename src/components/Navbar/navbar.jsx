@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { Menu, X, Search } from "lucide-react";
-import logo from "../../assets/gran.png";
+import logo from "../../assets/logo_280.webp";
 import { Link, useNavigate } from "react-router-dom";
 import i18n from "../../i18n";
 import { useTranslation } from "react-i18next";
@@ -74,7 +74,7 @@ const Navbar = () => {
       <nav className="bg-white shadow-md sticky top-0 z-50 border-b">
         <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
           <Link to="/" className="flex items-center space-x-2">
-            <img src={logo} alt="Logo" className="h-10 w-auto object-contain" />
+            <img src={logo} alt="Logo" className="h-8 w-auto object-contain" />
           </Link>
 
           <div className="hidden lg:flex gap-6 text-base font-semibold text-gray-700">
@@ -83,10 +83,10 @@ const Navbar = () => {
                 key={item.name}
                 to={item.path}
                 onClick={() => scrollTo({ top: 0 })}
-                className="hover:text-green-500 relative group transition-colors"
+                className="hover:text-[#E83630] relative group transition-colors"
               >
                 {item.name}
-                <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-green-500 group-hover:w-full transition-all duration-300" />
+                <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-[#E83630] group-hover:w-full transition-all duration-300" />
               </Link>
             ))}
           </div>
@@ -96,7 +96,7 @@ const Navbar = () => {
               <input
                 type="text"
                 placeholder={t("navbar.searchPlaceholder")}
-                className="w-full pl-4 pr-10 py-2 border border-green-500 rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+                className="w-full pl-4 pr-10 py-2 border border-[#E83630] rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500"
                 value={searchText}
                 onChange={(e) => {
                   setSearchText(e.target.value);
@@ -109,7 +109,7 @@ const Navbar = () => {
                 }}
               />
               <Search
-                className="absolute right-3 top-2.5 text-green-500 w-5 h-5 cursor-pointer"
+                className="absolute right-3 top-2.5 text-[#E83630] w-5 h-5 cursor-pointer"
                 onClick={handleSearch}
               />
 
@@ -147,7 +147,7 @@ const Navbar = () => {
             <select
               value={language}
               onChange={handleLanguageChange}
-              className="border border-green-500 rounded-full px-4 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="border border-[#E83630] rounded-full px-4 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="uz">UZ</option>
               <option value="ru">RU</option>

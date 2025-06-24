@@ -77,13 +77,13 @@ const News = () => {
             <div className="mt-10">
               <button
                 onClick={() => navigate(-1)}
-                className="relative group cursor-pointer border-[3px] border-green-500 overflow-hidden rounded-full px-10 py-2 flex items-center gap-2"
+                className="relative group cursor-pointer border-[3px] border-[#E83630] overflow-hidden rounded-full px-10 py-2 flex items-center gap-2"
               >
-                <span className="font-one text-green-500 group-hover:text-white relative duration-300 z-1">
+                <span className="font-one text-[#E83630] group-hover:text-white relative duration-300 z-1">
                   {t('news.prev')}
                 </span>
-                <IoArrowUndoCircleOutline className="text-green-500 text-2xl group-hover:text-white relative duration-300 z-1" />
-                <span className="bg-green-500 absolute w-full h-full left-0 top-0 -translate-x-full group-hover:translate-x-0 transition-transform duration-500 z-0" />
+                <IoArrowUndoCircleOutline className="text-[#E83630] text-2xl group-hover:text-white relative duration-300 z-1" />
+                <span className="bg-[#E83630] absolute w-full h-full left-0 top-0 -translate-x-full group-hover:translate-x-0 transition-transform duration-500 z-0" />
               </button>
             </div>
           </main>
@@ -139,7 +139,7 @@ const News = () => {
                             className="w-full h-full object-cover group-hover:scale-105 duration-300"
                           />
                         </div>
-                        <p className="font-medium text-[12px] md:text-[15px] text-gray-900 line-clamp-2 group-hover:text-green-500 pt-2">
+                        <p className="font-medium text-[12px] md:text-[15px] text-gray-900 line-clamp-2 group-hover:text-[#E83630] pt-2">
                           {item.title?.[lang] || 'Sarlavha yo‘q'}
                         </p>
                       </div>

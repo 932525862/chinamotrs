@@ -58,30 +58,31 @@ function Footer() {
           <li className="border-r border-gray-600/50 px-5 text-center py-10">
             <ul className="flex flex-col items-center gap-5">
               <li className="flex flex-col items-center gap-1">
-                <FaHome className="text-4xl text-green-500" />
+                <FaHome className="text-4xl text-[#E83630]" />
                 <div className="text-xl font-bold text-blue-950/80">{t('footer.addressTitle')}</div>
                 <p className="font-medium text-gray-900">{t('footer.address')}</p>
               </li>
               <li className="flex flex-col items-center gap-1">
-                <IoIosMail className="text-4xl text-green-500" />
+                <IoIosMail className="text-4xl text-[#E83630]" />
                 <div className="text-xl font-bold text-blue-950/80">{t('footer.emailTitle')}</div>
-                <div className="flex justify-center gap-3 mt-1 text-lime-600">
-                  <a href="#" className="hover:text-lime-900">
+                <p className="font-medium text-gray-900">info@chinamotors.uz</p>
+                <div className="flex justify-center gap-3 mt-1 text-[#E83630]">
+                  <a href="https://t.me/elektromobile_chinamotors" className="hover:text-lime-900">
                     Telegram
                   </a>
-                  <a href="#" className="hover:text-lime-900">
+                  <a href="https://www.instagram.com/chinamotors.uz?r=nametag" className="hover:text-lime-900">
                     Instagram
                   </a>
-                  <a href="#" className="hover:text-lime-900">
-                    Facebook
+                  <a href="https://www.youtube.com/channel/UCFnz7jrClzpbX1zBX2suoWg" className="hover:text-lime-900">
+                    Youtube
                   </a>
                 </div>
               </li>
               <li className="flex flex-col items-center gap-1">
-                <FaPhone className="text-4xl text-green-500" />
+                <FaPhone className="text-4xl text-[#E83630]" />
                 <div className="text-xl font-bold text-blue-950/80">{t('footer.phoneTitle')}</div>
-                <a href="tel:+998977052027" className="font-medium text-gray-900">
-                  +998 97 705 20 27
+                <a href="tel:+99871200-40-09" className="font-medium text-gray-900">
+                   +998(71)200-40-09
                 </a>
               </li>
             </ul>
@@ -95,7 +96,7 @@ function Footer() {
                   <li key={index}>
                     <NavLink
                       to={item.to}
-                      className="text-xl tracking-wider font-medium text-blue-950/90 hover:text-green-500"
+                      className="text-xl tracking-wider font-medium text-blue-950/90 hover:text-[#E83630]"
                     >
                       {t(item.textKey)}
                     </NavLink>
@@ -103,8 +104,8 @@ function Footer() {
                 ))}
               </ul>
               <button className="cursor-pointer flex flex-col items-center mt-6">
-                <TiArrowDownOutline className="rotate-180 text-5xl text-green-500 animate-bounce" />
-                <span className="text-xl font-medium mt-3 text-green-500 border-3 rounded-full py-1 px-3 border-green-500">
+                <TiArrowDownOutline className="rotate-180 text-5xl text-[#E83630] animate-bounce" />
+                <span className="text-xl font-medium mt-3 text-[#E83630] border-3 rounded-full py-1 px-3 border-[#E83630]">
                   {t('footer.scrollTop')}
                 </span>
               </button>
@@ -120,7 +121,7 @@ function Footer() {
                   <Link
                     key={item?.id}
                     to={`/category/${localizedName}`}
-                    className="text-gray-800 font-medium hover:text-green-500 cursor-pointer"
+                    className="text-gray-800 font-medium hover:text-[#E83630] cursor-pointer"
                   >
                     {item.name[lang]}
                   </Link>
