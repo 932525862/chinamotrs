@@ -277,7 +277,7 @@ const CategoryOnePage = () => {
                   So'rov Yuborish
                 </button>
                 <a
-                  href="http://t.me/Grandfitnessuz "
+                  href="https://t.me/@elektromobile_chinamotors"
                   target="_blank"
                   className="px-5 py-3 flex bg-green-500 hover:bg-green-600 text-sm md:text-md rounded-md text-white font-medium"
                 >
