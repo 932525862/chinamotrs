@@ -17,6 +17,7 @@ export default function Swiper_Catalog() {
   const [categories, setCategories] = useState([])
 
   const baseUrl = import.meta.env.VITE_API_BASE_URL
+  const image_url = import.meta.env.VITE_API_UPLOAD_BASE
 
   useEffect(() => {
     setLoading(true)
@@ -63,26 +64,36 @@ export default function Swiper_Catalog() {
       >
         {loading
           ? Array(5)
-              .fill(0)
-              .map((_, idx) => (
-                <SwiperSlide key={idx}>
-                  <Skeleton height={180} width={'100%'} />
-                </SwiperSlide>
-              ))
+            .fill(0)
+            .map((_, idx) => (
+              <SwiperSlide key={idx}>
+                <Skeleton height={180} width={'100%'} />
+              </SwiperSlide>
+            ))
           : categories.map((card) => {
-              const localizedName = card?.name?.uz || 'no-name'
-              return (
-                <SwiperSlide key={card?.id}>
-                  <Link to={`/category/${localizedName}`} className="block">
-                    <div className="max-[400px]:w-[150px] w-[180px] h-[180px] sm:h-[200px] mx-auto group relative sm:my-14 my-12 shadow-md hover:shadow-lg p-3 rounded-xl bg-white hover:bg-[#cecece2d] hover:backdrop-blur-xs flex items-center justify-center transition-transform duration-300 hover:scale-[1.03] border border-[#E83630]">
-                      <h2 className="text-center text-base sm:text-lg font-one group-hover:text-[#E83630] transition-all duration-300 text-shadow-2xs">
-                        {card?.name?.[lang] || 'NOMI YO‘Q'}
-                      </h2>
-                    </div>
-                  </Link>
-                </SwiperSlide>
-              )
-            })}
+            const localizedName = card?.name?.uz || 'no-name'
+            return (
+              <SwiperSlide key={card?.id}>
+                <Link to={`/category/${localizedName}`} className="block">
+                  <div className="w-[150px] h-[200px] sm:w-[180px] mx-auto flex flex-col items-center rounded-xl shadow-md hover:shadow-lg border border-[#E83630] bg-white hover:bg-[#cecece2d] hover:backdrop-blur-xs transition-transform duration-300 hover:scale-[1.03] overflow-hidden sm:my-14 my-12 p-3 group">
+
+                    {/* Image */}
+                    <img
+                      src={`${image_url}${card?.image}`}
+                      alt={card?.name?.[lang] || 'Nomi yo‘q'}
+                      className="w-full h-[100px] sm:h-[120px] object-cover mb-3 transition-transform duration-300 group-hover:scale-105"
+                    />
+
+                    {/* Name */}
+                    <h2 className="text-center text-sm sm:text-base font-one text-shadow-2xs group-hover:text-[#E83630] transition-all duration-300">
+                      {card?.name?.[lang] || 'NOMI YO‘Q'}
+                    </h2>
+                  </div>
+                </Link>
+              </SwiperSlide>
+
+            )
+          })}
 
         {/* Custom Arrow Buttons */}
         <div className="custom-prev absolute left-0 -bottom-5 -translate-y-1/2 w-[40px] h-[40px] rounded-full z-20 cursor-pointer border text-lg font-bold bg-black/30 backdrop-blur-sm text-gray-100 hover:bg-[#323131d3] transition flex items-center justify-center">

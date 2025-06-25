@@ -96,7 +96,7 @@ const Navbar = () => {
               <input
                 type="text"
                 placeholder={t("navbar.searchPlaceholder")}
-                className="w-full pl-4 pr-10 py-2 border border-[#E83630] rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+                className="w-full pl-4 pr-10 py-2 border border-[#E83630] rounded-full shadow-sm focus:outline-none focus:ring focus:ring-[#E83630]"
                 value={searchText}
                 onChange={(e) => {
                   setSearchText(e.target.value);

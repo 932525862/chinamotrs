@@ -26,7 +26,7 @@ export function UserInfoDialog({ open, close }) {
 
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
-  const [product, setProduct] = useState(null)
+  // const [product, setProduct] = useState(null)
 
   const { pathname } = useLocation()
   const base_url = import.meta.env.VITE_API_BASE_URL
@@ -64,7 +64,7 @@ export function UserInfoDialog({ open, close }) {
       fetch(`${base_url}/api/products/${productId}`)
         .then((res) => res.json())
         .then((data) => {
-          setProduct(data.data)
+          // setProduct(data.data)
           setFormData((prev) => ({
             ...prev,
             modelName: data?.data?.name?.uz || '',
@@ -194,7 +194,6 @@ export function UserInfoDialog({ open, close }) {
               value={formData.modelName}
               onChange={handleChange}
               required
-              readOnly
             />
           </div>
 
@@ -202,7 +201,7 @@ export function UserInfoDialog({ open, close }) {
             <Button type="button" variant="outline" onClick={close}>
               {t('form.cancel')}
             </Button>
-            <Button type="submit" className="bg-green-500 hover:bg-green-600" disabled={loading}>
+            <Button type="submit" className="bg-[#E83630] hover:bg-[#E83630]/90 cursor-pointer" disabled={loading}>
               {loading ? t('form.submitting') : t('form.submit')}
             </Button>
           </DialogFooter>
