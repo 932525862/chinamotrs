@@ -8,7 +8,7 @@ export const ProductCard = ({ product }) => {
 
   const { i18n } = useTranslation()
   const lang = ['uz', 'ru'].includes(i18n.language) ? i18n.language : 'uz'
- 
+
   const handleCardClick = () => {
     const newPath = window.location.pathname.includes('/category')
       ? `/category/id/${product?.id}`
@@ -40,14 +40,17 @@ export const ProductCard = ({ product }) => {
         <p className="text-[11px] sm:text-[15px]  font-medium text-blue-950">
           {product?.name?.[lang]}
         </p>
-        <p className="text-neutral-500 text-[7px] sm:text-[10px] md:text-[11px] line-through">
-          <span>{Number(product?.price * 1.5).toLocaleString('ru-RU')} so'm</span>
-        </p>
-        <div className="flex justify-between items-center">
-          <p className="text-orange-700 font-medium text-[11px] md:text-[14px]">
-            {Number(product?.price).toLocaleString('ru-RU')} so'm
-          </p>
-        </div>
+
+        {product?.details !== null && (
+          <div className="mt-4">
+            <div className="space-y-2 list-disc list-inside text-sm text-gray-600">
+              {product?.details?.map((detail, idx) => (
+                <div key={idx}>{detail?.[lang]}</div>
+              ))}
+            </div>
+          </div>
+        )}
+
       </div>
       <div className="absolute bottom-3 right-3">
         <ArrowBigRightDash className="w-3 md:w-5 h-3 md:h-5 text-blue-900 -rotate-45 group-hover:-rotate-90 duration-500" />

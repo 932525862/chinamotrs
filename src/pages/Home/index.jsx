@@ -15,7 +15,6 @@ const HomePage = () => {
       <SwiperSlides />
       <Swiper_Catalog />
       <Catalog />
-      {/* <CatalogMs/> */}
       <AboutHome />
       <Coments />
       <AboutPartners />

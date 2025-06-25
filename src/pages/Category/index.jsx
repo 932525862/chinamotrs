@@ -161,39 +161,15 @@ const CategoryPage = () => {
                     ))}
                 </div>
               </div>
-
-              {/* Price Range */}
-              <div className="mb-6">
-                <h3 className="font-medium text-gray-800 mb-3">Price Range</h3>
-                <div className="space-y-3">
-                  <div className="flex items-center gap-2">
-                    <input
-                      type="number"
-                      placeholder="Min"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      value={priceRange[0]}
-                      onChange={(e) => setPriceRange([e.target.value, priceRange[1]])}
-                    />
-                    <span className="text-gray-500">-</span>
-                    <input
-                      type="number"
-                      placeholder="Max"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      value={priceRange[1]}
-                      onChange={(e) => setPriceRange([priceRange[0], e.target.value])}
-                    />
-                  </div>
-                  <button
-                    className="relative w-full group border-[3px] border-green-500 overflow-hidden rounded-full p-2 flex items-center justify-center gap-2"
-                    onClick={() => handleProductFiler(1)}
-                  >
-                    <span className="font-one text-green-500 group-hover:text-white relative duration-300 z-10">
-                      Apply
-                    </span>
-                    <span className="bg-green-500 absolute w-full h-full left-0 top-0 -translate-x-full group-hover:translate-x-0 transition-transform duration-500 z-0" />
-                  </button>
-                </div>
-              </div>
+              <button
+                className="relative w-full group border-[3px] border-green-500 overflow-hidden rounded-full p-2 flex items-center justify-center gap-2"
+                onClick={() => handleProductFiler(1)}
+              >
+                <span className="font-one text-green-500 group-hover:text-white relative duration-300 z-10">
+                  Apply
+                </span>
+                <span className="bg-green-500 absolute w-full h-full left-0 top-0 -translate-x-full group-hover:translate-x-0 transition-transform duration-500 z-0" />
+              </button>
             </div>
           </div>
 

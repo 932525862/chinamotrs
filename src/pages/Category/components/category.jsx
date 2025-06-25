@@ -256,16 +256,18 @@ const CategoryOnePage = () => {
                 </div>
               </div>
               <div className="">
-                <div className=" line-through text-gray-700">
-                  {Number(data?.price * 1.5).toLocaleString('ru-RU')} <span className="">so'm</span>
-                </div>
-                <p className="font-one text-sm">Chegirmadagi narx</p>
-                <div className="flex items-baseline gap-2">
-                  <span className="text-2xl sm:text-3xl lg:text-4xl font-bold text-amber-600">
-                    {Number(data?.price)?.toLocaleString('ru-RU')}
-                  </span>
-                  <span className="text-lg sm:text-xl font-sans text-amber-600">so'm</span>
-                </div>
+                {data?.descriptions?.[lang] && (
+                  <div className="bg-white p-5 rounded-xl shadow border border-gray-100 mb-6">
+                    <h2 className="text-lg font-semibold text-gray-900 mb-3">
+                      {lang === "uz" ? "Tavsif" : "Описание"}
+                    </h2>
+                    <p className="text-gray-700 leading-relaxed text-sm sm:text-base">
+                      {data.descriptions[lang]}
+                    </p>
+                  </div>
+                )}
+
+
               </div>
               <div className="my-5 flex gap-5 md:gap-10">
                 <button
