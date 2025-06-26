@@ -1,8 +1,6 @@
-'use client';
-
 import { useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, EffectFade, Pagination, Keyboard } from 'swiper/modules';
+import { Autoplay, EffectFade, Keyboard } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/effect-fade';
 import 'swiper/css/pagination';
@@ -196,14 +194,17 @@ export default function HomeShowCase() {
                             </SwiperSlide>
                         ))}
                     </Swiper>
+                    <div className="fixed bottom-8 right-8 z-50 group">
+                        <span className="absolute inset-0 rounded-full animate-ping bg-[#E83630]/30 group-hover:scale-110 transition-transform duration-300" />
+                        <Button
+                            onClick={() => setOpen(true)}
+                            size="icon"
+                            className="relative bg-[#E83630] hover:bg-[#E83630]/90 text-white w-14 h-14 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
+                        >
+                            <Phone className="h-6 w-6" />
+                        </Button>
+                    </div>
 
-                    <Button
-                        onClick={() => setOpen(true)}
-                        size="icon"
-                        className="fixed bottom-8 right-8 bg-[#E83630] hover:bg-[#E83630]/90 text-white w-14 h-14 rounded-full shadow-xl hover:shadow-2xl transition-all cursor-pointer duration-300 hover:scale-105 z-50"
-                    >
-                        <Phone className="h-6 w-6" />
-                    </Button>
                 </Card>
             </div>
 

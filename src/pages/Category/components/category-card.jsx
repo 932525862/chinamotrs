@@ -14,9 +14,9 @@ export const CategoryCard = ({ product }) => {
     scrollTo({ top: 0 });
   };
 
-  console.log(product, "category card product");
+  console.log(product?.product, "category card product");
 
-  const imagePath = product?.image;
+  const imagePath = product?.product?.images[0]?.path;
 
   return (
     <div
@@ -55,9 +55,6 @@ export const CategoryCard = ({ product }) => {
           </div>
         </div>
       )}
-
-
-
     </div>
   );
 };

@@ -166,6 +166,7 @@ export function UserInfoDialog({ open, close }) {
             <Input
               id="firstName"
               name="firstName"
+              placeholder="Ex: John Doe"
               value={formData.firstName}
               onChange={handleChange}
               required
@@ -191,6 +192,7 @@ export function UserInfoDialog({ open, close }) {
             <Input
               id="modelName"
               name="modelName"
+              placeholder="Ex: Toyota Camry"
               value={formData.modelName}
               onChange={handleChange}
               required

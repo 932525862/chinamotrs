@@ -178,42 +178,40 @@ const CategoryOnePage = () => {
             </div>
             {/* Product Image */}
             <div className="space-y-4 lg:space-y-6">
-              <Card className="bg-white border-gray-200 shadow-md p-4 sm:p-8 relative overflow-hidden group hover:shadow-xl transition-all duration-500">
-                <div className="relative flex items-center justify-center h-64 sm:h-80 lg:h-96 rounded-xl overflow-hidden group">
+              <Card className="bg-white border-gray-200 shadow-md p-0 relative group hover:shadow-xl transition-all duration-500 rounded-xl overflow-hidden">
+                <div className="relative w-full h-[300px] sm:h-[400px] lg:h-[500px]">
                   {data?.images?.length > 1 && (
                     <button
-                      className="absolute z-10 -left-0 top-1/2 transform -translate-y-1/2 bg-black/90 hover:bg-black/50 text-gray-100 p-1 rounded-full shadow transition"
+                      className="absolute z-10 left-2 top-1/2 transform -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white p-2 rounded-full shadow-md transition"
                       onClick={(e) => {
                         e.stopPropagation()
                         handlePrevImage()
                       }}
                     >
-                      <ChevronLeft className="w-5 h-5" />
+                      <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
                     </button>
                   )}
-                  <div
-                    className="w-full h-full flex items-center justify-center cursor-pointer"
-                    onClick={() => setShowImageModal(true)}
-                  >
-                    <img
-                      src={`${upload_base}${data?.images?.[currentImageIndex]?.path}`}
-                      alt={`Product ${currentImageIndex + 1}`}
-                      className="w-full h-full object-contain transform group-hover:scale-105 transition-transform duration-500"
-                    />
-                  </div>
+
+                  <img
+                    src={`${upload_base}${data?.images?.[currentImageIndex]?.path}`}
+                    alt={`Product ${currentImageIndex + 1}`}
+                    className="w-full h-full object-contain sm:object-cover"
+                  />
+
                   {data?.images?.length > 1 && (
                     <button
-                      className="absolute z-10 -right-0 top-1/2 transform -translate-y-1/2 bg-black/90 hover:bg-black/50 text-gray-100 p-1 rounded-full shadow transition"
+                      className="absolute z-10 right-2 top-1/2 transform -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white p-2 rounded-full shadow-md transition"
                       onClick={(e) => {
                         e.stopPropagation()
                         handleNextImage()
                       }}
                     >
-                      <ChevronRight className="w-5 h-5" />
+                      <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
                     </button>
                   )}
                 </div>
               </Card>
+
             </div>
 
             {/* Product Details */}
@@ -222,7 +220,7 @@ const CategoryOnePage = () => {
                 <div className="w-full">
                   <Badge
                     variant="secondary"
-                    className="bg-green-500 text-white border-none mb-2 sm:mb-3 px-2 sm:px-3 py-1 text-xs sm:text-sm"
+                    className="bg-[#E83630] text-white border-none mb-2 sm:mb-3 px-2 sm:px-3 py-1 text-xs sm:text-sm"
                   >
                     {data?.category?.name?.[lang]}
                   </Badge>
@@ -234,7 +232,7 @@ const CategoryOnePage = () => {
                   <Button
                     variant="outline"
                     size="sm"
-                    className="bg-white border-gray-200 text-gray-700 hover:bg-blue-50 hover:border-green-500 hover:text-green-500 transition-all duration-300 shadow-sm text-xs sm:text-sm"
+                    className="bg-white border-gray-200 text-gray-700 hover:bg-blue-50 hover:border-[#E83630] hover:text-[#E83630] transition-all duration-300 shadow-sm text-xs sm:text-sm"
                     onClick={() => setShowShareOptions((prev) => !prev)}
                   >
                     <Share2 className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
@@ -272,7 +270,7 @@ const CategoryOnePage = () => {
               <div className="my-5 flex gap-5 md:gap-10">
                 <button
                   onClick={() => setOpen(!open)}
-                  className="px-5 cursor-pointer py-3 flex bg-orange-500 hover:bg-orange-600 text-sm md:text-md rounded-md text-white font-medium"
+                  className="px-5 cursor-pointer py-3 flex bg-[#E83630] hover:bg-[#E83630/90] text-sm md:text-md rounded-md text-white font-medium"
                 >
                   So'rov Yuborish
                 </button>

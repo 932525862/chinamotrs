@@ -75,13 +75,14 @@ export default function Swiper_Catalog() {
             return (
               <SwiperSlide key={card?.id}>
                 <Link to={`/category/${localizedName}`} className="block">
-                  <div className="w-[150px] h-[200px] sm:w-[180px] mx-auto flex flex-col items-center rounded-xl shadow-md hover:shadow-lg border border-[#E83630] bg-white hover:bg-[#cecece2d] hover:backdrop-blur-xs transition-transform duration-300 hover:scale-[1.03] overflow-hidden sm:my-14 my-12 p-3 group">
+                  <div className="w-[150px] h-[200px] sm:w-[180px] mx-auto flex flex-col items-center rounded-xl shadow-md hover:shadow-lg border border-[#E83630] bg-white hover:bg-[#cecece2d] hover:backdrop-blur-xs transition-transform duration-300 hover:scale-[1.03] overflow-hidden sm:my-14 my-12 group">
 
                     {/* Image */}
                     <img
                       src={`${image_url}${card?.image}`}
                       alt={card?.name?.[lang] || 'Nomi yo‘q'}
                       className="w-full h-[100px] sm:h-[120px] object-cover mb-3 transition-transform duration-300 group-hover:scale-105"
+                      style={{ mixBlendMode: 'multiply' }}
                     />
 
                     {/* Name */}

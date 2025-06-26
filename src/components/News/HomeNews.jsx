@@ -115,10 +115,10 @@ function HomeNews() {
             {/* Navigatsiya tugmalari (faqat yuklanib bo‘lgach) */}
             {!loading && (
               <>
-                <div className="custom-prev absolute left-0 bottom-1/2 w-[40px] h-[40px] rounded-full -translate-y-1/2 z-20 cursor-pointer border text-lg font-bold bg-black/30 backdrop-blur-sm text-green-500 hover:bg-[#323131d3] transition flex items-center justify-center">
+                <div className="custom-prev absolute left-0 bottom-1/2 w-[40px] h-[40px] rounded-full -translate-y-1/2 z-20 cursor-pointer border text-lg font-bold bg-black/30 backdrop-blur-sm text-[#E83630] hover:bg-[#E83630/90] transition flex items-center justify-center">
                   <FaArrowLeft />
                 </div>
-                <div className="custom-next absolute right-0 bottom-1/2 w-[40px] h-[40px] rounded-full -translate-y-1/2 z-20 cursor-pointer border text-xl font-bold bg-black/30 backdrop-blur-sm text-green-500 p-3 hover:bg-[#323131d3] transition flex items-center justify-center">
+                <div className="custom-next absolute right-0 bottom-1/2 w-[40px] h-[40px] rounded-full -translate-y-1/2 z-20 cursor-pointer border text-xl font-bold bg-black/30 backdrop-blur-sm text-[#E83630] p-3 hover:bg-[#E83630/90] transition flex items-center justify-center">
                   <FaArrowRight />
                 </div>
               </>

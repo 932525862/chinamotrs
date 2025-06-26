@@ -7,7 +7,6 @@ import axios from 'axios'
 import Loading from '../../components/Loading/loading'
 
 const CategoryPage = () => {
-  const [priceRange, setPriceRange] = useState(['', ''])
   const [selectedCategories, setSelectedCategories] = useState('')
   const [loading, setLoading] = useState(false)
   const [products, setProducts] = useState([])
@@ -44,8 +43,6 @@ const CategoryPage = () => {
     try {
       const queryParams = new URLSearchParams()
       if (selectedCategories) queryParams.append('category', selectedCategories)
-      if (priceRange[0]) queryParams.append('minPrice', priceRange[0])
-      if (priceRange[1]) queryParams.append('maxPrice', priceRange[1])
       if (searchName) queryParams.append('name', searchName)
 
       const res = await axios.get(
@@ -162,13 +159,13 @@ const CategoryPage = () => {
                 </div>
               </div>
               <button
-                className="relative w-full group border-[3px] border-green-500 overflow-hidden rounded-full p-2 flex items-center justify-center gap-2"
+                className="relative w-full group border-[3px] border-[#E83630] overflow-hidden rounded-full p-2 flex items-center justify-center gap-2"
                 onClick={() => handleProductFiler(1)}
               >
-                <span className="font-one text-green-500 group-hover:text-white relative duration-300 z-10">
+                <span className="font-one text-[#E83630] group-hover:text-white relative duration-300 z-10">
                   Apply
                 </span>
-                <span className="bg-green-500 absolute w-full h-full left-0 top-0 -translate-x-full group-hover:translate-x-0 transition-transform duration-500 z-0" />
+                <span className="bg-[#E83630] absolute w-full h-full left-0 top-0 -translate-x-full group-hover:translate-x-0 transition-transform duration-500 z-0" />
               </button>
             </div>
           </div>
