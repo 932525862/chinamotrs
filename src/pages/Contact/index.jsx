@@ -58,9 +58,6 @@ const ContactPage = () => {
       style={{ backgroundColor: 'rgb(237, 237, 237)' }}
     >
       <h2 className="text-3xl font-bold text-center mb-12">{t('contact.title')}</h2>
-
-      {/* ... manzillar va telefonlar qismi o‘zgarmadi ... */}
-
       <div className="bg-gray-100 p-8 rounded-xl shadow-md max-w-3xl mx-auto">
         <h3 className="text-2xl font-semibold text-center mb-4">{t('contact.formTitle')}</h3>
         <p className="text-center text-green-600 mb-8 uppercase font-semibold">
