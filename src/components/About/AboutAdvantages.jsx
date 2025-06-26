@@ -21,7 +21,7 @@ function AboutAdvantages() {
     <div className='bg-gray-100'>
      <Helmet>
         <title>Chinamotors</title>
-        <meta name="description" content="Zamonaviy trenajorlar, sport anjomlari va massaj qurilmalari" />
+        <meta name="description" content="Xitoy avtomobillari" />
       </Helmet>
       <section className="max-w-7xl mx-auto pt-10 pb-15 px-[1rem]">
         <div className="">
