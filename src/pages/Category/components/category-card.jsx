@@ -24,7 +24,7 @@ export const CategoryCard = ({ product }) => {
       onClick={handleCardClick}
     >
       {/* Image Container */}
-      <div className="w-full p-3 rounded-xl flex items-center justify-center">
+      <div className="w-full p-3 rounded-xl flex items-center justify-center h-auto">
         {imagePath ? (
           <img
             src={`${uploadUrl}${imagePath}`}
@@ -48,7 +48,7 @@ export const CategoryCard = ({ product }) => {
 
       {product?.product !== null && (
         <div className="mt-4">
-          <div className="space-y-2 list-disc list-inside text-sm text-gray-600">
+          <div className="list-disc list-inside text-sm text-gray-600">
             {product?.product?.details?.map((detail, idx) => (
               <div key={idx} className="text-center">{detail?.[lang]}</div>
             ))}

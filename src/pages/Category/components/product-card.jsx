@@ -22,7 +22,7 @@ export const ProductCard = ({ product }) => {
 
   return (
     <div
-      className="h-55 md:h-80 bg-white  group cursor-pointer shadow-sm hover:shadow-[2px_2px_7px_#a3a3a3]/50 p-2 duration-300 rounded-md relative"
+      className="h-60 md:h-80 bg-white  group cursor-pointer shadow-sm hover:shadow-[2px_2px_7px_#a3a3a3]/50 p-2 duration-300 rounded-md relative"
       onClick={handleCardClick}
     >
       {/* Image Container */}
